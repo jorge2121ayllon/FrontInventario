@@ -22,7 +22,7 @@ export class UsuarioaddComponent implements OnInit {
         id: this.Route.snapshot.params.id,
         usuario: new FormControl('',[Validators.required,Validators.minLength(5)]),
         role: new FormControl('',Validators.required),
-        password:  new FormControl('',[Validators.required,Validators.minLength(6)]),
+        password:  new FormControl(''),
         gmail:  new FormControl(''),
       })
     }
@@ -66,7 +66,6 @@ export class UsuarioaddComponent implements OnInit {
       )
     }
     else{
-      console.log(this.form.value)
       this.UsuarioService.saveUser(this.form.value).subscribe
       (
         r=> {

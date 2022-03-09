@@ -12,7 +12,7 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 export class UsuariosComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['usuario', 'role','acciones'];
+  displayedColumns: string[] = ['usuario', 'role','gmail','acciones'];
   usuarios :any;
   metadata :any;
 
