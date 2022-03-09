@@ -1,1 +1,18 @@
-<mat-progress-bar ></mat-progress-bar>
+<mat-toolbar color="primary">
+  <button mat-button class="example-icon" [routerLink]="['home']" >
+    <span class="menu">Home</span>
+  </button>
+  <span class="example-spacer"></span>
+  <button mat-button *ngIf="_authService.loggedIn()" class="example-icon" [routerLink]="['/usuarios']" >
+    <span class="menu">Usuarios</span>
+  </button>
+  <button mat-button *ngIf="!_authService.loggedIn()" class="example-icon"  [routerLink]="['login']" >
+    <span  class="menu">Login</span>
+  </button>
+  <button mat-button *ngIf="_authService.loggedIn()" class="example-icon" (click)="_authService.loggedOut()" >
+    <span  class="menu">Salir</span>
+  </button>
+</mat-toolbar>
+<body style=" padding: 2%;">
+  <router-outlet></router-outlet>
+</body>
