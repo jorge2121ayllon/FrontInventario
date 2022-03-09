@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { UsuarioService } from './../../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +24,7 @@ export class UsuariosComponent implements OnInit {
    pageIndex=0;
 
   constructor(private UsuarioService : UsuarioService,private Router: Router,
-    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl ) {
+    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
     }
 
@@ -38,8 +39,6 @@ export class UsuariosComponent implements OnInit {
   {
     this.UsuarioService.getUsers().subscribe( r =>
       {
-        console.log(r.data)
-
         this.usuarios = r.data;
         this.metadata = r.meta;
 
@@ -54,7 +53,7 @@ export class UsuariosComponent implements OnInit {
     if (res){
         this.UsuarioService.deleteUser(id).subscribe((data) => {
           this.Usuarios();
-         // this.toastr.success("Usuario Eliminado.")
+          this.toastr.success("Usuario Eliminado.")
         });
     }
   }

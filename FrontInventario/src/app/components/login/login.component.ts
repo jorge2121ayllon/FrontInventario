@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   form: FormGroup
 
-  constructor(private fb : FormBuilder,private LoginService : LoginService ,private Router: Router,
+  constructor(private fb : FormBuilder,private LoginService : LoginService ,private Router: Router,  private toastr: ToastrService,
     )
   {
     this.form = this.fb.group({
@@ -33,11 +34,11 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('Token', (response as any).token);
         localStorage.setItem('Usuario', (response as any).usuario);
         localStorage.setItem('Role', (response as any).role);
-        //this.toastr.success("Logeado exitosamente.")
+        this.toastr.success("Logeado exitosamente.")
         this.Router.navigate(['/home']);
       },
       error => {
-        //this.toastr.warning("Porfavor verifique los datos ingresados en password y gmail","Error de login.")
+        this.toastr.warning("Porfavor verifique los datos ingresados en password y gmail","Error de login.")
       });
   }
 

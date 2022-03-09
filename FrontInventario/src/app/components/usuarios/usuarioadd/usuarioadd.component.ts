@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from './../../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -12,8 +13,8 @@ export class UsuarioaddComponent implements OnInit {
 
   form: FormGroup;
   idUsuario: number=0;
-  constructor(private fb : FormBuilder,private Router: Router,private UsuarioService:
-    UsuarioService,private Route : ActivatedRoute)
+  constructor(private fb : FormBuilder,private Router: Router, private UsuarioService:
+    UsuarioService,private Route : ActivatedRoute, private toastr: ToastrService)
   {
     if(this.Route.snapshot.params.id>0)
     {
@@ -58,10 +59,10 @@ export class UsuarioaddComponent implements OnInit {
       (
         r=> {
           this.Router.navigate(['usuarios']);
-         // this.toastr.success("se edito exitosamente","Editado.")
+          this.toastr.success("se edito exitosamente","Editado.")
         },
         error => {
-       //   this.toastr.warning("no se edito","Error.")
+          this.toastr.warning("no se edito","Error.")
         }
       )
     }
@@ -70,10 +71,10 @@ export class UsuarioaddComponent implements OnInit {
       (
         r=> {
           this.Router.navigate(['usuarios']);
-        //  this.toastr.success("se guardo exitosamente","Guardado.")
+          this.toastr.success("se guardo exitosamente","Guardado.")
         },
         error => {
-        //  this.toastr.warning("no se guardo","Error.")
+          this.toastr.warning("no se guardo","Error.")
         }
       )
     }
