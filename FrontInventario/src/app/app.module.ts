@@ -30,6 +30,8 @@ import { HomeComponent } from './components/home/home.component';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { UsuarioaddComponent } from './components/usuarios/usuarioadd/usuarioadd.component';
 import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.component';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
+import { CategoriaaddComponent } from './components/categorias/categoriaadd/categoriaadd.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.compo
     HomeComponent,
     UsuarioaddComponent,
     UsuariosComponent,
+    CategoriasComponent,
+    CategoriaaddComponent,
 
   ],
   imports: [

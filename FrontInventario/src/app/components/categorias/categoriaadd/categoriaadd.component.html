@@ -1,0 +1,20 @@
+<form [formGroup]="form" (ngSubmit)="Guardar()">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nombre</mat-label>
+        <input matInput placeholder="Nombre" formControlName="nombre">
+        <mat-error *ngIf="form.controls.nombre.hasError('required')">
+            Nombre de descripción <strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <input matInput placeholder="Descripción" formControlName="descripcion">
+        <mat-error *ngIf="form.controls.descripcion.hasError('required')">
+            Descripcion<strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <br>
+    <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>  
