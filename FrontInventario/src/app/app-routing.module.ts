@@ -1,5 +1,7 @@
 import { UsuarioaddComponent } from './components/usuarios/usuarioadd/usuarioadd.component';
 import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.component'
+import { CategoriaaddComponent} from './components/categorias/categoriaadd/categoriaadd.component';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component'
 import { HomeComponent } from './components/home/home.component';
 
 import { LoginComponent } from './components/login/login.component';
@@ -9,6 +11,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {path: 'usuarios' , component: UsuariosComponent},
   {path: 'usuarioadd/:id' , component: UsuarioaddComponent},
+  {path: 'categorias' , component: CategoriasComponent},
+  {path: 'categoriaadd/:id' , component: CategoriaaddComponent},
 
   {path: 'login' , component: LoginComponent},
 
