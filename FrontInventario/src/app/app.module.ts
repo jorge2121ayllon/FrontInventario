@@ -34,6 +34,8 @@ import { CategoriasComponent } from './components/categorias/categorias/categori
 import { CategoriaaddComponent } from './components/categorias/categoriaadd/categoriaadd.component';
 import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
 import { ProductosComponent } from './components/productos/productos/productos.component';
+import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ProductosComponent } from './components/productos/productos/productos.c
     CategoriaaddComponent,
     ProductosaddComponent,
     ProductosComponent,
+    VentaaddComponent,
 
   ],
   imports: [
@@ -55,7 +58,7 @@ import { ProductosComponent } from './components/productos/productos/productos.c
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-
+    MatDialogModule,
     MatProgressBarModule,
     MatInputModule,
     MatButtonModule,

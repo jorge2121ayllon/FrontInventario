@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="Guardar()">
+
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>nombre Cliente</mat-label>
+      <input matInput placeholder="Nombre de Cliente" formControlName="nombreCliente">
+  </mat-form-field>
+  <br>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Id producto</mat-label>
+    <input matInput placeholder="Id producto" formControlName="idProducto">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Cantidad</mat-label>
+    <input matInput placeholder="Cantidad" formControlName="cantidad">
+  </mat-form-field>
+
+
+
+  <table style="text-align: center;">
+    <thead>
+      <tr>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>idVenta</th>
+        <th>idProducto</th>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let product of listaDetalle">
+          <td>{{product.cantidad}}</td>
+          <td>{{product.subtotal}}</td>
+          <td>{{product.idVenta}}</td>
+          <td>{{product.idProducto}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+  <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>
