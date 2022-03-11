@@ -32,6 +32,8 @@ import { UsuarioaddComponent } from './components/usuarios/usuarioadd/usuarioadd
 import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.component';
 import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
 import { CategoriaaddComponent } from './components/categorias/categoriaadd/categoriaadd.component';
+import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
+import { ProductosComponent } from './components/productos/productos/productos.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { CategoriaaddComponent } from './components/categorias/categoriaadd/cate
     UsuariosComponent,
     CategoriasComponent,
     CategoriaaddComponent,
+    ProductosaddComponent,
+    ProductosComponent,
 
   ],
   imports: [
