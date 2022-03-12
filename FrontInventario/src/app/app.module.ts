@@ -36,6 +36,7 @@ import { ProductosaddComponent } from './components/productos/productosadd/produ
 import { ProductosComponent } from './components/productos/productos/productos.component';
 import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
+    MatAutocompleteModule,
 
     MatSliderModule,
     MatFormFieldModule,

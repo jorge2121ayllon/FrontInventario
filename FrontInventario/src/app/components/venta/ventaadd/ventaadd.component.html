@@ -16,8 +16,6 @@
     <input matInput placeholder="Cantidad" formControlName="cantidad">
   </mat-form-field>
 
-
-
   <table style="text-align: center;">
     <thead>
       <tr>
@@ -37,6 +35,28 @@
       </tbody>
     </table>
 
-
-
   <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>
+
+
+  <br>
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Cities</mat-label>
+    <input
+    type="text"
+    placeholder="Pick One"
+    aria-label="Select a City"
+    matInput
+    [formControl]="searchTerm"
+    [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+      *ngFor="let city of FilteredCities | async "
+      [value]="city.codigo"
+      >
+        {{city.codigo}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
