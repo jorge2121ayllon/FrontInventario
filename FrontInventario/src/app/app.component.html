@@ -15,6 +15,9 @@
   <button mat-button *ngIf="_authService.loggedIn()" class="example-icon" [routerLink]="['/ventaadd']" >
     <span class="menu">ventaadd</span>
   </button>
+  <button mat-button *ngIf="_authService.loggedIn()" class="example-icon" [routerLink]="['/ventas']" >
+    <span class="menu">Ventas</span>
+  </button>
   <button mat-button *ngIf="!_authService.loggedIn()" class="example-icon"  [routerLink]="['login']" >
     <span  class="menu">Login</span>
   </button>

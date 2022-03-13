@@ -18,7 +18,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
+
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
@@ -35,8 +36,12 @@ import { CategoriaaddComponent } from './components/categorias/categoriaadd/cate
 import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
 import { ProductosComponent } from './components/productos/productos/productos.component';
 import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PruebaComponent } from './components/prueba/prueba.component';
+import {MatCardModule} from '@angular/material/card';
+import { VentasComponent } from './components/venta/ventas/ventas.component';
+
 
 @NgModule({
   declarations: [
@@ -50,6 +55,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ProductosaddComponent,
     ProductosComponent,
     VentaaddComponent,
+    PruebaComponent,
+    VentasComponent,
 
   ],
   imports: [
@@ -65,7 +72,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatButtonModule,
     MatToolbarModule,
     MatAutocompleteModule,
-
+    MatCardModule,
     MatSliderModule,
     MatFormFieldModule,
     MatMenuModule,

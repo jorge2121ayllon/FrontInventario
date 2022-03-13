@@ -4,4 +4,6 @@ export class DetalleVenta{
   subtotal?: number;
   idProducto? : number;
   idVenta? : number;
+  producto? : string;
+  precioVenta?: number;
 }
