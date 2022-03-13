@@ -1,3 +1,4 @@
+import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
 import { UsuarioaddComponent } from './components/usuarios/usuarioadd/usuarioadd.component';
 import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.component'
 import { CategoriaaddComponent} from './components/categorias/categoriaadd/categoriaadd.component';
@@ -17,9 +18,10 @@ const routes: Routes = [
   {path: 'categoriaadd/:id' , component: CategoriaaddComponent},
   {path: 'productos' , component: ProductosComponent},
   {path: 'productoadd/:id' , component: ProductosaddComponent},
+  {path: 'ventaadd' , component: VentaaddComponent},
+
 
   {path: 'login' , component: LoginComponent},
-
   {path: '**' , component: HomeComponent},
   {path: 'home' , component: HomeComponent}
 ];
