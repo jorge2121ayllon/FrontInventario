@@ -1,5 +1,12 @@
 <button mat-raised-button color="primary" [routerLink]="['/productoadd/0']">Agregar</button>
 <br>
+<form [formGroup]="form" >
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup.enter)="applyFilter()" placeholder="Digite los Caracteres de Búsqueda" formControlName="filtro">
+  </mat-form-field>
+</form>
+
 <br>
 
 <table mat-table [dataSource]="productos" class="mat-elevation-z8">`
@@ -69,3 +76,11 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <mat-paginator [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageIndex"
+  (page)="handlePage($event)"
+  aria-label="Select page">
+</mat-paginator>

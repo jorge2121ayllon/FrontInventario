@@ -27,8 +27,8 @@ export class ProductosaddComponent implements OnInit {
           precioVenta: new FormControl('',Validators.required),
           genero: new FormControl('',Validators.required),
           color: new FormControl('',Validators.required),
-          talla: new FormControl('',Validators.required),
-          marca: new FormControl('',Validators.required),
+          talla: new FormControl('',[Validators.required, Validators.maxLength (5)]),
+          marca: new FormControl(''),
           descripcion: new FormControl('',Validators.required),
           stock: new FormControl('',Validators.required),
           idCategoria: new FormControl('',Validators.required),
@@ -41,8 +41,8 @@ export class ProductosaddComponent implements OnInit {
           precioVenta: new FormControl('',Validators.required),
           genero: new FormControl('',Validators.required),
           color: new FormControl('',Validators.required),
-          talla: new FormControl('',Validators.required),
-          marca: new FormControl('',Validators.required),
+          talla: new FormControl('',[Validators.required, Validators.maxLength (5)]),
+          marca: new FormControl(''),
           descripcion: new FormControl('',Validators.required),
           stock: new FormControl('',Validators.required),
           idCategoria: new FormControl('',Validators.required),
@@ -69,7 +69,7 @@ export class ProductosaddComponent implements OnInit {
     }
   }
 
-  Guardar(){
+  Guardar(tipo:any){
     if(this.Route.snapshot.params.id>0){
       this.ProductoService.update(this.form.value).subscribe
       (
@@ -86,7 +86,20 @@ export class ProductosaddComponent implements OnInit {
       this.ProductoService.save(this.form.value).subscribe
       (
         r=> {
-          this.Router.navigate(['productos']);
+          if(tipo===true){
+              this.form.controls['precioCompra'].setValue(r.data.precioCompra)
+              this.form.controls['precioVenta'].setValue(r.data.precioVenta)
+              this.form.controls['genero'].setValue(r.data.genero)
+              this.form.controls['color'].setValue("")
+              this.form.controls['talla'].setValue("")
+              this.form.controls['marca'].setValue(r.data.marca)
+              this.form.controls['descripcion'].setValue(r.data.descripcion)
+              this.form.controls['stock'].setValue("")
+              this.form.controls['idCategoria'].setValue(r.data.idCategoria)
+          }else if(tipo===false){
+            this.Router.navigate(['productos']);
+          }
+          
           this.toastr.success("se guardo exitosamente","Guardado.")
         },
         error => {
@@ -105,6 +118,6 @@ export class ProductosaddComponent implements OnInit {
     )
   }
 
-  
+ 
 
 }
