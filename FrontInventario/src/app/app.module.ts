@@ -41,6 +41,7 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import {MatCardModule} from '@angular/material/card';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
+import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { VentasComponent } from './components/venta/ventas/ventas.component';
     VentaaddComponent,
     PruebaComponent,
     VentasComponent,
+    VentaeditComponent,
 
   ],
   imports: [

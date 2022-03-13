@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
 
 const routes: Routes = [
   {path: 'usuarios' , component: UsuariosComponent},
@@ -21,9 +22,9 @@ const routes: Routes = [
   {path: 'productos' , component: ProductosComponent},
   {path: 'productoadd/:id' , component: ProductosaddComponent},
   {path: 'ventaadd' , component: VentaaddComponent},
-  {path: 'prueba' , component: PruebaComponent},
   {path: 'ventas' , component: VentasComponent},
-
+  {path: 'ventaedit/:id' , component: VentaeditComponent},
+  {path: 'prueba' , component: PruebaComponent},
 
   {path: 'login' , component: LoginComponent},
   {path: '**' , component: HomeComponent},

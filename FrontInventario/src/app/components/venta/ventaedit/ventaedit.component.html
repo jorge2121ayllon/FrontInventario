@@ -87,13 +87,12 @@
       </thead>
         <tbody>
           <tr *ngFor="let product of listadetalleVenta">
-            <td>{{product.producto}}</td>
+            <td> {{product.producto}}</td>
             <td >{{product.precioVenta}}</td>
             <td >{{product.cantidad}}</td>
             <td >{{product.subTotal}}</td>
             <td>
               <button mat-button color="primary" (click)="eliminarDetalle(product)">Eliminar</button>
-              <button mat-button color="primary" (click)="editarDetalle(product)">Editar</button>
             </td>
 
           </tr>

@@ -67,27 +67,34 @@ export class VentaaddComponent implements OnInit {
 
   agregarDetalle()
   {
-
     let unicoProducto = this.listadetalleVenta.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
-
-    if(this.productoSeleccionado.precioVenta && unicoProducto.length<1)
+    if(this.productoSeleccionado.precioVenta && unicoProducto.length<1 && this.productoSeleccionado.stock)
     {
-    this.detalleventa={
-      cantidad: this.form.value.cantidad,
-      idProducto:this.productoSeleccionado.id,
-      subtotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
-      producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
-      precioVenta: this.productoSeleccionado.precioVenta
-     }
-     this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
+      if(this.productoSeleccionado.stock>= this.form.value.cantidad){
+        this.detalleventa={
+          cantidad: this.form.value.cantidad,
+          idProducto:this.productoSeleccionado.id,
+          subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+          producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+          precioVenta: this.productoSeleccionado.precioVenta
+         }
+         this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
 
-     this.listadetalleVenta.push(this.detalleventa);
+         this.listadetalleVenta.push(this.detalleventa);
+
+         this.productoSeleccionado=new Producto;
+      }
+      else{
+        this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
+      }
+
     }
     else{
       this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")
+      this.productoSeleccionado=new Producto;
     }
 
-    this.productoSeleccionado=new Producto;
+
   }
 
   guardar()
@@ -112,9 +119,9 @@ export class VentaaddComponent implements OnInit {
 
   eliminarDetalle(detalle: DetalleVenta)
   {
-    if(detalle.subtotal!)
+    if(detalle.subTotal!)
     {
-    this.totalVenta=this.totalVenta-detalle.subtotal;
+    this.totalVenta=this.totalVenta-detalle.subTotal;
     this.listadetalleVenta=this.listadetalleVenta.filter((item) => item.idProducto != detalle.idProducto);
     }
   }

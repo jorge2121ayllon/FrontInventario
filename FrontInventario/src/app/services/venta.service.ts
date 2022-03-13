@@ -30,7 +30,13 @@ export class VentaService {
   deleteVenta(ventaId: number): Observable<Venta>{
     return this.http.delete(this.baseUrl+ "?id=" +ventaId);
   }
+  getVenta(Id: number): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl +"/"+ Id);
+  }
 
+  updateVenta(Venta : any): Observable<Response>{
+    return this.http.put<Response>(this.baseUrl, JSON.stringify(Venta));
+  }
 
 
 }

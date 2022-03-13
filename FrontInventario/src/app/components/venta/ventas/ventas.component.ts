@@ -63,14 +63,15 @@ export class VentasComponent implements OnInit {
     const res = confirm('Seguro que desea eliminar el usuario');
     if (res){
         this.VentaService.deleteVenta(id).subscribe((data) => {
-          this.Ventas();
           this.toastr.success("Usuario Eliminado.")
+          this.Ventas();
         });
     }
   }
 
   Editar(id : any)
   {
-
+    console.log('entro')
+    this.Router.navigate(['/ventaedit/'+id]);
   }
 }

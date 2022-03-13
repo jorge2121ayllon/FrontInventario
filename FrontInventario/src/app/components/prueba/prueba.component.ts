@@ -47,8 +47,6 @@ export class PruebaComponent implements OnInit {
     this.ProductoService.gets().subscribe( r =>
       {
         this.listaProductos=r.data;
-
-        console.log( this.listaProductos)
       }
     )
   }
@@ -66,7 +64,7 @@ export class PruebaComponent implements OnInit {
     this.detalleventa={
       cantidad: this.form.value.cantidad,
       idProducto:this.productoSeleccionado.id,
-      subtotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+      subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
       producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
       precioVenta: this.productoSeleccionado.precioVenta
      }
