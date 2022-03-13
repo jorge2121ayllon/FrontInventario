@@ -18,7 +18,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
@@ -34,6 +34,7 @@ import { CategoriasComponent } from './components/categorias/categorias/categori
 import { CategoriaaddComponent } from './components/categorias/categoriaadd/categoriaadd.component';
 import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
 import { ProductosComponent } from './components/productos/productos/productos.component';
+
 
 @NgModule({
   declarations: [
