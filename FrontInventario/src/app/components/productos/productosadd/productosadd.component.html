@@ -1,4 +1,4 @@
-<form [formGroup]="form" (ngSubmit)="Guardar()">
+<form [formGroup]="form" (ngSubmit)="Guardar(false)">
 
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Descripcion</mat-label>
@@ -50,9 +50,6 @@
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Marca</mat-label>
         <input matInput placeholder="Marca" formControlName="marca">
-        <mat-error *ngIf="form.controls.marca.hasError('required')">
-            Marca<strong>requerido</strong>
-        </mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Stock</mat-label>
@@ -72,6 +69,16 @@
             Categoria<strong>requerido</strong>
         </mat-error>
     </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Foto del Producto</mat-label>
+        <input type="file" name="" id="">
+        <mat-error *ngIf="form.controls.idCategoria.hasError('required')">
+            Categoria<strong>requerido</strong>
+        </mat-error>
+    </mat-form-field>
 
     <br>
-    <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>  
+     
+    <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar Único Producto</button>
+    <button type="button" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" (click)="Guardar(true)" >Guardar Más Productos</button>

@@ -44,6 +44,7 @@ import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

@@ -2,9 +2,11 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CategoriaService } from './../../../services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
+
 
 @Component({
   selector: 'app-productos',
@@ -13,10 +15,12 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 })
 export class ProductosComponent implements OnInit {
 
+  form: FormGroup;
   displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria'];
   categorias :any;
   productos :any;
   metadata :any;
+  
 
   // MatPaginator Inputs
   length = 100;
@@ -24,9 +28,13 @@ export class ProductosComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10,25, 100];
   pageIndex=0;
 
-  constructor(private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
+  constructor(private fb : FormBuilder, private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
+
+      this.form = this.fb.group({
+        filtro: new FormControl('')
+      })
     }
 
   ngOnInit(): void {
@@ -78,6 +86,11 @@ export class ProductosComponent implements OnInit {
    this.PaginacionService.Filtro.PageNumber=e.pageIndex+1;
    this.PaginacionService.Filtro.PageSize=e.pageSize;
    this.Productos();
+  }
+
+  applyFilter() {
+    this.PaginacionService.Filtro.filter=this.form.value.filtro;
+    this.Productos();
   }
 
 
