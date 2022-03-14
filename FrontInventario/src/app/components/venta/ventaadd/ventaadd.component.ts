@@ -1,9 +1,15 @@
+import { VentaVentaDetalle } from './../../../models/VentaVentaDetalle';
+import { Observable } from 'rxjs';
+import { PaginacionService } from 'src/app/services/paginacion.service';
+import { ProductoService } from './../../../services/producto.service';
+import { Producto } from './../../../models/producto';
 import { DetalleVenta } from './../../../models/detalleVenta';
 import { VentaService } from './../../../services/venta.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ventaadd',
@@ -13,43 +19,95 @@ import { Component, OnInit } from '@angular/core';
 export class VentaaddComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['cantidad', 'subtotal', 'idProducto', 'idVenta'];
   form: FormGroup;
-
-  //detalle
-  listaDetalle: DetalleVenta[] = [{cantidad:3,subtotal:23}];
-  detalleVenta: DetalleVenta = new DetalleVenta;
-
+  listaProductos:Producto[]=[];
+  productoSeleccionado: Producto = new Producto;
+  listadetalleVenta:DetalleVenta[]=[];
+  detalleventa!: DetalleVenta;
+  venta: VentaVentaDetalle = new VentaVentaDetalle;
+  totalVenta=0;
+  listaProductosAux:Producto[]=[];
 
 
   constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
-              private toastr: ToastrService,private VentaService: VentaService)
+              private toastr: ToastrService,private VentaService: VentaService, private ProductoService: ProductoService,
+              private PaginacionService: PaginacionService,)
               {
                 this.form = this.fb.group({
-                  total: new FormControl(1),
-                  nombreCliente : new FormControl(''),
-                  idProducto : new FormControl(1),
+                  buscadorProducto: new FormControl(''),
                   cantidad : new FormControl(1),
+                  nombreCliente: new FormControl(''),
+                  total : new FormControl(0),
                 })
-
               }
 
   ngOnInit(): void {
 
   }
 
-  Guardar(){
+  obtenerProductos()
+  {
+    this.PaginacionService.Filtro.filter=this.form.value.buscadorProducto;
+    this.PaginacionService.Filtro.PageSize=100000;
+    this.PaginacionService.Filtro.PageNumber=1;
 
-    this.detalleVenta=this.form.value;
-    this.listaDetalle.push(this.detalleVenta);
+    this.ProductoService.gets().subscribe( r =>
+      {
+        this.listaProductos=r.data;
+        this.listaProductosAux=r.data;
+      }
+    )
   }
 
-  metodooo()
+  seleccionProducto(producto : any){
+   this.listaProductos= this.listaProductos.filter(listaProductos=>listaProductos.id==producto.id);
+   this.productoSeleccionado= this.listaProductos[0];
+   this.listaProductos=[];
+  }
+
+  agregarDetalle()
   {
-    this.VentaService.saveVenta(this.form.value).subscribe
+    let unicoProducto = this.listadetalleVenta.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
+    if(this.productoSeleccionado.precioVenta && unicoProducto.length<1 && this.productoSeleccionado.stock)
+    {
+      if(this.productoSeleccionado.stock>= this.form.value.cantidad){
+        this.detalleventa={
+          cantidad: this.form.value.cantidad,
+          idProducto:this.productoSeleccionado.id,
+          subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+          producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+          precioVenta: this.productoSeleccionado.precioVenta
+         }
+         this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
+
+         this.listadetalleVenta.push(this.detalleventa);
+
+         this.productoSeleccionado=new Producto;
+      }
+      else{
+        this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
+      }
+
+    }
+    else{
+      this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")
+      this.productoSeleccionado=new Producto;
+    }
+
+
+  }
+
+  guardar()
+  {
+    this.form.value.total=this.totalVenta;
+
+    this.venta.detalleVenta=this.listadetalleVenta;
+    this.venta.venta=this.form.value;
+
+    this.VentaService.saveVenta(this.venta).subscribe
     (
       r=> {
-        this.Router.navigate(['categorias']);
+        this.Router.navigate(['/ventas']);
         this.toastr.success("se guardo exitosamente","Guardado.")
       },
       error => {
@@ -58,10 +116,20 @@ export class VentaaddComponent implements OnInit {
     )
   }
 
-  agregarDetalle()
-  {
 
+  eliminarDetalle(detalle: DetalleVenta)
+  {
+    if(detalle.subTotal!)
+    {
+    this.totalVenta=this.totalVenta-detalle.subTotal;
+    this.listadetalleVenta=this.listadetalleVenta.filter((item) => item.idProducto != detalle.idProducto);
+    }
   }
 
-
+  editarDetalle(detalleSeleccionado : DetalleVenta)
+  {
+    this.eliminarDetalle(detalleSeleccionado);
+    this.productoSeleccionado= (this.listaProductosAux.filter(listaProductosAux=>listaProductosAux.id==detalleSeleccionado.idProducto))[0];
+    console.log(this.productoSeleccionado)
+  }
 }
