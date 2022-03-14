@@ -28,6 +28,7 @@ export class VentaaddComponent implements OnInit {
   totalVenta=0;
   listaProductosAux:Producto[]=[];
 
+  numeroLista=1;
 
   constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
               private toastr: ToastrService,private VentaService: VentaService, private ProductoService: ProductoService,
