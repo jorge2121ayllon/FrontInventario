@@ -23,7 +23,7 @@ export class CategoriasComponent implements OnInit {
   pageIndex=0;
 
   constructor(private CategoriaService : CategoriaService,private Router: Router,
-    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) { 
+    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl, private toastr: ToastrService) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
     }
 

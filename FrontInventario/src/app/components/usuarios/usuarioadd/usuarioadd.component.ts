@@ -14,7 +14,7 @@ export class UsuarioaddComponent implements OnInit {
   form: FormGroup;
   idUsuario: number=0;
   constructor(private fb : FormBuilder,private Router: Router, private UsuarioService:
-    UsuarioService,private Route : ActivatedRoute, private toastr: ToastrService)
+    UsuarioService,private Route : ActivatedRoute,  private toastr: ToastrService)
   {
     if(this.Route.snapshot.params.id>0)
     {
