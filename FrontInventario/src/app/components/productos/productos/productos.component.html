@@ -1,0 +1,86 @@
+<button mat-raised-button color="primary" [routerLink]="['/productoadd/0']">Agregar</button>
+<br>
+<form [formGroup]="form" >
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup.enter)="applyFilter()" placeholder="Digite los Caracteres de Búsqueda" formControlName="filtro">
+  </mat-form-field>
+</form>
+
+<br>
+
+<table mat-table [dataSource]="productos" class="mat-elevation-z8">`
+    <ng-container matColumnDef="precioCompra" >
+        <th mat-header-cell *matHeaderCellDef> Precio de Compra </th>
+        <td mat-cell *matCellDef="let element"> {{element.precioCompra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precioVenta">
+      <th mat-header-cell *matHeaderCellDef > Precio de Venta </th>
+      <td mat-cell *matCellDef="let element"> {{element.precioVenta}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="genero">
+        <th mat-header-cell *matHeaderCellDef > Género </th>
+        <td mat-cell *matCellDef="let element"> {{element.genero}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="color">
+        <th mat-header-cell *matHeaderCellDef > Color </th>
+        <td mat-cell *matCellDef="let element"> {{element.color}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="talla">
+        <th mat-header-cell *matHeaderCellDef > Talla </th>
+        <td mat-cell *matCellDef="let element"> {{element.talla}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef > Marca </th>
+        <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="descripcion">
+        <th mat-header-cell *matHeaderCellDef > Descripcion </th>
+        <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="stock">
+        <th mat-header-cell *matHeaderCellDef > Stock </th>
+        <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="codigo">
+        <th mat-header-cell *matHeaderCellDef > Código </th>
+        <td mat-cell *matCellDef="let element"> {{element.codigo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="idCategoria">
+        <th mat-header-cell *matHeaderCellDef > Categoria </th>
+        <td mat-cell *matCellDef="let element"> {{element.idCategoria}} </td>
+      </ng-container>
+
+    <ng-container matColumnDef="acciones">
+        <th mat-header-cell *matHeaderCellDef> Acciones </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-mini-fab color="warn" (click)="borrar(element.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          &nbsp;
+          <button mat-mini-fab color="basic" (click)="Editar(element.id)">
+            <mat-icon>create</mat-icon>
+          </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [length]="length"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="pageSizeOptions"
+  [pageIndex]="pageIndex"
+  (page)="handlePage($event)"
+  aria-label="Select page">
+</mat-paginator>
