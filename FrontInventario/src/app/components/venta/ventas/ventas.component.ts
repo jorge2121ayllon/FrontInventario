@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
@@ -12,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VentasComponent implements OnInit {
 
-
+  form: FormGroup;
   displayedColumns: string[] = ['nombreCliente', 'total','fecha','acciones'];
   metadata :any;
   ventas : any ;
@@ -26,8 +27,13 @@ export class VentasComponent implements OnInit {
 
 
   constructor(private VentaService : VentaService,private Router: Router,
-    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) {
+    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService,
+    private fb : FormBuilder) {
       this.paginator.itemsPerPageLabel = "Registros por página";
+
+      this.form = this.fb.group({
+        filtro: new FormControl('')
+      })
     }
 
   ngOnInit(): void {
@@ -74,4 +80,10 @@ export class VentasComponent implements OnInit {
     console.log('entro')
     this.Router.navigate(['/ventaedit/'+id]);
   }
+
+  Filtro() {
+    this.PaginacionService.Filtro.filter=this.form.value.filtro;
+    this.Ventas();
+  }
+
 }

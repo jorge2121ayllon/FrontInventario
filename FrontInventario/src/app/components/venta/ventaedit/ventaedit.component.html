@@ -1,4 +1,4 @@
-<form [formGroup]="form" >
+<form [formGroup]="form" autocomplete="off">
 
   <mat-card>
     <mat-card-title>Datos del cliente</mat-card-title>
@@ -54,17 +54,36 @@
 
     <table style="text-align: center;" *ngIf="productoSeleccionado.descripcion">
       <thead>
-        <th> {{productoSeleccionado.descripcion}}</th>
-        <th>
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Cantidad del producto</mat-label>
-            <input type="number" matInput placeholder="cantidad" formControlName="cantidad">
-          </mat-form-field>
-        </th>
-        <th>
-          <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
-        </th>
+          <tr>
+            <th>Descripcion producto</th>
+            <th>Precio Unitario</th>
+            <th>Stock Disponible</th>
+            <th>Cantidad Para Venta</th>
+            <th>Acciones</th>
+          </tr>
       </thead>
+       <tbody>
+          <tr>
+            <td>
+              {{productoSeleccionado.codigo}} {{productoSeleccionado.descripcion}} {{productoSeleccionado.color}}
+            </td>
+            <td>
+              {{productoSeleccionado.precioVenta}}
+            </td>
+            <td>
+              {{productoSeleccionado.stock}}
+            </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Cantidad del producto</mat-label>
+                <input type="number" matInput placeholder="cantidad" formControlName="cantidad">
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
+            </td>
+          </tr>
+        </tbody>
     </table>
   </mat-card-content>
   </mat-card>
@@ -92,13 +111,15 @@
             <td >{{product.cantidad}}</td>
             <td >{{product.subTotal}}</td>
             <td>
-              <button mat-button color="primary" (click)="eliminarDetalle(product)">Eliminar</button>
+              <button mat-icon-button color="warn" (click)="eliminarDetalle(product)">
+                <mat-icon>delete</mat-icon>
+              </button>
             </td>
 
           </tr>
           <tr>
             <td colspan="4" style="text-align: right;">
-              Total {{totalVenta}}
+              <strong>Total : </strong> {{totalVenta}} Bs.
             </td>
           </tr>
         </tbody>

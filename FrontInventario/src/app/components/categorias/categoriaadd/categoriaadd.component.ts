@@ -14,7 +14,7 @@ export class CategoriaaddComponent implements OnInit {
   form: FormGroup;
   idCategoria: number=0;
   constructor(private fb : FormBuilder,private Router: Router, private CategoriaService:
-    CategoriaService,private Route : ActivatedRoute, private toastr: ToastrService) 
+    CategoriaService,private Route : ActivatedRoute,  private toastr: ToastrService) 
     {
       if(this.Route.snapshot.params.id>0){
         this.idCategoria = this.Route.snapshot.params.id;
