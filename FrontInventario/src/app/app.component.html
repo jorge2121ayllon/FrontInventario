@@ -11,12 +11,22 @@
       <li><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active">Home</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Usuarios</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/categorias']" routerLinkActive="router-link-active">Categorias</a></li>
+      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/ventas']" routerLinkActive="router-link-active">Ventas</a></li>
       <li><a class="nav-link" *ngIf="!_authService.loggedIn()" [routerLink]="['login']" routerLinkActive="router-link-active">Login</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()">Salir</a></li>
     </ul>
   </nav>
 </header>
 
-<body style="margin-top: 200px;">
-  <router-outlet></router-outlet>
-</body>
+
+
+<section class="service-section spad">
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</section>
+
+
+<footer class="footer-section">
+  <div class="copyright">Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved.  <br>This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></div><br><br>
+</footer>

@@ -21,7 +21,7 @@
       </mat-form-field>
       <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
 
-      <table style="text-align: center;" *ngIf="listaProductos.length>0">
+      <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
         <thead>
           <tr>
             <th>codigo</th>
@@ -75,9 +75,9 @@
             </td>
             <td>
               <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Cantidad del producto</mat-label>
-                <input type="number" matInput placeholder="cantidad" formControlName="cantidad">
+                <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
               </mat-form-field>
+
             </td>
             <td>
               <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
@@ -94,7 +94,7 @@
   <mat-card>
     <mat-card-title>Detalle de venta</mat-card-title>
     <mat-card-content>
-    <table style="text-align: center; " *ngIf="listadetalleVenta.length>0">
+    <table style="text-align: center; " *ngIf="listadetalleVenta.length>0"  class="table table-hover">
       <thead>
         <tr>
           <th>descripcion</th>
