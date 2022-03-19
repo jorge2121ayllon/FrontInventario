@@ -19,6 +19,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -84,6 +85,7 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
+    NgxMatFileInputModule,
   ],
   providers: [
     LoginService,
