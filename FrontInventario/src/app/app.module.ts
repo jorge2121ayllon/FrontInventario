@@ -43,6 +43,9 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import {MatCardModule} from '@angular/material/card';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
+import { ComprasComponent } from './components/compra/compras/compras.component';
+import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
+import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
 
 
 
@@ -61,6 +64,9 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     PruebaComponent,
     VentasComponent,
     VentaeditComponent,
+    ComprasComponent,
+    CompraaddComponent,
+    CompraeditComponent,
 
   ],
   imports: [

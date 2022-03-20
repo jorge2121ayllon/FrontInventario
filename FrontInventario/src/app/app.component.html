@@ -12,6 +12,8 @@
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Usuarios</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/categorias']" routerLinkActive="router-link-active">Categorias</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/ventas']" routerLinkActive="router-link-active">Ventas</a></li>
+      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/compras']" routerLinkActive="router-link-active">Compras</a></li>
+      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/productos']" routerLinkActive="router-link-active">Productos</a></li>
       <li><a class="nav-link" *ngIf="!_authService.loggedIn()" [routerLink]="['login']" routerLinkActive="router-link-active">Login</a></li>
       <li><a class="nav-link" *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()">Salir</a></li>
     </ul>

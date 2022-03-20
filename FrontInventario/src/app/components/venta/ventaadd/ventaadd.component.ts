@@ -94,8 +94,6 @@ export class VentaaddComponent implements OnInit {
       this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")
       this.productoSeleccionado=new Producto;
     }
-
-
   }
 
   guardar()
