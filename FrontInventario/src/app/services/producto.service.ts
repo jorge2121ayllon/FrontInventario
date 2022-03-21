@@ -23,6 +23,7 @@ export class ProductoService {
     '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
    }
 
+
    save(Producto:any): Observable<Response>{
      console.log(Producto);
     return this.http.post<Response>(this.baseUrl, JSON.stringify(Producto));

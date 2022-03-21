@@ -16,7 +16,7 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 export class ProductosComponent implements OnInit {
 
   form: FormGroup;
-  displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','acciones'];
+  displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','imagen','acciones'];
   categorias :any;
   productos :any;
   metadata :any;
@@ -94,4 +94,32 @@ export class ProductosComponent implements OnInit {
   }
 
 
+  //sgte funcionalidad: 1.-vista  de stock con descripcion y cantidad de stock, 2.- vista de notificaciones
+  //inicio 17-03-22 fin 20-03-22 
+
+
+   //base 64 to image
+   async toImage(url: any){
+    var res =  await fetch(url);
+    var blob =  (await res).blob();
+
+    const result =  new Promise(async (resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(await blob);
+    })
+    return result
+  };
+
+  getCategoria(id:any){
+    for (let index = 0; index < this.categorias.length; index++) {
+      if(this.categorias[index].id==id){return this.categorias[index].nombre;}
+    }
+  }
 }

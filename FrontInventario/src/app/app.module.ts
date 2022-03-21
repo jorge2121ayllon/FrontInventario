@@ -20,6 +20,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import {MatDividerModule} from '@angular/material/divider'; 
+import {MatListModule} from '@angular/material/list'; 
+import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -43,6 +47,8 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import {MatCardModule} from '@angular/material/card';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
+import { StockdetalleComponent } from './components/stock/stockdetalle/stockdetalle.component';
+import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
 
 
 
@@ -61,6 +67,8 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     PruebaComponent,
     VentasComponent,
     VentaeditComponent,
+    StockdetalleComponent,
+    StockalertaComponent,
 
   ],
   imports: [
@@ -86,6 +94,10 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     MatPaginatorModule,
     MatExpansionModule,
     NgxMatFileInputModule,
+    MatDividerModule,
+    MatListModule,
+    MatBadgeModule,
+    MatCheckboxModule,
   ],
   providers: [
     LoginService,

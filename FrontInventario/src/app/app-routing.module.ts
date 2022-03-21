@@ -7,6 +7,8 @@ import { CategoriaaddComponent} from './components/categorias/categoriaadd/categ
 import { CategoriasComponent } from './components/categorias/categorias/categorias.component'
 import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
 import { ProductosComponent } from './components/productos/productos/productos.component';
+import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
+import { StockdetalleComponent } from './components/stock/stockdetalle/stockdetalle.component'; 
 import { HomeComponent } from './components/home/home.component';
 
 import { LoginComponent } from './components/login/login.component';
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: 'categorias' , component: CategoriasComponent},
   {path: 'categoriaadd/:id' , component: CategoriaaddComponent},
   {path: 'productos' , component: ProductosComponent},
+  {path: 'stockAlert' , component: StockalertaComponent},
+  {path: 'stockDetalle' , component: StockdetalleComponent},
   {path: 'productoadd/:id' , component: ProductosaddComponent},
   {path: 'ventaadd' , component: VentaaddComponent},
   {path: 'ventas' , component: VentasComponent},

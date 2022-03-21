@@ -1,0 +1,9 @@
+<button mat-raised-button color="primary" [routerLink]="['/stockDetalle']">Buscar</button>
+<mat-selection-list #shoes [multiple]="false">
+    <mat-list-option *ngFor="let producto of productos" [value]="producto.stock">
+      {{producto.descripcion}}: {{producto.stock}}
+    </mat-list-option>
+  </mat-selection-list>
+  <p>
+    Producto Seleccionado : {{shoes.selectedOptions.selected[0]?.value}}
+  </p>
