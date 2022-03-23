@@ -18,7 +18,7 @@ import { values } from 'lodash';
 export class StockdetalleComponent implements OnInit {
 
   public form: FormGroup;
-  displayedColumns: string[] = ['descripcion','color','talla', 'stock','codigo','acciones'];
+  displayedColumns: string[] = ['descripcion','marca','color','talla', 'stock','codigo','acciones'];
   categorias :any;
   productos :any;
   metadata :any;
@@ -43,21 +43,27 @@ export class StockdetalleComponent implements OnInit {
       this.paginator.itemsPerPageLabel = "Registros por página";
 
       this.form = this.fb.group({
-        categoria:new FormControl(''),
-        descripcion:new FormControl(''),
-        color:new FormControl(''),
-        marca:new FormControl(''),
-        talla:new FormControl(''),
-        codigo:new FormControl(''),
+        categoria:new FormControl(0),
+        descripcion:new FormControl('?'),
+        color:new FormControl('?'),
+        marca:new FormControl('?'),
+        talla:new FormControl('?'),
+        codigo:new FormControl('?'),
       })
     }
 
 
   ngOnInit(): void {
 
-    this.PaginacionService.Filtro.filter='';
-    this.PaginacionService.Filtro.PageSize=5;
-    this.PaginacionService.Filtro.PageNumber=1;
+    this.PaginacionService.Filtros.filter='';
+    this.PaginacionService.Filtros.categoria=0;
+    this.PaginacionService.Filtros.descripcion='';
+    this.PaginacionService.Filtros.color='';
+    this.PaginacionService.Filtros.marca='';
+    this.PaginacionService.Filtros.talla='';
+    this.PaginacionService.Filtros.codigo='';
+    this.PaginacionService.Filtros.PageSize=5;
+    this.PaginacionService.Filtros.PageNumber=1;
     this.Categorias();
   }
 
@@ -90,13 +96,20 @@ export class StockdetalleComponent implements OnInit {
 
   handlePage(e: PageEvent)
   {
-   this.PaginacionService.Filtro.PageNumber=e.pageIndex+1;
-   this.PaginacionService.Filtro.PageSize=e.pageSize;
+   this.PaginacionService.Filtros.PageNumber=e.pageIndex+1;
+   this.PaginacionService.Filtros.PageSize=e.pageSize;
    this.Productos();
   }
 
   applyFilter() {
-    this.PaginacionService.Filtro.filter=this.form.value.categoria+'-'+this.form.value.descripcion+'-'+this.form.value.color+'-'+this.form.value.marca+'-'+this.form.value.talla+'-'+this.form.value.codigo;
+    console.log(this.form.value)
+    this.PaginacionService.Filtros.filter='si';
+    this.PaginacionService.Filtros.categoria=Number(this.form.value.categoria);
+    this.PaginacionService.Filtros.descripcion=this.form.value.descripcion;
+    this.PaginacionService.Filtros.color=this.form.value.color;
+    this.PaginacionService.Filtros.marca=this.form.value.marca;
+    this.PaginacionService.Filtros.talla=this.form.value.talla;
+    this.PaginacionService.Filtros.codigo=this.form.value.codigo;
     this.Productos();
   }
   //sgte funcionalidad: 1.-vista  de stock con descripcion y cantidad de stock, 2.- vista de notificaciones

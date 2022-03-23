@@ -130,6 +130,7 @@ export class ProductosaddComponent implements OnInit {
               this.form.controls['descripcion'].setValue(r.data.descripcion)
               this.form.controls['stock'].setValue("")
               this.form.controls['imagen'].setValue("")
+              this.codigo=(r.data.codigo)
               this.myimage=""
               this.form.controls['idCategoria'].setValue(r.data.idCategoria)
           }else if(tipo===false){

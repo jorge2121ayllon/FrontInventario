@@ -18,7 +18,7 @@
             <td><mat-form-field appearance="fill" *ngIf="checkCategoria.value">
                 <mat-label>Categoria</mat-label>
                 <mat-select formControlName="categoria">
-                  <mat-option *ngFor="let categoria of categorias" [value]="categoria.nombre">
+                  <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
                     {{categoria.nombre}}
                   </mat-option>
                 </mat-select>
@@ -58,6 +58,11 @@
     <ng-container matColumnDef="descripcion">
         <th mat-header-cell *matHeaderCellDef > Descripcion </th>
         <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef > Marca </th>
+        <td mat-cell *matCellDef="let element"> {{element.marca}} </td>
       </ng-container>
 
       <ng-container matColumnDef="color">
