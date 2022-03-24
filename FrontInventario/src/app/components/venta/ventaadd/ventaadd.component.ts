@@ -64,6 +64,7 @@ export class VentaaddComponent implements OnInit {
    this.listaProductos= this.listaProductos.filter(listaProductos=>listaProductos.id==producto.id);
    this.productoSeleccionado= this.listaProductos[0];
    this.listaProductos=[];
+
   }
 
   agregarDetalle()

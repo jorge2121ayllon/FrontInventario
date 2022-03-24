@@ -113,7 +113,6 @@ export class CompraeditComponent implements OnInit {
      let unicoProducto = this.listadetalleCompra.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
      if(this.productoSeleccionado.precioVenta && unicoProducto.length<1 && this.productoSeleccionado.stock)
      {
-       if(this.productoSeleccionado.stock>= this.form.value.cantidad){
          this.detalleCompra={
            cantidad: this.form.value.cantidad,
            idProducto:this.productoSeleccionado.id,
@@ -124,11 +123,6 @@ export class CompraeditComponent implements OnInit {
           this.totalCompra= this.totalCompra +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
           this.listadetalleCompra.push(this.detalleCompra);
           this.productoSeleccionado=new Producto;
-       }
-       else{
-         this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
-       }
-
      }
      else{
        this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")

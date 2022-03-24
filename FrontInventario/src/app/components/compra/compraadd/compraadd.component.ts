@@ -70,8 +70,6 @@ export class CompraaddComponent implements OnInit {
 
     if(this.productoSeleccionado.precioCompra && unicoProducto.length<1 && this.productoSeleccionado.stock)
     {
-      if(this.productoSeleccionado.stock>= this.form.value.cantidad){
-
         this.detalleCompra={
           cantidad: this.form.value.cantidad,
           idProducto:this.productoSeleccionado.id,
@@ -84,11 +82,6 @@ export class CompraaddComponent implements OnInit {
          this.listadetalleCompra.push(this.detalleCompra);
 
          this.productoSeleccionado=new Producto;
-      }
-      else{
-        this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
-      }
-
     }
     else{
       this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")

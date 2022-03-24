@@ -1,5 +1,6 @@
 <form [formGroup]="form" autocomplete="off" >
 
+
   <mat-card>
     <mat-card-title>Datos del cliente</mat-card-title>
     <mat-card-content>
@@ -21,6 +22,7 @@
       </mat-form-field>
       <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
 
+      <div class="table-responsive">
       <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
         <thead>
           <tr>
@@ -41,6 +43,7 @@
             </tr>
           </tbody>
         </table>
+      </div>
     </mat-card-content>
   </mat-card>
 
@@ -51,14 +54,14 @@
   <mat-card>
     <mat-card-title>Detalles Del Producto</mat-card-title>
     <mat-card-content>
-
+      <div class="table-responsive">
     <table style="text-align: center;" *ngIf="productoSeleccionado.descripcion">
       <thead>
           <tr>
-            <th>Descripcion producto</th>
-            <th>Precio Unitario</th>
-            <th>Stock Disponible</th>
-            <th>Cantidad Para Venta</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Cantidad</th>
             <th>Acciones</th>
           </tr>
       </thead>
@@ -77,7 +80,6 @@
               <mat-form-field class="example-full-width" appearance="fill">
                 <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
               </mat-form-field>
-
             </td>
             <td>
               <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
@@ -85,6 +87,7 @@
           </tr>
         </tbody>
     </table>
+  </div>
   </mat-card-content>
   </mat-card>
 
@@ -94,6 +97,7 @@
   <mat-card>
     <mat-card-title>Detalle de venta</mat-card-title>
     <mat-card-content>
+      <div class="table-responsive">
     <table style="text-align: center; " *ngIf="listadetalleVenta.length>0"  class="table table-hover">
       <thead>
         <tr>
@@ -129,7 +133,7 @@
           </tr>
         </tbody>
       </table>
-
+      </div>
     </mat-card-content>
   </mat-card>
 
