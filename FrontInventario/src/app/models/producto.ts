@@ -9,5 +9,6 @@ export class Producto{
     descripcion?: string;
     stock?: number;
     codigo?: string;
+    imagen?: string;
     idCategoria?: number;
 }
