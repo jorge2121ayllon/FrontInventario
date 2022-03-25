@@ -2,10 +2,12 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CategoriaService } from './../../../services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
+import { Producto } from 'src/app/models/producto';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
+import { Observable, observable } from 'rxjs';
 
 
 @Component({
@@ -19,7 +21,9 @@ export class ProductosComponent implements OnInit {
   displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','imagen','acciones'];
   categorias :any;
   productos :any;
+  listaImg :Producto[]=[];
   metadata :any;
+  myimage: any;
   
 
   // MatPaginator Inputs
@@ -31,7 +35,7 @@ export class ProductosComponent implements OnInit {
   constructor(private fb : FormBuilder, private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
-
+      this.myimage= new Observable<any>();
       this.form = this.fb.group({
         filtro: new FormControl('')
       })
@@ -58,11 +62,29 @@ export class ProductosComponent implements OnInit {
     this.ProductoService.gets().subscribe( r =>
       {
         this.productos = r.data;
+        this.listaImg=this.productos;
+        this.listaImgs(this.listaImg);
         this.metadata = r.meta;
-
         this.length=this.metadata.totalCount;
       }
     )
+  }
+
+  //almacena los productos en una lista local para convertir las img
+  listaImgs(lista:any){
+    for (let index = 0; index < lista.length; index++) {
+            lista[index].imagen= this.toImage(lista[index].imagen)
+    }
+  }
+
+  //metodo para retornar la img de cada producto
+  returnImg(id:any){
+      for (let index = 0; index < this.listaImg.length; index++) {
+        if (this.listaImg[index].id===id) {
+          this.myimage=this.listaImg[index].imagen;
+        }
+      }
+      return this.myimage;
   }
 
   borrar(id : any)
@@ -117,6 +139,7 @@ export class ProductosComponent implements OnInit {
     return result
   };
 
+  //obtiene los nombres de las categorias
   getCategoria(id:any){
     for (let index = 0; index < this.categorias.length; index++) {
       if(this.categorias[index].id==id){return this.categorias[index].nombre;}
