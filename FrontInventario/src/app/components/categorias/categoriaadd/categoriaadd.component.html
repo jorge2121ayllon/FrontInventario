@@ -1,20 +1,56 @@
-<form [formGroup]="form" (ngSubmit)="Guardar()">
+<li>
+    <div class="cd-half-width fivth-slide">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="content fivth-content">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="left-info">
+                    <p>Maecenas imperdiet sagittis lacus, ut consequat velit iaculis id. Praesent eu consequat urna. Morbi justo dolor, ornare sed lorem et, auctor iaculis ligula.
+                    <br><br>
+                    <em>3344 Donec mollis libero<br>at metus luctus 10110</em>
+                    </p>
+                    <ul class="social-icons">
+                      <i><a href="#"><i class="fa fa-facebook"></i></a></i>
+                      <i><a href="#"><i class="fa fa-twitter"></i></a></i>
+                      <i><a href="#"><i class="fa fa-linkedin"></i></a></i>
+                      <i><a href="#"><i class="fa fa-rss"></i></a></i>
+                      <i><a href="#"><i class="fa fa-behance"></i></a></i>
+                    </ul>
+                  </div>
+                </div>
+  
+                <div class="col-md-8">
+                  <div class="row">
 
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Nombre</mat-label>
-        <input matInput placeholder="Nombre" formControlName="nombre">
-        <mat-error *ngIf="form.controls.nombre.hasError('required')">
-            Nombre de descripción <strong>requerido</strong>
-        </mat-error>
-    </mat-form-field>
+                    <form [formGroup]="form" (ngSubmit)="Guardar()">
 
-    <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Descripción</mat-label>
-        <input matInput placeholder="Descripción" formControlName="descripcion">
-        <mat-error *ngIf="form.controls.descripcion.hasError('required')">
-            Descripcion<strong>requerido</strong>
-        </mat-error>
-    </mat-form-field>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre" formControlName="nombre">
+                            <mat-error *ngIf="form.controls.nombre.hasError('required')">
+                                Nombre de descripción <strong>requerido</strong>
+                            </mat-error>
+                        </mat-form-field><br>
 
-    <br>
-    <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>  
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Descripción</mat-label>
+                            <input matInput placeholder="Descripción" formControlName="descripcion">
+                            <mat-error *ngIf="form.controls.descripcion.hasError('required')">
+                                Descripcion<strong>requerido</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <br>
+                        <button type="submit" mat-raised-button color="primary"  [disabled]="!form.valid" >Guardar</button> <br><br> 
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>                  
+  </div>
+</div>
+</li>

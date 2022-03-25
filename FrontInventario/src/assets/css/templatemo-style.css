@@ -534,7 +534,7 @@ video::-webkit-media-controls {
 .fivth-content input {
   margin-bottom: 20px;
   padding-left: 15px;
-  max-width: 100%;
+  max-width: 96%;
   height: 40px;
   display: inline-block;
   line-height: 40px;
