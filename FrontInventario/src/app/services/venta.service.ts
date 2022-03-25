@@ -38,5 +38,12 @@ export class VentaService {
     return this.http.put<Response>(this.baseUrl, JSON.stringify(Venta));
   }
 
+  getReportes(): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl +"/"+1+"/"+1+'?dateInit='+this.PaginacionService.FiltroDate.dateInit+
+    '&dateEnd='+this.PaginacionService.FiltroDate.dateEnd+
+    '&PageSize='+this.PaginacionService.Filtro.PageSize+
+    '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
+  }
+
 
 }

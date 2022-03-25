@@ -8,6 +8,7 @@ import { CategoriasComponent } from './components/categorias/categorias/categori
 import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
 import { ProductosComponent } from './components/productos/productos/productos.component';
 import { HomeComponent } from './components/home/home.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
 
 import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'ventas' , component: VentasComponent},
   {path: 'ventaedit/:id' , component: VentaeditComponent},
   {path: 'prueba' , component: PruebaComponent},
+  {path: 'inventario' , component: InventarioComponent},
 
   {path: 'login' , component: LoginComponent},
   {path: '**' , component: HomeComponent},

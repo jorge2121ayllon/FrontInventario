@@ -31,4 +31,10 @@ export class DetalleVentaService {
     return this.http.delete(this.baseUrl+ "?id=" +Id);
   }
 
+  gets(): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+'?filter='+this.PaginacionService.Filtro.filter+
+    '&PageSize='+this.PaginacionService.Filtro.PageSize+
+    '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
+  }
+
 }

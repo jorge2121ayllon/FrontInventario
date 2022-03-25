@@ -19,6 +19,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -42,6 +43,7 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import {MatCardModule} from '@angular/material/card';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
 
 
 
@@ -60,6 +62,7 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     PruebaComponent,
     VentasComponent,
     VentaeditComponent,
+    InventarioComponent,
 
   ],
   imports: [
@@ -84,6 +87,7 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatDatepickerModule,
   ],
   providers: [
     LoginService,
