@@ -19,7 +19,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+//import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -43,11 +44,10 @@ import { PruebaComponent } from './components/prueba/prueba.component';
 import {MatCardModule} from '@angular/material/card';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
 import { ComprasComponent } from './components/compra/compras/compras.component';
 import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
 import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
-
-
 
 @NgModule({
   declarations: [
@@ -64,10 +64,10 @@ import { CompraeditComponent } from './components/compra/compraedit/compraedit.c
     PruebaComponent,
     VentasComponent,
     VentaeditComponent,
+    InventarioComponent,
     ComprasComponent,
     CompraaddComponent,
     CompraeditComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -91,6 +91,7 @@ import { CompraeditComponent } from './components/compra/compraedit/compraedit.c
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
+    MatDatepickerModule,
     NgxMatFileInputModule,
   ],
   providers: [
