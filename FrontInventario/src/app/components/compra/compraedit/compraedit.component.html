@@ -1,17 +1,5 @@
 <form [formGroup]="form" autocomplete="off" >
 
-
-  <mat-card>
-    <mat-card-title>Datos del cliente</mat-card-title>
-    <mat-card-content>
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>nombre Cliente</mat-label>
-        <input matInput placeholder="nombre Cliente" formControlName="nombreCliente">
-      </mat-form-field>
-    </mat-card-content>
-  </mat-card>
-  <br>
-
   <mat-card>
     <mat-card-title>Buscador de productos</mat-card-title>
     <mat-card-content>
@@ -21,7 +9,6 @@
         <input matInput (keyup.enter)="obtenerProductos()" placeholder="buscador Producto" formControlName="buscadorProducto">
       </mat-form-field>
       <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
-
       <div class="table-responsive">
       <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
         <thead>
@@ -39,7 +26,7 @@
               <td>{{product.descripcion}}</td>
               <td>{{product.color}}</td>
               <td>{{product.stock}}</td>
-              <td>{{product.precioVenta}}</td>
+              <td>{{product.precioCompra}}</td>
             </tr>
           </tbody>
         </table>
@@ -48,20 +35,17 @@
   </mat-card>
 
 
-
-  <br>
-
   <mat-card>
     <mat-card-title>Detalles Del Producto</mat-card-title>
     <mat-card-content>
-      <div class="table-responsive">
+    <div class="table-responsive">
     <table style="text-align: center;" *ngIf="productoSeleccionado.descripcion">
       <thead>
           <tr>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Cantidad</th>
+            <th>Descripcion producto</th>
+            <th>Precio Unitario</th>
+            <th>Stock Disponible</th>
+            <th>Cantidad Para Venta</th>
             <th>Acciones</th>
           </tr>
       </thead>
@@ -71,7 +55,7 @@
               {{productoSeleccionado.codigo}} {{productoSeleccionado.descripcion}} {{productoSeleccionado.color}}
             </td>
             <td>
-              {{productoSeleccionado.precioVenta}}
+              {{productoSeleccionado.precioCompra}}
             </td>
             <td>
               {{productoSeleccionado.stock}}
@@ -80,6 +64,7 @@
               <mat-form-field class="example-full-width" appearance="fill">
                 <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
               </mat-form-field>
+
             </td>
             <td>
               <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
@@ -87,18 +72,18 @@
           </tr>
         </tbody>
     </table>
-  </div>
+    </div>
   </mat-card-content>
   </mat-card>
 
 
-  <br>
+
 
   <mat-card>
     <mat-card-title>Detalle de venta</mat-card-title>
     <mat-card-content>
-      <div class="table-responsive">
-    <table style="text-align: center; " *ngIf="listadetalleVenta.length>0"  class="table table-hover">
+    <div class="table-responsive">
+    <table style="text-align: center; " *ngIf="listadetalleCompra.length>0"  class="table table-hover">
       <thead>
         <tr>
           <th>descripcion</th>
@@ -109,9 +94,9 @@
         </tr>
       </thead>
         <tbody>
-          <tr *ngFor="let product of listadetalleVenta">
+          <tr *ngFor="let product of listadetalleCompra">
             <td>{{product.producto}}</td>
-            <td >{{product.precioVenta}}</td>
+            <td >{{product.precioCompra}}</td>
             <td >{{product.cantidad}}</td>
             <td >{{product.subTotal}}</td>
             <td>
@@ -119,23 +104,19 @@
               <button mat-icon-button color="warn" (click)="eliminarDetalle(product)">
                 <mat-icon>delete</mat-icon>
               </button>
-
-              <button mat-icon-button color="basic" (click)="editarDetalle(product)">
-                <mat-icon>create</mat-icon>
-              </button>
             </td>
 
           </tr>
           <tr>
             <td colspan="4" style="text-align: right;">
-              <strong>Total :  {{totalVenta}} Bs. </strong>
+              <strong>Total :  {{totalCompra}} Bs. </strong>
             </td>
           </tr>
         </tbody>
       </table>
-      </div>
+    </div>
     </mat-card-content>
   </mat-card>
 
 
-  <button mat-button color="primary" (click)="guardar()">Guardar Venta</button>
+  <button mat-button color="primary" (click)="guardar()">Guardar Compra</button>

@@ -64,6 +64,7 @@ export class VentaaddComponent implements OnInit {
    this.listaProductos= this.listaProductos.filter(listaProductos=>listaProductos.id==producto.id);
    this.productoSeleccionado= this.listaProductos[0];
    this.listaProductos=[];
+
   }
 
   agregarDetalle()
@@ -94,8 +95,6 @@ export class VentaaddComponent implements OnInit {
       this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")
       this.productoSeleccionado=new Producto;
     }
-
-
   }
 
   guardar()
