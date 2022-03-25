@@ -1,3 +1,6 @@
+import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
+import { ComprasComponent } from './components/compra/compras/compras.component';
+import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
 import { VentasComponent } from './components/venta/ventas/ventas.component';
 import { PruebaComponent } from './components/prueba/prueba.component';
 import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
@@ -18,19 +21,28 @@ import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.compo
 const routes: Routes = [
   {path: 'usuarios' , component: UsuariosComponent},
   {path: 'usuarioadd/:id' , component: UsuarioaddComponent},
+
   {path: 'categorias' , component: CategoriasComponent},
   {path: 'categoriaadd/:id' , component: CategoriaaddComponent},
+
   {path: 'productos' , component: ProductosComponent},
   {path: 'productoadd/:id' , component: ProductosaddComponent},
+
   {path: 'ventaadd' , component: VentaaddComponent},
   {path: 'ventas' , component: VentasComponent},
   {path: 'ventaedit/:id' , component: VentaeditComponent},
   {path: 'prueba' , component: PruebaComponent},
   {path: 'inventario' , component: InventarioComponent},
 
+  {path: 'compraadd' , component: CompraaddComponent},
+  {path: 'compras' , component: ComprasComponent},
+  {path: 'compraedit/:id' , component: CompraeditComponent},
+
+
   {path: 'login' , component: LoginComponent},
   {path: '**' , component: HomeComponent},
-  {path: 'home' , component: HomeComponent}
+  {path: 'home' , component: HomeComponent},
+  {path: 'prueba' , component: PruebaComponent}
 ];
 
 @NgModule({

@@ -24,6 +24,7 @@ export class ProductoService {
    }
 
    save(Producto:any): Observable<Response>{
+     console.log(Producto);
     return this.http.post<Response>(this.baseUrl, JSON.stringify(Producto));
   }
 

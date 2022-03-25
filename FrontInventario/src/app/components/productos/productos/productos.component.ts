@@ -16,7 +16,7 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 export class ProductosComponent implements OnInit {
 
   form: FormGroup;
-  displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria'];
+  displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','acciones'];
   categorias :any;
   productos :any;
   metadata :any;
