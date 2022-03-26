@@ -2,12 +2,13 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ProductoService } from './../../services/producto.service';
 import { VentaService } from './../../services/venta.service';
+import { CategoriaService } from './../../services/categoria.service'
 import { DetalleVenta } from './../../models/detalleVenta';
 import { DetalleVentaService } from './../../services/detalle-venta.service';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
-import { FormBuilder, FormGroup,  Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup,  Validators } from '@angular/forms';
 import { Producto } from 'src/app/models/producto';
 
 @Component({
@@ -25,6 +26,7 @@ export class InventarioComponent implements OnInit {
   displayedColumns: string[] = ['idCategoria', 'marca', 'descripcion', 'precioCompra', 'precioVenta', 'stock', 'ganancia'];
   productos :any;
   metadata :any;
+  public listaCategorias: any[] = [];
   listaDetalles : DetalleVenta[]=[];
   listaProductos: any;
   detalles: any;
@@ -38,7 +40,7 @@ export class InventarioComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10,25, 100];
   pageIndex=0;
 
-  constructor(private ProductoService : ProductoService, private VentaService : VentaService, private DetalleVentaService: DetalleVentaService, private Router: Router,
+  constructor(private ProductoService : ProductoService, private VentaService : VentaService, private DetalleVentaService: DetalleVentaService, private CategoriaService: CategoriaService, private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl, private toastr: ToastrService, private formBuilder: FormBuilder,) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
 
@@ -50,8 +52,8 @@ export class InventarioComponent implements OnInit {
       this.form = this.formBuilder.group({
           fechaInicio: ['', [Validators.required]],
           fechaFin: ['', [Validators.required]],
-          cantidadTotal: [''],
-          gananciaTotal: [''],
+          cantidadTotal: new FormControl({value: '', disabled: true}),
+          gananciaTotal: new FormControl({value: '', disabled: true}),
         }
       )
     }
@@ -67,6 +69,7 @@ export class InventarioComponent implements OnInit {
     this.PaginacionService.FiltroDate.PageNumber=1;
     this.DetalleVentas();
     this.Productos();
+    this.categorias();
   }
   
   //Obtiene ventas de determinada fecha
@@ -175,6 +178,20 @@ export class InventarioComponent implements OnInit {
       contador+=lista[i].cantidad;
     }
     return contador;
+  }
+
+  //Obtiene categorias
+  verCategoria(id: any){
+    for(let i=0; i < this.listaCategorias.length; i++){
+      if(this.listaCategorias[i].id===Number(id)){
+        return this.listaCategorias[i].nombre;
+      }
+    }
+  }
+  categorias(){
+    this.CategoriaService.getCategorias().subscribe(response=>(
+      this.listaCategorias=response.data
+    ))
   }
 
   handlePage(e: PageEvent)
