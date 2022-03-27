@@ -24,6 +24,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -98,6 +99,7 @@ import { StockalertaComponent } from './components/stock/stockalerta/stockalerta
     MatListModule,
     MatBadgeModule,
     MatCheckboxModule,
+    MatTooltipModule,
   ],
   providers: [
     LoginService,

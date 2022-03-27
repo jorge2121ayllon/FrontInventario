@@ -50,7 +50,7 @@
   </mat-card>
   
 <br>
-<mat-progress-bar mode="indeterminate" *ngIf="!productos"></mat-progress-bar>
+<mat-progress-bar mode="buffer"*ngIf="!productos"></mat-progress-bar>
 
 <div class="mat-elevation-z8" *ngIf="productos">
   <table mat-table [dataSource]="productos" class="mat-elevation-z8">

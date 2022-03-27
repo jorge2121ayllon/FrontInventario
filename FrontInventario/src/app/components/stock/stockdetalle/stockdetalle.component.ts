@@ -44,11 +44,11 @@ export class StockdetalleComponent implements OnInit {
 
       this.form = this.fb.group({
         categoria:new FormControl(0),
-        descripcion:new FormControl('?'),
-        color:new FormControl('?'),
-        marca:new FormControl('?'),
-        talla:new FormControl('?'),
-        codigo:new FormControl('?'),
+        descripcion:new FormControl(''),
+        color:new FormControl(''),
+        marca:new FormControl(''),
+        talla:new FormControl(''),
+        codigo:new FormControl(''),
       })
     }
 
