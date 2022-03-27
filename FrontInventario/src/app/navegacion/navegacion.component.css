@@ -1,0 +1,44 @@
+.sidenav-container {
+  height: 100%;
+
+}
+
+.sidenav {
+  width: 200px;
+  background-color:  #f9bf04;
+}
+
+
+.sidenav .mat-toolbar {
+  background: inherit;
+
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+
+.profile-card {
+  text-align: center;
+}
+
+img {
+  width: 70%;
+  height: auto;
+
+}
+
+
+.list:hover {
+  color: azure;
+  background-color: #2c2c2a;
+}
+
+
+mat-card{
+  height: 100%;
+  background-color: azure;
+}

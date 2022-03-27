@@ -1,9 +1,28 @@
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+.body{
+  padding-top: 6%;
+  justify-content: center;
+  height: 100%;
+  align-items: center;
+  background-color: aliceblue;
 }
 
-.example-full-width {
-  width: 100%;
+
+.ancho{
+  width: 30%;
 }
+
+.boton{
+  height: 50px;
+}
+
+
+.profile-card {
+  text-align: center;
+}
+
+img {
+  width: 15%;
+  height: auto;
+  border-radius: 20%;
+}
+

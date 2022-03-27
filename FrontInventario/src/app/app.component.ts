@@ -9,20 +9,11 @@ import { StockService } from 'src/app/services/stock.service';
 })
 export class AppComponent {
   title = 'FrontInventario';
-  productos :any;
-  cantidad:any;
+
   constructor(public _authService:LoginService, private StockService : StockService) {}
   ngOnInit(): void {
-    this.Productos();
+
   }
 
-  Productos()
-  {
-    this.StockService.getStock().subscribe( r =>
-      {
-        this.productos = r.data;
-        this.cantidad=r.data.length;
-      }
-    )
-  }
+
 }

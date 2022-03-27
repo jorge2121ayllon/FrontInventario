@@ -43,7 +43,7 @@ export class LoginService {
 
   loggedOut(){
     localStorage.removeItem('Token');
-    localStorage.removeItem('UserName');
+    localStorage.removeItem('Usuario');
     localStorage.removeItem('Role');
     this.Router.navigate(['/home']);
   }
