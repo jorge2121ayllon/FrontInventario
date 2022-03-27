@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-content>
+    <button mat-raised-button
+    matTooltip="Buscar Información del Stock de los Productos"
+    matTooltipClass="example-tooltip-red"
+    aria-label="Button that shows a red tooltip"
+    class="example-button" color="primary" [routerLink]="['/stockDetalle']">
+      <mat-icon>manage_search</mat-icon>
+    </button>
+    <mat-selection-list #shoes [multiple]="false">
+        <mat-list-option *ngFor="let producto of productos" [value]="producto.stock">
+          <mat-icon mat-list-icon >dry_cleaning</mat-icon>
+          <div mat-line>{{producto.descripcion}}</div>
+          <div mat-line> {{producto.stock}} </div>
+        </mat-list-option>
+      </mat-selection-list>
+      <p>
+        Producto Seleccionado : {{shoes.selectedOptions.selected[0]?.value}}
+      </p>
+  </mat-card-content>
+</mat-card>

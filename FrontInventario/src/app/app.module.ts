@@ -18,7 +18,14 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatExpansionModule} from '@angular/material/expansion';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import {MatDividerModule} from '@angular/material/divider'; 
+import {MatListModule} from '@angular/material/list'; 
+import {MatBadgeModule} from '@angular/material/badge'; 
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
+import {MatTooltipModule} from '@angular/material/tooltip'; 
+
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatButtonModule} from '@angular/material/button';
@@ -30,6 +37,21 @@ import { HomeComponent } from './components/home/home.component';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import { UsuarioaddComponent } from './components/usuarios/usuarioadd/usuarioadd.component';
 import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.component';
+import { CategoriasComponent } from './components/categorias/categorias/categorias.component';
+import { CategoriaaddComponent } from './components/categorias/categoriaadd/categoriaadd.component';
+import { ProductosaddComponent } from './components/productos/productosadd/productosadd.component';
+import { ProductosComponent } from './components/productos/productos/productos.component';
+import { VentaaddComponent } from './components/venta/ventaadd/ventaadd.component';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatAutocompleteModule} from '@angular/material/autocomplete';
+import { PruebaComponent } from './components/prueba/prueba.component';
+import {MatCardModule} from '@angular/material/card';
+import { VentasComponent } from './components/venta/ventas/ventas.component';
+import { VentaeditComponent } from './components/venta/ventaedit/ventaedit.component';
+import { StockdetalleComponent } from './components/stock/stockdetalle/stockdetalle.component';
+import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
+
+
 
 @NgModule({
   declarations: [
@@ -38,6 +60,16 @@ import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.compo
     HomeComponent,
     UsuarioaddComponent,
     UsuariosComponent,
+    CategoriasComponent,
+    CategoriaaddComponent,
+    ProductosaddComponent,
+    ProductosComponent,
+    VentaaddComponent,
+    PruebaComponent,
+    VentasComponent,
+    VentaeditComponent,
+    StockdetalleComponent,
+    StockalertaComponent,
 
   ],
   imports: [
@@ -47,12 +79,13 @@ import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.compo
     HttpClientModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-
+    MatDialogModule,
     MatProgressBarModule,
     MatInputModule,
     MatButtonModule,
     MatToolbarModule,
-
+    MatAutocompleteModule,
+    MatCardModule,
     MatSliderModule,
     MatFormFieldModule,
     MatMenuModule,
@@ -61,6 +94,12 @@ import { UsuariosComponent } from './components/usuarios/usuarios/usuarios.compo
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
+    NgxMatFileInputModule,
+    MatDividerModule,
+    MatListModule,
+    MatBadgeModule,
+    MatCheckboxModule,
+    MatTooltipModule,
   ],
   providers: [
     LoginService,
