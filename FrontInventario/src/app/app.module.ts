@@ -19,12 +19,13 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import {MatDividerModule} from '@angular/material/divider'; 
 import {MatListModule} from '@angular/material/list'; 
 import {MatBadgeModule} from '@angular/material/badge'; 
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -52,6 +53,10 @@ import { StockdetalleComponent } from './components/stock/stockdetalle/stockdeta
 import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
 
 
+import { InventarioComponent } from './components/inventario/inventario.component';
+import { ComprasComponent } from './components/compra/compras/compras.component';
+import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
+import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +75,10 @@ import { StockalertaComponent } from './components/stock/stockalerta/stockalerta
     VentaeditComponent,
     StockdetalleComponent,
     StockalertaComponent,
-
+    InventarioComponent,
+    ComprasComponent,
+    CompraaddComponent,
+    CompraeditComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,7 +102,7 @@ import { StockalertaComponent } from './components/stock/stockalerta/stockalerta
     MatSelectModule,
     MatPaginatorModule,
     MatExpansionModule,
-    NgxMatFileInputModule,
+    MatDatepickerModule,
     MatDividerModule,
     MatListModule,
     MatBadgeModule,

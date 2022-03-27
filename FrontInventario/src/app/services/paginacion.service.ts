@@ -1,4 +1,5 @@
 import { Filtro } from './../models/filtro';
+import { FiltroDate } from './../models/filtroDate';
 import { Injectable } from '@angular/core';
 import { Filtros } from '../models/filtros';
 
@@ -9,6 +10,7 @@ export class  PaginacionService {
 
   Filtro : Filtro = new Filtro;
   Filtros : Filtros = new Filtros;
+  FiltroDate: FiltroDate = new FiltroDate;
 
   constructor() {
     this.Filtro.filter="";
@@ -24,5 +26,9 @@ export class  PaginacionService {
     this.Filtros.codigo="";
     this.Filtros.PageNumber=1;
     this.Filtros.PageSize=5;
+    this.FiltroDate.dateInit=new Date();
+    this.FiltroDate.dateEnd=new Date();
+    this.FiltroDate.PageNumber=1;
+    this.FiltroDate.PageSize=5;
    }
 }

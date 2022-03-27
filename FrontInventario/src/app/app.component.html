@@ -1,24 +1,44 @@
-<header class="header-area">
-  <a href="home.html" class="logo-area">
-    <img src="assets/img/logo.png" alt="">
-  </a>
-  <div class="nav-switch">
-    <i class="fa fa-bars"></i>
+<section class="cd-hero">
+  <div class="cd-slider-nav">
+    <nav>
+      <span class="cd-marker item-1"></span>
+      <ul>
+        <!-- <li><a a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/home-icon.png"></div><h6>Home</h6></a></li> -->
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/inventario']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/about-icon.png"></div><h6>Inventario</h6></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/usuarios']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/featured-icon.png"></div><h6>Usuarios</h6></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/categorias']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/projects-icon.png"></div><h6>Categorias</h6></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/productos']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/contact-icon.png"></div><h6>Productos</h6></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/stockAlert']" routerLinkActive="router-link-active">Stock <mat-icon matBadge={{cantidad}} matBadgeColor="warn" *ngIf="productos">error_outline</mat-icon></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/ventas']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/about-icon.png"></div><h6>Ventas</h6></a></li>
+        <li><a class="nav-link" *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()"><div class="image-icon"><img src="assets/img/projects-icon.png"></div><h6>Salir</h6></a></li>
+        <li><a class="nav-link" *ngIf="!_authService.loggedIn()" [routerLink]="['login']" routerLinkActive="router-link-active"><div class="image-icon"><img src="assets/img/featured-icon.png"></div><h6>Login</h6></a></li>
+      </ul>
+
+      <li class="selected">
+        <div class="heading">
+          <h1>NEWLINE</h1>
+          <span>Welcome To Web Design Agency</span>
+        </div>
+        <div class="cd-full-width first-slide">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="content first-content">
+                  <h4>Let’s Talk More About Newline</h4>
+                  <p>Newline is free CSS template by TemplateMo. Credits go to <a href="https://videos.pexels.com/videos/busy-street-in-the-city-1089" target="_blank">Pexels.com</a> for a video background and <a href="http://unsplash.com" target="_blank">Unsplash</a> for images. Please tell your friends about TemplateMo and this is a way to help back. Thank you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dictum convallis mi. In dapibus auctor dictum donec mattis quis eros ultricies feugiat.</p>
+                  <div class="primary-button">
+                    <a href="#">Discover More</a>
+                  </div>
+                </div>
+              </div>
+            </div>                  
+          </div>
+        </div>
+      </li>
+
+    </nav> 
   </div>
-  <div class="phone-number">+ 591 729 825 92</div>
-  <nav class="nav-menu">
-    <ul>
-      <li><a class="nav-link" [routerLink]="['home']" routerLinkActive="router-link-active">Home</a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/usuarios']" routerLinkActive="router-link-active">Usuarios</a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/categorias']" routerLinkActive="router-link-active">Categorias</a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/productos']" routerLinkActive="router-link-active">Productos</a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/stockAlert']" routerLinkActive="router-link-active">Stock <mat-icon matBadge={{cantidad}} matBadgeColor="warn" *ngIf="productos">error_outline</mat-icon></a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" [routerLink]="['/ventas']" routerLinkActive="router-link-active">Ventas</a></li>
-      <li><a class="nav-link" *ngIf="!_authService.loggedIn()" [routerLink]="['login']" routerLinkActive="router-link-active">Login</a></li>
-      <li><a class="nav-link" *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()">Salir</a></li>
-    </ul>
-  </nav>
-</header>
+</section>
 
 <body style="margin-top: 200px;">
   <router-outlet></router-outlet>
