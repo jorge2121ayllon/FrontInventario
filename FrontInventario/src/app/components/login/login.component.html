@@ -1,24 +1,28 @@
+<div class="body" >
 
-<div class="body">
-    <div class="login">
 
-            <form class="example-form" [formGroup]="form" (ngSubmit)="ingresar()">
+          <form [formGroup]="form" (ngSubmit)="ingresar()">
 
-            <h1>Login</h1>
+          <div class="profile-card" >
+              <img src="./assets/img/login.jpg" >
+          <br>
+          <br>
 
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Usuario</mat-label>
-                <input matInput formControlName="User">
-            </mat-form-field>
+          <mat-form-field class="ancho" appearance="fill">
+              <mat-label>Usuario</mat-label>
+              <input matInput formControlName="User">
+          </mat-form-field>
+          <br>
+          <mat-form-field class="ancho"  appearance="fill">
+              <mat-label>Password </mat-label>
+              <input type="password" matInput formControlName="Password">
+          </mat-form-field>
 
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Password </mat-label>
-                <input type="password" matInput formControlName="Password">
-            </mat-form-field>
+          <br>
 
-            <br>
-            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Primary</button>
-        </form>
-    </div>
+          <button type="submit" mat-raised-button class="ancho boton" color="primary" [disabled]="form.invalid">ingresar</button>
+        </div>
+      </form>
+
 
 </div>

@@ -4,9 +4,25 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 table {
     width: 100%;
-  overflow: auto;
+    overflow: auto;
+    color: black;
+    background-color: aliceblue;
   }
 mat-paginator
 {
   font-weight: bold;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+
+th{
+  font-weight: bold;
+  font-size: medium;
+  color: black;
+}
+
+

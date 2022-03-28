@@ -57,6 +57,9 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { ComprasComponent } from './components/compra/compras/compras.component';
 import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
 import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
+import { NavegacionComponent } from './navegacion/navegacion.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,7 @@ import { CompraeditComponent } from './components/compra/compraedit/compraedit.c
     ComprasComponent,
     CompraaddComponent,
     CompraeditComponent,
+    NavegacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -108,6 +112,8 @@ import { CompraeditComponent } from './components/compra/compraedit/compraedit.c
     MatBadgeModule,
     MatCheckboxModule,
     MatTooltipModule,
+    LayoutModule,
+    MatSidenavModule,
   ],
   providers: [
     LoginService,
