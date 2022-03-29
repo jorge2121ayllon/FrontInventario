@@ -4,6 +4,7 @@ import { UsuarioService } from './../../../services/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-usuarios',
@@ -16,6 +17,7 @@ export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = ['usuario', 'role','gmail','acciones'];
   usuarios :any;
   metadata :any;
+  form: FormGroup;
 
    // MatPaginator Inputs
    length = 100;
@@ -23,9 +25,12 @@ export class UsuariosComponent implements OnInit {
    pageSizeOptions: number[] = [5, 10,25, 100];
    pageIndex=0;
 
-  constructor(private UsuarioService : UsuarioService,private Router: Router,
+  constructor(private fb : FormBuilder,private UsuarioService : UsuarioService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
+      this.form = this.fb.group({
+        filtro: new FormControl('')
+      })
     }
 
   ngOnInit(): void {
@@ -68,5 +73,10 @@ export class UsuariosComponent implements OnInit {
    this.PaginacionService.Filtro.PageNumber=e.pageIndex+1;
    this.PaginacionService.Filtro.PageSize=e.pageSize;
    this.Usuarios();
+  }
+
+  applyFilter() {
+    this.PaginacionService.Filtro.filter=this.form.value.filtro;
+    this.Usuarios();
   }
 }

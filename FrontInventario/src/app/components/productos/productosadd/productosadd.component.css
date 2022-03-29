@@ -13,4 +13,9 @@
     width: 100%;
   }
 
+  img {
+    border-radius: 40px;
+    box-shadow: 0 0 2px 1px rgba(14, 13, 11, 0.5);
+  }
+
 

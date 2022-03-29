@@ -16,10 +16,16 @@ export class StockService {
    }
 
   getStock(): Observable<Response>{
-    return this.http.get<Response>(this.baseUrl+"/"+1+"/"+'filter='+this.PaginacionService.Filtro.filter+
+    return this.http.get<Response>(this.baseUrl+"/"+1+"/"+1+"/"+'?filter='+this.PaginacionService.Filtro.filter+
     '&PageSize='+this.PaginacionService.Filtro.PageSize+
     '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
    }
+   getStockcantidad(): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+"/"+2+"/"+2+"/"+'?filter='+this.PaginacionService.Filtro.filter+
+    '&PageSize='+this.PaginacionService.Filtro.PageSize+
+    '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
+   }
+   
    getDetalleStock(): Observable<Response>{
 
     var filtro=this.PaginacionService.Filtros.filter;
@@ -30,11 +36,9 @@ export class StockService {
     var talla=this.PaginacionService.Filtros.talla;
     var codigo=this.PaginacionService.Filtros.codigo;
 
-
-    console.log(this.PaginacionService.Filtros)
     return this.http.get<Response>(this.baseUrl+"/"+1+"/"+1+"/"+1+"/"+'?filter='+filtro+'&categoria='+categoria+'&descripcion='+descripcion+
     '&color='+color+'&marca='+marca+'&talla='+talla+'&codigo='+codigo+
-    '&PageSize='+this.PaginacionService.Filtro.PageSize+
-    '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
+    '&PageSize='+this.PaginacionService.Filtros.PageSize+
+    '&PageNumber='+this.PaginacionService.Filtros.PageNumber)
    }
 }

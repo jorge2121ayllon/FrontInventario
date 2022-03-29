@@ -51,6 +51,9 @@ export class ComprasComponent implements OnInit {
         this.metadata = r.meta;
 
         this.length=this.metadata.totalCount;
+        if(this.metadata.totalCount===0){
+          this.toastr.info("No cuenta con Compras")
+        }
       }
     )
   }

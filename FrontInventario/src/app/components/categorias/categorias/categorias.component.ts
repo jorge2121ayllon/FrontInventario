@@ -4,6 +4,7 @@ import { CategoriaService } from './../../../services/categoria.service';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-categorias',
@@ -15,6 +16,7 @@ export class CategoriasComponent implements OnInit {
   displayedColumns: string[] = ['nombre', 'descripcion', 'acciones'];
   categorias :any;
   metadata :any;
+  form: FormGroup;
 
   // MatPaginator Inputs
   length = 100;
@@ -22,9 +24,12 @@ export class CategoriasComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10,25, 100];
   pageIndex=0;
 
-  constructor(private CategoriaService : CategoriaService,private Router: Router,
+  constructor(private fb : FormBuilder,private CategoriaService : CategoriaService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl, private toastr: ToastrService) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
+      this.form = this.fb.group({
+        filtro: new FormControl('')
+      })
     }
 
   ngOnInit(): void {
@@ -34,6 +39,7 @@ export class CategoriasComponent implements OnInit {
     this.Categorias();
   }
 
+
   Categorias()
   {
     this.CategoriaService.getCategorias().subscribe( r =>
@@ -42,6 +48,9 @@ export class CategoriasComponent implements OnInit {
         this.metadata = r.meta;
 
         this.length=this.metadata.totalCount;
+        if(this.metadata.totalCount===0){
+          this.toastr.info("No cuenta con Categorias")
+        }
       }
     )
   }
@@ -67,6 +76,11 @@ export class CategoriasComponent implements OnInit {
    this.PaginacionService.Filtro.PageNumber=e.pageIndex+1;
    this.PaginacionService.Filtro.PageSize=e.pageSize;
    this.Categorias();
+  }
+
+  applyFilter() {
+    this.PaginacionService.Filtro.filter=this.form.value.filtro;
+    this.Categorias();
   }
 
 }
