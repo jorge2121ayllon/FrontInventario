@@ -7,6 +7,7 @@ import { asNativeElements, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { observable, Observable, Observer, Subscriber } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-productosadd',
@@ -29,7 +30,7 @@ export class ProductosaddComponent implements OnInit {
  
   constructor(private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
-    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, private _sanitizer: DomSanitizer) 
+    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location) 
     {
       this.myimage= new Observable<any>();
       this.myimage1= String();
@@ -200,4 +201,5 @@ export class ProductosaddComponent implements OnInit {
     })
     return result
   };
+
 }

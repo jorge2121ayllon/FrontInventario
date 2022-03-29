@@ -1,3 +1,14 @@
-table {
-  width: 100%;
+.mat-form-field {
+  font-size: 14px;
+  width: auto;
+}
+.example-h2 {
+  margin: 10px;
+}
+.example-button {
+  margin: 10px;
+}
+
+.example-tooltip-red {
+  background: #b71c1c;
 }

@@ -41,8 +41,8 @@ export class VentasComponent implements OnInit {
     this.PaginacionService.Filtro.PageSize=5;
     this.PaginacionService.Filtro.PageNumber=1;
     this.Ventas();
-
   }
+ 
 
   Ventas()
   {
@@ -52,6 +52,9 @@ export class VentasComponent implements OnInit {
         this.metadata = r.meta;
 
         this.length=this.metadata.totalCount;
+        if(this.metadata.totalCount===0){
+          this.toastr.info("No existe Ventas asociadas al Cliente")
+        }
       }
     )
   }

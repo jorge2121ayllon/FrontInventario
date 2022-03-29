@@ -35,7 +35,7 @@ export class NavegacionComponent {
 
   Productos()
   {
-    this.StockService.getStock().subscribe( r =>
+    this.StockService.getStockcantidad().subscribe( r =>
       {
         this.productos = r.data;
         this.cantidad=r.data.length;

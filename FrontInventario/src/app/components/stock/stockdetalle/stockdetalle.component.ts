@@ -76,6 +76,9 @@ export class StockdetalleComponent implements OnInit {
         this.metadata = r.meta;
 
         this.length=this.metadata.totalCount;
+        if(this.metadata.totalCount===0){
+          this.toastr.info("No existe productos con los filtros enviados")
+        }
       }
     )
   }

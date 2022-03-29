@@ -66,6 +66,9 @@ export class ProductosComponent implements OnInit {
         this.listaImgs(this.listaImg);
         this.metadata = r.meta;
         this.length=this.metadata.totalCount;
+        if(this.metadata.totalCount===0){
+          this.toastr.info("No cuenta con Prodcutos")
+        }
       }
     )
   }
