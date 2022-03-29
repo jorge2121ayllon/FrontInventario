@@ -19,11 +19,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSelectModule} from '@angular/material/select';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDividerModule} from '@angular/material/divider'; 
-import {MatListModule} from '@angular/material/list'; 
-import {MatBadgeModule} from '@angular/material/badge'; 
-import {MatCheckboxModule} from '@angular/material/checkbox'; 
-import {MatTooltipModule} from '@angular/material/tooltip'; 
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
@@ -53,13 +53,14 @@ import { StockdetalleComponent } from './components/stock/stockdetalle/stockdeta
 import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
 
 
-import { InventarioComponent } from './components/inventario/inventario.component';
+
 import { ComprasComponent } from './components/compra/compras/compras.component';
 import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
 import { CompraeditComponent } from './components/compra/compraedit/compraedit.component';
 import { NavegacionComponent } from './navegacion/navegacion.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ReporteventasComponent } from './components/reportes/reporteventas/reporteventas.component';
 
 @NgModule({
   declarations: [
@@ -78,11 +79,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     VentaeditComponent,
     StockdetalleComponent,
     StockalertaComponent,
-    InventarioComponent,
     ComprasComponent,
     CompraaddComponent,
     CompraeditComponent,
     NavegacionComponent,
+    ReporteventasComponent,
   ],
   imports: [
     BrowserModule,
