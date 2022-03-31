@@ -22,8 +22,9 @@ export class ProductosComponent implements OnInit {
   categorias :any;
   productos :any;
   listaImg :Producto[]=[];
-  metadata :any;
   myimage: any;
+  metadata :any;
+ 
   
 
   // MatPaginator Inputs

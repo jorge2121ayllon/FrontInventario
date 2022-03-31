@@ -27,6 +27,9 @@ export class VentaaddComponent implements OnInit {
   venta: VentaVentaDetalle = new VentaVentaDetalle;
   totalVenta=0;
   listaProductosAux:Producto[]=[];
+  //img
+  listaImg :Producto[]=[];
+  myimage: any;
 
   numeroLista=1;
 
@@ -55,6 +58,8 @@ export class VentaaddComponent implements OnInit {
     this.ProductoService.gets().subscribe( r =>
       {
         this.listaProductos=r.data;
+        this.listaImg=this.listaProductos;
+        this.listaImgs(this.listaImg);
         this.listaProductosAux=r.data;
       }
     )
@@ -132,5 +137,41 @@ export class VentaaddComponent implements OnInit {
     this.eliminarDetalle(detalleSeleccionado);
     this.productoSeleccionado= (this.listaProductosAux.filter(listaProductosAux=>listaProductosAux.id==detalleSeleccionado.idProducto))[0];
     console.log(this.productoSeleccionado)
+  }
+
+
+  //metodo para retornar la img de cada producto
+  returnImg(id:any){
+    for (let index = 0; index < this.listaImg.length; index++) {
+      if (this.listaImg[index].id===id) {
+        this.myimage=this.listaImg[index].imagen;
+      }
+    }
+    return this.myimage;
+}
+
+   //base 64 to image
+   async toImage(url: any){
+    var res =  await fetch(url);
+    var blob =  (await res).blob();
+
+    const result =  new Promise(async (resolve, reject) => {
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        resolve(reader.result);
+      }, false);
+
+      reader.onerror = () => {
+        return reject(this);
+      };
+      reader.readAsDataURL(await blob);
+    })
+    return result
+  };
+  //almacena los productos en una lista local para convertir las img
+  listaImgs(lista:any){
+    for (let index = 0; index < lista.length; index++) {
+            lista[index].imagen= this.toImage(lista[index].imagen)
+    }
   }
 }
