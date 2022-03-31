@@ -59,9 +59,13 @@ export class CategoriasComponent implements OnInit {
   {
     const res = confirm('Seguro que desea eliminar la categoria');
     if (res){
-        this.CategoriaService.deleteCategoria(id).subscribe((data) => {
+        this.CategoriaService.deleteCategoria(id).subscribe((res) => {
           this.Categorias();
-          this.toastr.success("Categoria Eliminada.")
+          if(res.data){
+            this.toastr.warning("Categoria Eliminada Con Éxito")
+          }else if(!res.data){
+            this.toastr.warning("No se puede Eliminar la Categoria porque se encuentra vinculada a un Producto")
+          }
         });
     }
   }
