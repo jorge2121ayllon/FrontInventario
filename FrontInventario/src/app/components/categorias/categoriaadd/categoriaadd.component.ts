@@ -14,21 +14,21 @@ export class CategoriaaddComponent implements OnInit {
   form: FormGroup;
   idCategoria: number=0;
   constructor(private fb : FormBuilder,private Router: Router, private CategoriaService:
-    CategoriaService,private Route : ActivatedRoute,  private toastr: ToastrService) 
+    CategoriaService,private Route : ActivatedRoute,  private toastr: ToastrService)
     {
       if(this.Route.snapshot.params.id>0){
         this.idCategoria = this.Route.snapshot.params.id;
         this.form = this.fb.group({
           id: this.Route.snapshot.params.id,
           nombre: new FormControl('',Validators.required),
-          descripcion: new FormControl('',Validators.required),
+          descripcion: new FormControl(''),
         })
       }
       else{
         this.form = this.fb.group({
           id: this.Route.snapshot.params.id,
           nombre: new FormControl('',Validators.required),
-          descripcion: new FormControl('',Validators.required),
+          descripcion: new FormControl(''),
         })
       }
     }

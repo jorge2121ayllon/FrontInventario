@@ -7,22 +7,26 @@
     class="example-button" color="primary" [routerLink]="['/stockDetalle']">
       <mat-icon>manage_search</mat-icon>
     </button>
-    <mat-selection-list #shoes [multiple]="false">
-        <mat-list-option *ngFor="let producto of productos" [value]="producto" (click)="toImage(producto.imagen)">
-          <mat-icon mat-list-icon >dry_cleaning</mat-icon>
-          <div mat-line>Producto: <strong>{{producto.descripcion}}</strong></div>
-          <div mat-line>Stock: <strong>{{producto.stock}}</strong>  </div>
-        </mat-list-option>
-      </mat-selection-list>
-      <mat-paginator [length]="length"
-  [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions"
-  [pageIndex]="pageIndex"
-  (page)="handlePage($event)"
-  aria-label="Select page">
-</mat-paginator>
-    </mat-card-content>   
-    <mat-card class="example-card">
+  </mat-card-content>
+  <mat-card-content >
+            <mat-selection-list #shoes [multiple]="false" >
+              <mat-list-option *ngFor="let producto of productos" [value]="producto" (click)="toImage(producto.imagen)">
+                <mat-icon mat-list-icon >dry_cleaning</mat-icon>
+                <div mat-line>Producto: <strong>{{producto.descripcion}}</strong></div>
+                <div mat-line>Stock: <strong>{{producto.stock}}</strong>  </div>
+              </mat-list-option>
+            </mat-selection-list>
+            <mat-paginator [length]="length"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        [pageIndex]="pageIndex"
+        (page)="handlePage($event)"
+        aria-label="Select page">
+        </mat-paginator>
+  </mat-card-content>
+
+
+    <mat-card class="example-card" *ngIf="shoes.selectedOptions.selected[0]?.value">
       <mat-card-title-group>
         <mat-card-title>{{shoes.selectedOptions.selected[0]?.value.descripcion}}</mat-card-title>
         <mat-card-subtitle><strong>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</strong></mat-card-subtitle>
@@ -36,7 +40,7 @@
       <mat-card-content>
        <h2>Stock:<strong></strong> {{shoes.selectedOptions.selected[0]?.value.stock}}</h2>
       </mat-card-content>
-    </mat-card> 
+    </mat-card>
 </mat-card>
 <br>
 
