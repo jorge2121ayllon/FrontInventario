@@ -61,6 +61,7 @@ import { NavegacionComponent } from './navegacion/navegacion.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ReporteventasComponent } from './components/reportes/reporteventas/reporteventas.component';
+import { ProductosDialogComponent } from './components/productos/productos-dialog/productos-dialog.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ReporteventasComponent } from './components/reportes/reporteventas/repo
     CompraeditComponent,
     NavegacionComponent,
     ReporteventasComponent,
+    ProductosDialogComponent,
   ],
   imports: [
     BrowserModule,

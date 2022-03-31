@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>{{data.creado.descripcion}}</h1>
+<p><span>&#10003;</span> Creado con éxito</p>
+<div mat-dialog-content>
+  Codigo de Producto:
+  <ul>
+    <li>
+       {{data.creado.codigo}}
+    </li>
+  </ul>
+  <img [src]="myimage | async" class="img-rounded" alt="Cinque Terre" width="70px" height="70px"> 
+</div>

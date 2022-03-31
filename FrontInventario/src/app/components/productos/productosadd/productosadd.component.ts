@@ -3,11 +3,14 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { CategoriaService } from 'src/app/services/categoria.service'; 
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { asNativeElements, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { asNativeElements, Component, ElementRef, OnInit, ViewChild,Inject } from '@angular/core';
 import { observable, Observable, Observer, Subscriber } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Location } from '@angular/common';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.component';
+import { Producto } from 'src/app/models/producto';
 
 @Component({
   selector: 'app-productosadd',
@@ -22,13 +25,15 @@ export class ProductosaddComponent implements OnInit {
   codigo:string;
   categorias :any;
   myimage11: any;
+  //mostrar codigo
+  creado:any
   
   //FOTO
   imagenLocal:any;
   imagenCon:any;
   visible:any;
  
-  constructor(private fb : FormBuilder,private Router: Router, private ProductoService:
+  constructor(public dialog: MatDialog, private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
     CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location) 
     {
@@ -134,8 +139,11 @@ export class ProductosaddComponent implements OnInit {
               this.codigo=(r.data.codigo)
               this.myimage=""
               this.form.controls['idCategoria'].setValue(r.data.idCategoria)
+              //mostrar codigo
+              this.openDialog(r.data);
           }else if(tipo===false){
             this.Router.navigate(['productos']);
+            this.openDialog(r.data);
           }
           
           this.toastr.success("se guardo exitosamente","Guardado.")
@@ -202,4 +210,13 @@ export class ProductosaddComponent implements OnInit {
     return result
   };
 
+
+  //mostrarCodigoGenerado
+  openDialog(creado:any) {
+    this.dialog.open(ProductosDialogComponent, {
+      data: {
+        creado:creado,
+      },
+    });
+  }
 }
