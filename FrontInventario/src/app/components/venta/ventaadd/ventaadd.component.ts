@@ -72,7 +72,7 @@ export class VentaaddComponent implements OnInit {
     let unicoProducto = this.listadetalleVenta.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
     if(this.productoSeleccionado.precioVenta && unicoProducto.length<1 && this.productoSeleccionado.stock)
     {
-      if(this.productoSeleccionado.stock>= this.form.value.cantidad){
+      if(this.productoSeleccionado.stock>this.form.value.cantidad){
         this.detalleventa={
           cantidad: this.form.value.cantidad,
           idProducto:this.productoSeleccionado.id,
@@ -87,6 +87,7 @@ export class VentaaddComponent implements OnInit {
          this.productoSeleccionado=new Producto;
       }
       else{
+
         this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
       }
 

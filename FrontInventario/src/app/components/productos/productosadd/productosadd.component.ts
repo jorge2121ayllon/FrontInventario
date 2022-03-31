@@ -1,6 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
-import { ProductoService } from 'src/app/services/producto.service'; 
-import { CategoriaService } from 'src/app/services/categoria.service'; 
+import { ProductoService } from 'src/app/services/producto.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { asNativeElements, Component, ElementRef, OnInit, ViewChild,Inject } from '@angular/core';
@@ -27,15 +27,15 @@ export class ProductosaddComponent implements OnInit {
   myimage11: any;
   //mostrar codigo
   creado:any
-  
+
   //FOTO
   imagenLocal:any;
   imagenCon:any;
   visible:any;
- 
+
   constructor(public dialog: MatDialog, private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
-    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location) 
+    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location)
     {
       this.myimage= new Observable<any>();
       this.myimage1= String();
@@ -53,7 +53,6 @@ export class ProductosaddComponent implements OnInit {
           talla: new FormControl('',[Validators.required, Validators.maxLength (5)]),
           marca: new FormControl(''),
           descripcion: new FormControl('',Validators.required),
-          stock: new FormControl('',Validators.required),
           codigo: new FormControl(''),
           imagen: new FormControl(''),
           idCategoria: new FormControl('',Validators.required),
@@ -69,7 +68,7 @@ export class ProductosaddComponent implements OnInit {
           talla: new FormControl('',[Validators.required, Validators.maxLength (5)]),
           marca: new FormControl(''),
           descripcion: new FormControl('',Validators.required),
-          stock: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+")]),
+          stock: new FormControl(0),
           codigo: new FormControl(''),
           imagen: new FormControl(''),
           idCategoria: new FormControl('',Validators.required),
@@ -89,7 +88,6 @@ export class ProductosaddComponent implements OnInit {
           this.form.controls['talla'].setValue(r.data.talla)
           this.form.controls['marca'].setValue(r.data.marca)
           this.form.controls['descripcion'].setValue(r.data.descripcion)
-          this.form.controls['stock'].setValue(r.data.stock)
           this.codigo=(r.data.codigo)
           this.myimage= this.toImage(r.data.imagen)
           this.imagenLocal=r.data.imagen
@@ -107,7 +105,7 @@ export class ProductosaddComponent implements OnInit {
         (this.form.value).imagen=this.imagenCon;
     }
     (this.form.value).codigo=this.codigo;
-   
+
     if(this.Route.snapshot.params.id>0){
       console.log(this.form.value)
       this.ProductoService.update(this.form.value).subscribe
@@ -125,7 +123,7 @@ export class ProductosaddComponent implements OnInit {
       this.ProductoService.save(this.form.value).subscribe
       (
         r=> {
-          console.log(this.form.value);
+
           if(tipo===true){
               this.form.controls['precioCompra'].setValue(r.data.precioCompra)
               this.form.controls['precioVenta'].setValue(r.data.precioVenta)
@@ -142,10 +140,10 @@ export class ProductosaddComponent implements OnInit {
               //mostrar codigo
               this.openDialog(r.data);
           }else if(tipo===false){
-            this.Router.navigate(['productos']);
+            //this.Router.navigate(['productos']);
             this.openDialog(r.data);
           }
-          
+
           this.toastr.success("se guardo exitosamente","Guardado.")
         },
         error => {

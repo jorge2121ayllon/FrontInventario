@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LoginService } from './services/login.service';
 import { Inject, Injectable, Injector } from '@angular/core';
@@ -10,6 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   constructor(private injector: Injector,
               private LoginService: LoginService,
+              private toastr: ToastrService,
               private router: Router,) {}
 
   intercept(req:any, next: any){
@@ -27,14 +29,14 @@ export class TokenInterceptor implements HttpInterceptor {
       catchError((error) => {
         if(error.status==401)
         {
-          //this.toastr.warning("Por seguridad el tiempo de autorizacion acabo",
-                             // "Expiro su autorizacion.")
+          this.toastr.warning("Por seguridad el tiempo de autorizacion acabo",
+                              "Expiro su autorizacion.")
           this.LoginService.loggedOut();
         }
         if(error.status==403)
         {
-          //this.toastr.error("No esta autorizado para ingresar.",
-         // "No Autorizado.")
+          this.toastr.error("No esta autorizado para ingresar.",
+          "No Autorizado.")
           this.router.navigate(['/home']);
         }
         return throwError(error);

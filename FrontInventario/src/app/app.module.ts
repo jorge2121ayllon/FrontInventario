@@ -86,6 +86,7 @@ import { ProductosDialogComponent } from './components/productos/productos-dialo
     NavegacionComponent,
     ReporteventasComponent,
     ProductosDialogComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -117,6 +118,7 @@ import { ProductosDialogComponent } from './components/productos/productos-dialo
     MatTooltipModule,
     LayoutModule,
     MatSidenavModule,
+    MatExpansionModule
   ],
   providers: [
     LoginService,

@@ -42,7 +42,7 @@ export class StockdetalleComponent implements OnInit {
   checkCodigo = new FormControl(false);
 
   constructor(public fb : FormBuilder,private StockService : StockService,private Router: Router,
-    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService, private CategoriaService : CategoriaService) { 
+    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService, private CategoriaService : CategoriaService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
       this.myimage= new Observable<any>();
       this.form = this.fb.group({
@@ -109,7 +109,7 @@ export class StockdetalleComponent implements OnInit {
   }
 
   applyFilter() {
-    console.log(this.form.value)
+    this.Limpiador()
     this.PaginacionService.Filtros.filter='si';
     this.PaginacionService.Filtros.categoria=Number(this.form.value.categoria);
     this.PaginacionService.Filtros.descripcion=this.form.value.descripcion;
@@ -120,7 +120,7 @@ export class StockdetalleComponent implements OnInit {
     this.Productos();
   }
   //sgte funcionalidad: 1.-vista  de stock con descripcion y cantidad de stock, 2.- vista de notificaciones
-  //inicio 17-03-22 fin 20-03-22 
+  //inicio 17-03-22 fin 20-03-22
 //metodo para retornar la img de cada producto
 returnImg(id:any){
   for (let index = 0; index < this.listaImg.length; index++) {
@@ -156,4 +156,34 @@ listaImgs(lista:any){
   return result
 };
 
+Limpiador()
+{
+  if(this.checkColor.value==false)
+  {
+    this.form.value.color='';
+  }
+  if(this.checkCategoria.value==false)
+  {
+    this.form.value.categoria=0;
+  }
+  if(this.checkMarca.value==false)
+  {
+    this.form.value.marca='';
+  }
+  if(this.checkDescripcion.value==false)
+  {
+    this.form.value.descripcion='';
+  }
+  if(this.checkTalla.value==false)
+  {
+    this.form.value.talla='';
+  }
+  if(this.checkCodigo.value==false)
+  {
+    this.form.value.codigo='';
+  }
 }
+
+}
+
+

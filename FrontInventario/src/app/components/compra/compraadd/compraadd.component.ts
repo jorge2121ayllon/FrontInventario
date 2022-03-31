@@ -26,6 +26,7 @@ export class CompraaddComponent implements OnInit {
   productoSeleccionado: Producto = new Producto;
   detalleCompra!: DetalleCompra;
   totalCompra=0;
+  productoalert=0;
 
 
   constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
@@ -66,10 +67,12 @@ export class CompraaddComponent implements OnInit {
 
   agregarDetalle()
   {
+
     let unicoProducto = this.listadetalleCompra.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
 
-    if(this.productoSeleccionado.precioCompra && unicoProducto.length<1 && this.productoSeleccionado.stock)
+    if(this.productoSeleccionado.precioCompra && unicoProducto.length<1 )
     {
+      console.log('ebt')
         this.detalleCompra={
           cantidad: this.form.value.cantidad,
           idProducto:this.productoSeleccionado.id,
@@ -122,6 +125,11 @@ export class CompraaddComponent implements OnInit {
   {
     this.eliminarDetalle(detalleSeleccionado);
     this.productoSeleccionado= (this.listaProductosAux.filter(listaProductosAux=>listaProductosAux.id==detalleSeleccionado.idProducto))[0];
+  }
+
+  agregarNuevo()
+  {
+    this.productoalert=1;
   }
 }
 

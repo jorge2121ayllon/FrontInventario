@@ -1,14 +1,27 @@
-<form [formGroup]="form" autocomplete="off" >
 
+ <mat-expansion-panel hideToggle>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      NUEVO PRODUCTO
+    </mat-panel-title>
+    <mat-panel-description>
+      datos para registrar un nuevo producto
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <app-productosadd></app-productosadd>
+</mat-expansion-panel>
+
+<form [formGroup]="form" autocomplete="off" >
   <mat-card>
     <mat-card-title>Buscador de productos</mat-card-title>
     <mat-card-content>
 
-      <mat-form-field class="example-full-width" appearance="fill">
+      <mat-form-field style="width: auto;">
         <mat-label>buscador Producto</mat-label>
         <input matInput (keyup.enter)="obtenerProductos()" placeholder="buscador Producto" formControlName="buscadorProducto">
+
       </mat-form-field>
-      <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
+      &nbsp;<button mat-raised-button color="primary" (click)="obtenerProductos()">Buscar</button>
 
       <div class="table-responsive">
       <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
@@ -36,11 +49,11 @@
   </mat-card>
 
 
-  <mat-card>
+  <mat-card  *ngIf="productoSeleccionado.descripcion">
     <mat-card-title>Detalles Del Producto</mat-card-title>
     <mat-card-content>
     <div class="table-responsive">
-    <table style="text-align: center;" *ngIf="productoSeleccionado.descripcion">
+    <table style="text-align: center;">
       <thead>
           <tr>
             <th>Descripcion</th>
@@ -62,10 +75,7 @@
               {{productoSeleccionado.stock}}
             </td>
             <td>
-              <mat-form-field class="example-full-width" appearance="fill">
-                <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
-              </mat-form-field>
-
+              <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
             </td>
             <td>
               <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
@@ -77,14 +87,11 @@
   </mat-card-content>
   </mat-card>
 
-
-
-
-  <mat-card>
-    <mat-card-title>Detalle de venta</mat-card-title>
+  <mat-card *ngIf="listadetalleCompra.length>0">
+    <mat-card-title>Detalle de Compra</mat-card-title>
     <mat-card-content>
     <div class="table-responsive">
-    <table style="text-align: center; " *ngIf="listadetalleCompra.length>0"  class="table table-hover">
+    <table style="text-align: center; "  class="table table-hover">
       <thead>
         <tr>
           <th>descripcion</th>
@@ -121,7 +128,8 @@
       </table>
     </div>
     </mat-card-content>
-  </mat-card>
 
 
   <button mat-button color="primary" (click)="guardar()">Guardar Compra</button>
+  </mat-card>
+

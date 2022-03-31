@@ -1,9 +1,7 @@
 
-        <h2 class="example-h2">Datos de Producto</h2>
 
         <form class="example-container" [formGroup]="form" (ngSubmit)="Guardar(false)">
           <div class="form-row">
-
             <div class="form-group col-md-4">
               <mat-form-field appearance="fill">
                 <mat-label>Genero</mat-label>
@@ -37,11 +35,10 @@
                 </mat-error>
             </mat-form-field>
             </div>
-            <hr>
+
           </div>
 
           <div class="form-row">
-
             <div class="form-group col-md-4">
               <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Categoria</mat-label>
@@ -62,16 +59,32 @@
                 <input matInput placeholder="Marca" formControlName="marca">
               </mat-form-field>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
               <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Stock</mat-label>
-                <input matInput placeholder="Stock" formControlName="stock" type="number">
-                <mat-error *ngIf="form.controls.stock.hasError('required')">
-                    Stock<strong> requerido</strong>
+                <mat-label>Precio Compra</mat-label>
+                <input matInput placeholder="Precio de Compra del Producto" formControlName="precioCompra" >
+                <span matPrefix>Bs .</span>
+                <mat-error *ngIf="form.controls.precioCompra.hasError('required')">
+                    Precio de Compra del Producto<strong> requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.precioCompra.invalid">
+                    Precio de Compra del Producto<strong> incorrecto</strong>
                 </mat-error>
               </mat-form-field>
             </div>
-            <hr>
+            <div class="form-group col-md-2">
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Precio Venta</mat-label>
+                <input matInput placeholder="Precio de Venta del Producto" formControlName="precioVenta">
+                <span matPrefix>Bs .</span>
+                <mat-error *ngIf="form.controls.precioVenta.hasError('required')">
+                    Precio de Venta del Producto<strong> requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="form.controls.precioVenta.invalid">
+                    Precio de Venta del Producto <strong> incorrecto</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
           </div>
 
           <div class="form-row">
@@ -84,35 +97,13 @@
               </div>
             </div>
             <div class="form-group col-md-6">
+              <br>
+              <br>
               <mat-form-field class="example-full-width" appearance="fill" >
                 <mat-label>Descripcion</mat-label>
-                <textarea matInput placeholder="Descripción" formControlName="descripcion"></textarea>
+                <textarea matInput rows="12" placeholder="Descripción" formControlName="descripcion"></textarea>
                 <mat-error *ngIf="form.controls.descripcion.hasError('required')">
                     Descripcion<strong> requerida</strong>
-                </mat-error>
-              </mat-form-field>
-              <hr>
-              <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Precio Compra</mat-label>
-                <input matInput placeholder="Precio de Compra del Producto" formControlName="precioCompra" >
-                <span matPrefix>Bs .</span>
-                <mat-error *ngIf="form.controls.precioCompra.hasError('required')">
-                    Precio de Compra del Producto<strong> requerido</strong>
-                </mat-error>
-                <mat-error *ngIf="form.controls.precioCompra.invalid">
-                    Precio de Compra del Producto<strong> incorrecto</strong>
-                </mat-error>
-              </mat-form-field>
-              <hr>
-              <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Precio Venta</mat-label>
-                <input matInput placeholder="Precio de Venta del Producto" formControlName="precioVenta">
-                <span matPrefix>Bs .</span>
-                <mat-error *ngIf="form.controls.precioVenta.hasError('required')">
-                    Precio de Venta del Producto<strong> requerido</strong>
-                </mat-error>
-                <mat-error *ngIf="form.controls.precioVenta.invalid">
-                    Precio de Venta del Producto <strong> incorrecto</strong>
                 </mat-error>
               </mat-form-field>
             </div>
@@ -127,7 +118,5 @@
           </div>
 
 </form>
-
-
 
 
