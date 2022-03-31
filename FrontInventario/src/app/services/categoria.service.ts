@@ -31,7 +31,7 @@ export class CategoriaService {
     return this.http.put<Categoria>(this.baseUrl +"/"+ Categoria.id, JSON.stringify(Categoria));
   }
 
-  deleteCategoria(categoriaId: number): Observable<Categoria>{
+  deleteCategoria(categoriaId: number): Observable<any>{
     return this.http.delete(this.baseUrl+ "?id=" +categoriaId);
   }
 
