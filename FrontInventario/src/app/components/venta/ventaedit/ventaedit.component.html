@@ -20,8 +20,8 @@
         <input matInput placeholder="buscador Producto" formControlName="buscadorProducto">
       </mat-form-field>
       <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
-      <div class="table-responsive">
-      <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
+      <div class="table-responsive table-responsive table-bordered table-striped table-wrapper-scroll-y my-custom-scrollbar " *ngIf="listaProductos.length>0" >
+      <table style="text-align: center;" class="table table-hover">
         <thead>
           <tr>
             <th>codigo</th>
@@ -93,7 +93,7 @@
   <mat-card>
     <mat-card-title>Detalle de venta</mat-card-title>
     <mat-card-content>
-      <div class="table-responsive">
+   <div class="table-responsive ">
     <table style="text-align: center; " *ngIf="listadetalleVenta.length>0" class="table table-hover">
       <thead>
         <tr>

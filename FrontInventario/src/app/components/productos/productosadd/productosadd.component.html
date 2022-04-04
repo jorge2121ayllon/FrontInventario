@@ -64,9 +64,7 @@
                 <mat-label>Precio Compra</mat-label>
                 <input matInput placeholder="Precio de Compra del Producto" formControlName="precioCompra" >
                 <span matPrefix>Bs .</span>
-                <mat-error *ngIf="form.controls.precioCompra.hasError('required')">
-                    Precio de Compra del Producto<strong> requerido</strong>
-                </mat-error>
+
                 <mat-error *ngIf="form.controls.precioCompra.invalid">
                     Precio de Compra del Producto<strong> incorrecto</strong>
                 </mat-error>
@@ -77,9 +75,7 @@
                 <mat-label>Precio Venta</mat-label>
                 <input matInput placeholder="Precio de Venta del Producto" formControlName="precioVenta">
                 <span matPrefix>Bs .</span>
-                <mat-error *ngIf="form.controls.precioVenta.hasError('required')">
-                    Precio de Venta del Producto<strong> requerido</strong>
-                </mat-error>
+
                 <mat-error *ngIf="form.controls.precioVenta.invalid">
                     Precio de Venta del Producto <strong> incorrecto</strong>
                 </mat-error>

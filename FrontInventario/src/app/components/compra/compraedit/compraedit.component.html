@@ -9,8 +9,8 @@
         <input matInput (keyup.enter)="obtenerProductos()" placeholder="buscador Producto" formControlName="buscadorProducto">
       </mat-form-field>
       <button mat-button color="primary" (click)="obtenerProductos()">Buscar</button>
-      <div class="table-responsive">
-      <table style="text-align: center;" *ngIf="listaProductos.length>0" class="table table-hover">
+      <div class="table-responsive table-bordered table-striped table-wrapper-scroll-y my-custom-scrollbar" *ngIf="listaProductos.length>0">
+      <table style="text-align: center;"  class="table table-hover">
         <thead>
           <tr>
             <th>codigo</th>
@@ -79,7 +79,7 @@
   <mat-card>
     <mat-card-title>Detalle de Compra</mat-card-title>
     <mat-card-content>
-    <div class="table-responsive">
+    <div class="table-responsive ">
     <table style="text-align: center; " *ngIf="listadetalleCompra.length>0"  class="table table-hover">
       <thead>
         <tr>
