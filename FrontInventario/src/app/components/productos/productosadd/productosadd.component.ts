@@ -1,3 +1,4 @@
+import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductoService } from 'src/app/services/producto.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
@@ -35,7 +36,8 @@ export class ProductosaddComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
-    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location)
+    CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location,
+    private PaginacionService: PaginacionService)
     {
       this.myimage= new Observable<any>();
       this.myimage1= String();
@@ -140,7 +142,20 @@ export class ProductosaddComponent implements OnInit {
               //mostrar codigo
               this.openDialog(r.data);
           }else if(tipo===false){
-            //this.Router.navigate(['productos']);
+
+            this.form.controls['precioCompra'].setValue('')
+            this.form.controls['precioVenta'].setValue('')
+            this.form.controls['genero'].setValue('')
+            this.form.controls['color'].setValue('')
+            this.form.controls['talla'].setValue('')
+            this.form.controls['marca'].setValue('')
+            this.form.controls['descripcion'].setValue('')
+            this.form.controls['stock'].setValue(0)
+            this.form.controls['codigo'].setValue('')
+            this.codigo=('')
+            this.myimage=""
+            this.form.controls['idCategoria'].setValue('')
+
             this.openDialog(r.data);
           }
 
@@ -155,6 +170,9 @@ export class ProductosaddComponent implements OnInit {
 
   Categorias()
   {
+    this.PaginacionService.Filtro.PageNumber=1;
+    this.PaginacionService.Filtro.filter='';
+    this.PaginacionService.Filtro.PageSize=100000;
     this.CategoriaService.getCategorias().subscribe( r =>
       {
         this.categorias = r.data;
