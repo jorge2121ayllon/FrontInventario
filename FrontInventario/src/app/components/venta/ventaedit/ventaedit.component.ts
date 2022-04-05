@@ -7,7 +7,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { VentaService } from './../../../services/venta.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -44,7 +44,8 @@ export class VentaeditComponent implements OnInit {
         cantidad : new FormControl(1),
         nombreCliente: new FormControl(''),
         total : new FormControl(0),
-        Id: new FormControl(this.Route.snapshot.params.id)
+        Id: new FormControl(this.Route.snapshot.params.id),
+        celular: new FormControl('',Validators.required),
       })
     }
 
@@ -58,6 +59,7 @@ export class VentaeditComponent implements OnInit {
       r=>{
         this.form.controls['total'].setValue(r.data.total)
         this.form.controls['nombreCliente'].setValue(r.data.nombreCliente)
+        this.form.controls['celular'].setValue(r.data.celular)
         this.totalVenta = this.form.value.total;
       }
     )
@@ -157,6 +159,8 @@ export class VentaeditComponent implements OnInit {
 
   guardar()
   {
+    if (this.form.valid)
+    {
     this.form.value.total=this.totalVenta;
     this.venta.detalleVenta=this.listadetalleVenta;
     this.venta.venta=this.form.value;
@@ -172,4 +176,5 @@ export class VentaeditComponent implements OnInit {
       }
     )
   }
+}
 }

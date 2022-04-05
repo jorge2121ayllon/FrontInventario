@@ -42,6 +42,7 @@ export class VentaaddComponent implements OnInit {
                   cantidad : new FormControl(1),
                   nombreCliente: new FormControl(''),
                   total : new FormControl(0),
+                  celular: new FormControl('',Validators.required),
                 })
               }
 
@@ -105,21 +106,24 @@ export class VentaaddComponent implements OnInit {
 
   guardar()
   {
-    this.form.value.total=this.totalVenta;
+    if (this.form.valid)
+    {
+      this.form.value.total=this.totalVenta;
 
-    this.venta.detalleVenta=this.listadetalleVenta;
-    this.venta.venta=this.form.value;
+      this.venta.detalleVenta=this.listadetalleVenta;
+      this.venta.venta=this.form.value;
 
-    this.VentaService.saveVenta(this.venta).subscribe
-    (
-      r=> {
-        this.Router.navigate(['/ventas']);
-        this.toastr.success("se guardo exitosamente","Guardado.")
-      },
-      error => {
-        this.toastr.warning("no se guardo","Error.")
-      }
-    )
+      this.VentaService.saveVenta(this.venta).subscribe
+      (
+        r=> {
+          this.Router.navigate(['/ventas']);
+          this.toastr.success("se guardo exitosamente","Guardado.")
+        },
+        error => {
+          this.toastr.warning("no se guardo","Error.")
+        }
+      )
+    }
   }
 
 

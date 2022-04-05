@@ -32,6 +32,24 @@ export class NavegacionComponent {
 
   }
 
+  IsAdmin()
+  {
+    if(localStorage.getItem('Role')=="Administrador")
+    {
+      return true
+    }
+    return false
+  }
+  IsVendedor()
+  {
+    if(localStorage.getItem('Role')=="Vendedor")
+    {
+      return true
+    }
+
+    return false
+  }
+
 
   Productos()
   {

@@ -39,7 +39,11 @@ export class VentaService {
   }
 
   getReportes(inicio : Date , fin : Date): Observable<Response>{
-    return this.http.get<Response>(this.baseUrl +"/"+inicio+"/"+fin)
+    return this.http.get<Response>(this.baseUrl +"/"+inicio+"/"+fin+"/"+0)
+  }
+
+  getReportesClientes(inicio : Date , fin : Date): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl +"/"+inicio+"/"+fin+"/"+1)
   }
 
 
