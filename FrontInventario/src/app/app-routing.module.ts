@@ -1,3 +1,5 @@
+import { ReporteclientesComponent } from './components/reportes/reporteclientes/reporteclientes.component';
+import { reporteClientes } from './models/reporteClientes';
 import { ReporteventasComponent } from './components/reportes/reporteventas/reporteventas.component';
 import { CompraaddComponent } from './components/compra/compraadd/compraadd.component';
 import { ComprasComponent } from './components/compra/compras/compras.component';
@@ -43,6 +45,7 @@ const routes: Routes = [
   {path: 'compraedit/:id' , component: CompraeditComponent},
 
   {path: 'reporteventas' , component: ReporteventasComponent},
+  {path: 'reporteclientes' , component: ReporteclientesComponent},
 
   {path: 'login' , component: LoginComponent},
   {path: '**' , component: HomeComponent},

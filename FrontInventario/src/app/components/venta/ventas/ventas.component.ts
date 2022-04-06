@@ -14,7 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class VentasComponent implements OnInit {
 
   form: FormGroup;
-  displayedColumns: string[] = ['nombreCliente', 'total','fecha','acciones'];
+  displayedColumns: string[] = ['nombreCliente','celular', 'total','fecha','acciones'];
   metadata :any;
   ventas : any ;
 
@@ -42,7 +42,7 @@ export class VentasComponent implements OnInit {
     this.PaginacionService.Filtro.PageNumber=1;
     this.Ventas();
   }
- 
+
 
   Ventas()
   {

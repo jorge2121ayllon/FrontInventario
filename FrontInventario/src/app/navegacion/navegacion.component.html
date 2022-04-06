@@ -14,33 +14,39 @@
         <h3 >{{usuario}}</h3>
       </div>
 
-      <a  class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['/stockAlert']">
+      <a  class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['/stockAlert']">
         <mat-icon> inventory </mat-icon>&nbsp; STOCK <mat-icon matBadge={{cantidad}} matBadgeColor="warn" *ngIf="productos && cantidad" >error_outline</mat-icon>
 
       </a>
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['categorias']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['categorias']">
         <mat-icon>style</mat-icon>&nbsp;CATEGORIAS</a>
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['usuarios']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['usuarios']">
         <mat-icon>supervised_user_circle</mat-icon>&nbsp; USUARIOS</a>
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['ventas']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['ventas']">
         <mat-icon>shopping_cart</mat-icon>&nbsp; VENTAS</a>
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['compras']">
+        <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsVendedor()==true"  [routerLink]="['ventas']">
+          <mat-icon>shopping_cart</mat-icon>&nbsp; VENTAS</a>
+
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['compras']">
         <mat-icon>add_shopping_cart</mat-icon>&nbsp; COMPRAS</a>
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['productos']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['productos']">
         <mat-icon> local_offer</mat-icon>&nbsp;PRODUCTOS</a>
 
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['reporteventas']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['reporteventas']">
         <mat-icon> find_in_page</mat-icon>&nbsp;REPORTE VENTAS</a>
+
+        <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['reporteclientes']">
+          REPORTE CLIENTES</a>
 
       <a class="list" mat-list-item *ngIf="!_authService.loggedIn()"  [routerLink]="['login']">
         <mat-icon>input</mat-icon>&nbsp; INGRESAR</a>
 
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn()" (click)="_authService.loggedOut()">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn() " (click)="_authService.loggedOut()">
         <mat-icon>logout</mat-icon> &nbsp;SALIR</a>
 
     </mat-nav-list>
