@@ -14,10 +14,14 @@ import { Producto } from 'src/app/models/producto';
 })
 export class StockalertaComponent implements OnInit {
   productos :any;
+  group:any;
   metadata :any;
   myimage: any;
   listaImg :Producto[]=[];
-
+  listaStock:Producto[]=[];
+  listaStockDoble:Producto[]=[];
+  cantidad=0;
+  
   // MatPaginator Inputs
   length = 100;
   pageSize = 5;
@@ -47,6 +51,17 @@ export class StockalertaComponent implements OnInit {
     this.StockService.getStock().subscribe( r =>
       {
         this.productos = r.data;
+        this.group=this.groupBy(r.data, (producto: { codigo: any; }) => producto.codigo);
+        //
+        this.group.forEach((element: Producto[]=[]) => {
+          this.listaStock.push(element[0]);
+          this.productos=this.listaStock;
+          element.forEach(elementt => {
+            this.listaImg.push(elementt);
+          });
+        });
+        this.listaImgs(this.listaImg);
+        //
         this.metadata = r.meta;
         this.length=this.metadata.totalCount;
         if(this.metadata.totalCount===0){
@@ -82,4 +97,51 @@ async toImage(url: any){
   this.myimage=result;
   return result
 };
+groupBy(list: any, keyGetter: any) {
+  const map = new Map();
+  list.forEach((item:any) => {
+       const key = keyGetter(item);
+       const collection = map.get(key);
+       if (!collection) {
+           map.set(key, [item]);
+       } else {
+           collection.push(item);
+       }
+  });
+  return map;
+}
+
+
+//metodo para retornar la img de cada producto
+returnImg(id:any){
+  for (let index = 0; index < this.listaImg.length; index++) {
+    if (this.listaImg[index].id===id) {
+      this.myimage=this.listaImg[index].imagen;
+    }
+  }
+  return this.myimage;
+}
+
+//almacena los productos en una lista local para convertir las img
+listaImgs(lista:any){
+  for (let index = 0; index < lista.length; index++) {
+          lista[index].imagen= this.toImage(lista[index].imagen)
+  }
+}
+
+mostrar(code:any){
+//
+this.listaStockDoble=this.group.get(code)
+this.cantidadTotal(this.listaStockDoble);
+//
+}
+
+cantidadTotal(list:any){
+  var can=0;
+for (let index = 0; index < list.length; index++) {
+  can+=list[index].stock;
+}
+this.cantidad=can;
+}
+
 }
