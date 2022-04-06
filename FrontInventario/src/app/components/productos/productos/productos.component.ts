@@ -145,7 +145,7 @@ export class ProductosComponent implements OnInit {
 
   //obtiene los nombres de las categorias
   getCategoria(id:any){
-    for (let index = 0; index < this.categorias.length; index++) {
+    for (let index = 0; index < this.categorias?.length; index++) {
       if(this.categorias[index].id==id){return this.categorias[index].nombre;}
     }
   }

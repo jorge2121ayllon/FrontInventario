@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Producto } from '../models/producto';
 
 @Component({
   selector: 'app-navegacion',
@@ -13,6 +14,7 @@ import { map, shareReplay } from 'rxjs/operators';
 export class NavegacionComponent {
 
   productos :any;
+  listaStock:Producto[]=[];
   cantidad:any;
   usuario:any;
   rol:any;
@@ -29,7 +31,6 @@ export class NavegacionComponent {
    this.usuario =   localStorage.getItem('Usuario');
    this.rol =   localStorage.getItem('Role');
    this.Productos();
-
   }
 
   IsAdmin()
@@ -56,8 +57,24 @@ export class NavegacionComponent {
     this.StockService.getStockcantidad().subscribe( r =>
       {
         this.productos = r.data;
-        this.cantidad=r.data.length;
+        var group=this.groupBy(r.data, (producto: { codigo: any; }) => producto.codigo);
+        this.cantidad=group.size;
       }
     )
   }
+   groupBy(list: any, keyGetter: any) {
+    const map = new Map();
+    list.forEach((item:any) => {
+         const key = keyGetter(item);
+         const collection = map.get(key);
+         if (!collection) {
+             map.set(key, [item]);
+         } else {
+             collection.push(item);
+         }
+    });
+    return map;
+}
+
+
 }
