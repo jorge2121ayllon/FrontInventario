@@ -63,6 +63,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ReporteventasComponent } from './components/reportes/reporteventas/reporteventas.component';
 import { ProductosDialogComponent } from './components/productos/productos-dialog/productos-dialog.component';
 import { ReporteclientesComponent } from './components/reportes/reporteclientes/reporteclientes.component';
+import { PanelayudasComponent } from './components/ayuda/panelayudas/panelayudas.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { ReporteclientesComponent } from './components/reportes/reporteclientes/
     ReporteventasComponent,
     ProductosDialogComponent,
     ReporteclientesComponent,
+    PanelayudasComponent,
 
   ],
   imports: [
