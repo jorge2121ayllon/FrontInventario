@@ -11,7 +11,7 @@
           &nbsp;
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Celular</mat-label>
-            <input  matInput placeholder="Celular" formControlName="celular">
+            <input type="text"  matInput placeholder="Celular" formControlName="celular">
             <mat-error *ngIf="form.controls.celular.hasError('required')">
               Celular de cliente<strong> obligatorio</strong>
             </mat-error>
@@ -49,7 +49,7 @@
               <td>{{product.color}}</td>
               <td>{{product.stock}}</td>
               <td>{{product.precioVenta}}</td>
-              <td><img [src]="returnImg(product.id) | async" width="50px" height="50px" alt="" /></td>
+              <td><img  [src]="returnImg(product.id) | async" width="50px" height="50px" alt="" /></td>
             </tr>
           </tbody>
         </table>

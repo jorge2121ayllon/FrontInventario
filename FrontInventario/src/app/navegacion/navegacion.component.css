@@ -4,7 +4,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 207px;
   background-color:  #f9bf04;
 }
 
@@ -40,5 +40,5 @@ img {
 mat-card{
   height: 100%;
   background-color: azure;
- 
+
 }
