@@ -15,6 +15,7 @@ import { ProductosaddComponent } from './components/productos/productosadd/produ
 import { ProductosComponent } from './components/productos/productos/productos.component';
 import { StockalertaComponent } from './components/stock/stockalerta/stockalerta.component';
 import { StockdetalleComponent } from './components/stock/stockdetalle/stockdetalle.component';
+import { PanelayudasComponent } from './components/ayuda/panelayudas/panelayudas.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { LoginComponent } from './components/login/login.component';
@@ -46,6 +47,8 @@ const routes: Routes = [
 
   {path: 'reporteventas' , component: ReporteventasComponent},
   {path: 'reporteclientes' , component: ReporteclientesComponent},
+
+  {path: 'ayuda' , component: PanelayudasComponent},
 
   {path: 'login' , component: LoginComponent},
   {path: '**' , component: HomeComponent},

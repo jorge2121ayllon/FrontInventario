@@ -1,0 +1,138 @@
+<mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ventas
+        </mat-panel-title>
+        <mat-panel-description>
+          Registro de Ventas
+          <mat-icon>shopping_cart</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+        <iframe width="640" height="360" src="https://www.youtube.com/embed/f7zvFx8hnns">
+    </iframe>
+
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Ventas
+        </mat-panel-title>
+        <mat-panel-description>
+          Edición de Ventas
+          <mat-icon>shopping_cart</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/k4zXmfMGnho">
+    </iframe>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+        <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Compras
+          </mat-panel-title>
+          <mat-panel-description>
+            Registro de Compras
+            <mat-icon>add_shopping_cart</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <iframe width="640" height="360" src="https://www.youtube.com/embed/jb79nng2dJY">
+      </iframe>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Compras
+          </mat-panel-title>
+          <mat-panel-description>
+            Edición de Compras
+            <mat-icon>add_shopping_cart</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <iframe width="640" height="360" src="https://www.youtube.com/embed/NteqgDpvXiI">
+      </iframe>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Reportes
+          </mat-panel-title>
+          <mat-panel-description>
+            Reporte de Ventas
+            <mat-icon>find_in_page</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <iframe width="640" height="360" src="https://www.youtube.com/embed/d9gdofL6kzE">
+      </iframe>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Reporte
+          </mat-panel-title>
+          <mat-panel-description>
+            Reporte de Clientes
+            <mat-icon>find_in_page</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <iframe width="640" height="360" src="https://www.youtube.com/embed/h9D6wZXPq5Y">
+      </iframe>
+    
+        <mat-action-row>
+          <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+          <button mat-button color="primary" (click)="nextStep()">Siguiente</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+  
+    <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Inventario
+        </mat-panel-title>
+        <mat-panel-description>
+          Inventario
+          <mat-icon>inventory</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/SI-x5li5GWY">
+    </iframe>
+  
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Anterior</button>
+        <button mat-button color="primary" (click)="nextStep()">Fin</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  
+  </mat-accordion>
+  
