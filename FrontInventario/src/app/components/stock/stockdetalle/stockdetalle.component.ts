@@ -72,9 +72,9 @@ export class StockdetalleComponent implements OnInit {
 
   Productos()
   {
+
     this.StockService.getDetalleStock().subscribe( r =>
       {
-        console.log(r.data);
         this.productos = r.data;
         this.metadata = r.meta;
         this.listaImg=this.productos;
@@ -158,6 +158,7 @@ listaImgs(lista:any){
 
 Limpiador()
 {
+
   if(this.checkColor.value==false)
   {
     this.form.value.color='';
