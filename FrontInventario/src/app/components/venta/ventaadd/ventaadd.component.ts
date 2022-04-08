@@ -156,9 +156,9 @@ export class VentaaddComponent implements OnInit {
 
    //base 64 to image
    async toImage(url: any){
-
-  if(url!="")
-  {
+    if(url===""){
+      return '/assets/img/productoSinImagen.jpg'
+    }
     var res =  await fetch(url);
     var blob =  (await res).blob();
 
@@ -174,11 +174,6 @@ export class VentaaddComponent implements OnInit {
       reader.readAsDataURL(await blob);
     })
     return result
-  }
-  else{
-    return '';
-  }
-
   };
   //almacena los productos en una lista local para convertir las img
   listaImgs(lista:any){
