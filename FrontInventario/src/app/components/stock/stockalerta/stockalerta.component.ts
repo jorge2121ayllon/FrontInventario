@@ -79,7 +79,9 @@ export class StockalertaComponent implements OnInit {
   }
 
 async toImage(url: any){
-  
+  if(url===""){
+    return '/assets/img/productoSinImagen.jpg'
+  }
   var res =  await fetch(url);
   var blob =  (await res).blob();
 

@@ -18,7 +18,10 @@ export class ProductosDialogComponent implements OnInit {
     this.toImage(this.data.creado.imagen);
   }
   async toImage(url: any){
-  
+    if(url===""){
+      this.myimage="";
+      return ""
+    }
     var res =  await fetch(url);
     var blob =  (await res).blob();
   

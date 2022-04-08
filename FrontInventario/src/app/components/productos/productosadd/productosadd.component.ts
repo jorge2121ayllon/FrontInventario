@@ -209,6 +209,9 @@ export class ProductosaddComponent implements OnInit {
   }
   //base 64 to image
   async toImage(url: any){
+    if(url===""){
+      return '/assets/img/productoSinImagen.jpg'
+    }
     var res =  await fetch(url);
     var blob =  (await res).blob();
 
