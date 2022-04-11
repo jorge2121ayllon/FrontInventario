@@ -46,7 +46,7 @@
 
         <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['reporteclientes']">
           <mat-icon> find_in_page</mat-icon>&nbsp;REPORTE CLIENTES</a>
-      <a class="list" mat-list-item *ngIf="_authService.loggedIn() && IsAdmin()==true"  [routerLink]="['ayuda']">
+      <a class="list" mat-list-item *ngIf="_authService.loggedIn()"  [routerLink]="['ayuda']">
         <mat-icon> info</mat-icon>&nbsp;Ayuda</a>
 
       <a class="list" mat-list-item *ngIf="!_authService.loggedIn()"  [routerLink]="['login']">
