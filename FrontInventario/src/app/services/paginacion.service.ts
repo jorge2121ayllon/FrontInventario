@@ -24,6 +24,7 @@ export class  PaginacionService {
     this.Filtros.marca="";
     this.Filtros.talla="";
     this.Filtros.codigo="";
+    this.Filtros.genero="";
     this.Filtros.PageNumber=1;
     this.Filtros.PageSize=5;
     this.FiltroDate.dateInit=new Date();
