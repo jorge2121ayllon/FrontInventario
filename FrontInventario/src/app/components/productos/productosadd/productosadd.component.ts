@@ -50,6 +50,7 @@ export class ProductosaddComponent implements OnInit {
           id: this.Route.snapshot.params.id,
           precioCompra: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           precioVenta: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
+          stock: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           genero: new FormControl('',Validators.required),
           color: new FormControl('',Validators.required),
           talla: new FormControl('',[Validators.required, Validators.maxLength (5)]),
@@ -89,6 +90,7 @@ export class ProductosaddComponent implements OnInit {
           this.form.controls['color'].setValue(r.data.color)
           this.form.controls['talla'].setValue(r.data.talla)
           this.form.controls['marca'].setValue(r.data.marca)
+          this.form.controls['stock'].setValue(r.data.stock)
           this.form.controls['descripcion'].setValue(r.data.descripcion)
           this.codigo=(r.data.codigo)
           this.myimage= this.toImage(r.data.imagen)
@@ -132,6 +134,7 @@ export class ProductosaddComponent implements OnInit {
               this.form.controls['genero'].setValue(r.data.genero)
               this.form.controls['color'].setValue("")
               this.form.controls['talla'].setValue("")
+              this.form.controls['stock'].setValue("")
               this.form.controls['marca'].setValue(r.data.marca)
               this.form.controls['descripcion'].setValue(r.data.descripcion)
               this.form.controls['stock'].setValue("")

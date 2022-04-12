@@ -38,12 +38,12 @@ export class VentaService {
     return this.http.put<Response>(this.baseUrl, JSON.stringify(Venta));
   }
 
-  getReportes(inicio : Date , fin : Date): Observable<Response>{
-    return this.http.get<Response>(this.baseUrl +"/"+inicio+"/"+fin+"/"+0)
+  getReportes(genero: string , inicio : Date , fin : Date): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+"/"+ genero+"/"+inicio+"/"+fin+"/"+0)
   }
 
-  getReportesClientes(inicio : Date , fin : Date): Observable<Response>{
-    return this.http.get<Response>(this.baseUrl +"/"+inicio+"/"+fin+"/"+1)
+  getReportesClientes(genero: string ,inicio : Date , fin : Date): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+"/"+ genero+"/"+inicio+"/"+fin+"/"+1)
   }
 
 
