@@ -6,6 +6,7 @@ export class Filtros{
     marca?: string;
     talla?: string;
     codigo?: string;
+    genero?: string;
     PageSize?: number;
     PageNumber?: number;
   }

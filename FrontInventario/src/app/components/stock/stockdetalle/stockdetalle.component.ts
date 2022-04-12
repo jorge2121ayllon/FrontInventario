@@ -20,7 +20,7 @@ import { Producto } from 'src/app/models/producto';
 export class StockdetalleComponent implements OnInit {
 
   public form: FormGroup;
-  displayedColumns: string[] = ['descripcion','marca','color','talla', 'stock','codigo','imagen','acciones'];
+  displayedColumns: string[] = ['descripcion','marca','color','talla', 'stock','codigo','genero','imagen','acciones'];
   categorias :any;
   productos :any;
   metadata :any;
@@ -40,6 +40,7 @@ export class StockdetalleComponent implements OnInit {
   checkMarca = new FormControl(false);
   checkTalla = new FormControl(false);
   checkCodigo = new FormControl(false);
+  checkGenero = new FormControl(false);
 
   constructor(public fb : FormBuilder,private StockService : StockService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService, private CategoriaService : CategoriaService) {
@@ -52,6 +53,7 @@ export class StockdetalleComponent implements OnInit {
         marca:new FormControl(''),
         talla:new FormControl(''),
         codigo:new FormControl(''),
+        genero:new FormControl(''),
       })
     }
 
@@ -65,6 +67,7 @@ export class StockdetalleComponent implements OnInit {
     this.PaginacionService.Filtros.marca='';
     this.PaginacionService.Filtros.talla='';
     this.PaginacionService.Filtros.codigo='';
+    this.PaginacionService.Filtros.genero='';
     this.PaginacionService.Filtros.PageSize=5;
     this.PaginacionService.Filtros.PageNumber=1;
     this.Categorias();
@@ -117,6 +120,7 @@ export class StockdetalleComponent implements OnInit {
     this.PaginacionService.Filtros.marca=this.form.value.marca;
     this.PaginacionService.Filtros.talla=this.form.value.talla;
     this.PaginacionService.Filtros.codigo=this.form.value.codigo;
+    this.PaginacionService.Filtros.genero=this.form.value.genero;
     this.Productos();
   }
   //sgte funcionalidad: 1.-vista  de stock con descripcion y cantidad de stock, 2.- vista de notificaciones
@@ -185,6 +189,10 @@ Limpiador()
   if(this.checkCodigo.value==false)
   {
     this.form.value.codigo='';
+  }
+  if(this.checkGenero.value==false)
+  {
+    this.form.value.genero='';
   }
 }
 

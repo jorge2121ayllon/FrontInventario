@@ -35,9 +35,17 @@ export class StockService {
     var marca=this.PaginacionService.Filtros.marca;
     var talla=this.PaginacionService.Filtros.talla;
     var codigo=this.PaginacionService.Filtros.codigo;
+    var genero=this.PaginacionService.Filtros.genero;
 
-    return this.http.get<Response>(this.baseUrl+"/"+1+"/"+1+"/"+1+"/"+'?filter='+filtro+'&categoria='+categoria+'&descripcion='+descripcion+
-    '&color='+color+'&marca='+marca+'&talla='+talla+'&codigo='+codigo+
+    return this.http.get<Response>(this.baseUrl+"/"+1+"/"+1+"/"+1+"/"+
+    '?filter='+filtro+
+    '&categoria='+categoria+
+    '&descripcion='+descripcion+
+    '&color='+color+
+    '&marca='+marca+
+    '&talla='+talla+
+    '&codigo='+codigo+
+    '&genero='+genero+
     '&PageSize='+this.PaginacionService.Filtros.PageSize+
     '&PageNumber='+this.PaginacionService.Filtros.PageNumber)
    }
