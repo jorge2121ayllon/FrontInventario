@@ -93,6 +93,13 @@
               </div>
             </div>
             <div class="form-group col-md-6">
+              <mat-form-field class="example-full-width" appearance="fill" >
+                <mat-label>stock</mat-label>
+                <input type="number" matInput placeholder="stock" formControlName="stock">
+                <mat-error *ngIf="form.controls.stock.hasError('required')">
+                    Stock<strong> requerido</strong>
+                </mat-error>
+              </mat-form-field>
               <br>
               <br>
               <mat-form-field class="example-full-width" appearance="fill" >

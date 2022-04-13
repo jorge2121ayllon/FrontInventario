@@ -23,7 +23,8 @@ export class ReporteventasComponent implements OnInit {
   constructor(private VentaService: VentaService,  private fb : FormBuilder) {
       this.form = this.fb.group({
         inicio: new FormControl('',Validators.required),
-        fin: new FormControl('',Validators.required)
+        fin: new FormControl('',Validators.required),
+        genero: new FormControl('Todos',Validators.required)
       })
    }
 
@@ -40,7 +41,7 @@ export class ReporteventasComponent implements OnInit {
     this.vendidoTotal = 0;
 
 
-    this.VentaService.getReportes( this.form.value.inicio , this.form.value.fin).subscribe(
+    this.VentaService.getReportes( this.form.value.genero, this.form.value.inicio , this.form.value.fin).subscribe(
       v=> {
         this.reportes = v as any;
 

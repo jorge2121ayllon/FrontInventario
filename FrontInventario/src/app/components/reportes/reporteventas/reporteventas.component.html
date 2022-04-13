@@ -6,21 +6,31 @@
       <div class="form-row">
 
         <div class="form-group col-md-2">
-
             <button (click)="Buscar()" [disabled]="!form.valid" mat-fab color="primary" aria-label="Example icon button with a delete icon">
               <mat-icon>search</mat-icon>
             </button>
-
         </div>
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Genero</mat-label>
+            <mat-select  formControlName="genero">
+                <mat-option value="Todos">Todos</mat-option>
+                <mat-option value="Masculino">Masculino</mat-option>
+                <mat-option value="Femenino">Femenino</mat-option>
+                <mat-option value="Unisex">Unisex</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="form-group col-md-3">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Fecha Inicio</mat-label>
             <input matInput type="date" formControlName="inicio">
           </mat-form-field>
         </div>
 
-        <div class="form-group col-md-5">
+        <div class="form-group col-md-3">
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Fecha Fin</mat-label>
             <input matInput type="date" formControlName="fin">

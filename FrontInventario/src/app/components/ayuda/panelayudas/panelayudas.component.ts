@@ -9,12 +9,24 @@ export class PanelayudasComponent implements OnInit {
 
   constructor() { }
 
+  Usuario= localStorage.getItem('Role')
+
   ngOnInit(): void {
   }
   step = 0;
 
   setStep(index: number) {
     this.step = index;
+  }
+
+  Administrador()
+  {
+    if(this.Usuario=="Administrador")
+    {
+      return true;
+    }else
+
+    return false;
   }
 
   nextStep() {
