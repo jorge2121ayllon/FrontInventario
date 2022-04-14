@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  appUrl:'https://localhost:44388/'
+  appUrl:'https://fashsporttarija.online/'
 };
