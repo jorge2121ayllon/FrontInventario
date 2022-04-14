@@ -13,6 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComprasComponent implements OnInit {
 
+  load: boolean= true;
   form: FormGroup;
   displayedColumns: string[] = [ 'fecha','total','acciones'];
   metadata :any;
@@ -45,6 +46,7 @@ export class ComprasComponent implements OnInit {
 
   Compras()
   {
+    this.load= false;
     this.CompraService.getCompras().subscribe( r =>
       {
         this.compras = r.data;
@@ -54,8 +56,11 @@ export class ComprasComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No cuenta con Compras")
         }
+
       }
     )
+    this.load= true;
+
   }
 
   handlePage(e: PageEvent)

@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements OnInit {
-
+  load: boolean= true;
   form: FormGroup;
   displayedColumns: string[] = ['nombreCliente','celular', 'total','fecha','acciones'];
   metadata :any;
@@ -46,6 +46,7 @@ export class VentasComponent implements OnInit {
 
   Ventas()
   {
+    this.load= false;
     this.VentaService.getVentas().subscribe( r =>
       {
         this.ventas = r.data;
@@ -57,6 +58,7 @@ export class VentasComponent implements OnInit {
         }
       }
     )
+    this.load= true;
   }
 
   handlePage(e: PageEvent)

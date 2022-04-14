@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./compraadd.component.css']
 })
 export class CompraaddComponent implements OnInit {
-
+  load: boolean= true;
   form: FormGroup;
 
   listaProductos:Producto[]=[];
@@ -49,6 +49,7 @@ export class CompraaddComponent implements OnInit {
 
   obtenerProductos()
   {
+    this.load= false;
     this.PaginacionService.Filtro.filter=this.form.value.buscadorProducto;
     this.PaginacionService.Filtro.PageSize=100000;
     this.PaginacionService.Filtro.PageNumber=1;
@@ -57,8 +58,12 @@ export class CompraaddComponent implements OnInit {
       {
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
+
       }
+
     )
+    this.load= true;
+
   }
 
 
@@ -96,6 +101,7 @@ export class CompraaddComponent implements OnInit {
 
   guardar()
   {
+    this.load= false;
     this.form.value.total=this.totalCompra;
 
     this.compra.detalleCompra=this.listadetalleCompra;
@@ -104,6 +110,7 @@ export class CompraaddComponent implements OnInit {
     this.CompraService.saveCompra(this.compra).subscribe
     (
       r=> {
+        this.load= true;
         this.Router.navigate(['/compras']);
         this.toastr.success("se guardo exitosamente","Guardado.")
       },
@@ -111,6 +118,8 @@ export class CompraaddComponent implements OnInit {
         this.toastr.warning("no se guardo","Error.")
       }
     )
+    this.load= true;
+
   }
 
 

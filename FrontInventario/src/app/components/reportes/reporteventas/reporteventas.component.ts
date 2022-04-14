@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reporteventas.component.css']
 })
 export class ReporteventasComponent implements OnInit {
-
+  load: boolean= true;
   reportes: any;
   form : FormGroup;
   ganaciaTotal = 0;
@@ -34,6 +34,7 @@ export class ReporteventasComponent implements OnInit {
 
   Buscar()
   {
+    this.load=false;
     this.alertar=0;
     this.ganaciaTotal = 0;
     this.cantidadTotal = 0;
@@ -57,7 +58,6 @@ export class ReporteventasComponent implements OnInit {
           }
       }
     )
-
-
+      this.load=true;
   }
 }
