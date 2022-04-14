@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { ProductosaddComponent } from '../productosadd/productosadd.component';
 @Component({
   selector: 'app-productos-dialog',
@@ -9,34 +10,13 @@ import { ProductosaddComponent } from '../productosadd/productosadd.component';
 })
 export class ProductosDialogComponent implements OnInit {
   myimage: any;
-  
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: ProductosaddComponent) {
     this.myimage= new Observable<any>();
    }
-  
+
   ngOnInit(): void {
-    this.toImage(this.data.creado.imagen);
+    this.myimage=environment.appUrl+this.data.creado.imagen;
   }
-  async toImage(url: any){
-    if(url===""){
-      this.myimage="";
-      return ""
-    }
-    var res =  await fetch(url);
-    var blob =  (await res).blob();
-  
-    const result =  new Promise(async (resolve, reject) => {
-      var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        resolve(reader.result);
-      }, false);
-  
-      reader.onerror = () => {
-        return reject(this);
-      };
-      reader.readAsDataURL(await blob);
-    })
-    this.myimage=result;
-    return result
-  };
+
 }

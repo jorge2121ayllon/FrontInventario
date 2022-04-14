@@ -11,4 +11,5 @@ export class Producto{
     codigo?: string;
     imagen?: string;
     idCategoria?: number;
+
 }

@@ -23,7 +23,7 @@ export class CompraService {
   }
 
   saveCompra(Compra:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(Compra));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(Compra), this.PaginacionService.httpOptions);
   }
 
   deleteCompra(CompraId: number): Observable<Compra>{
@@ -34,7 +34,7 @@ export class CompraService {
   }
 
   updateCompra(Compra : any): Observable<Response>{
-    return this.http.put<Response>(this.baseUrl, JSON.stringify(Compra));
+    return this.http.put<Response>(this.baseUrl, JSON.stringify(Compra), this.PaginacionService.httpOptions);
   }
 
 

@@ -28,7 +28,7 @@
               <td>{{product.color}}</td>
               <td>{{product.stock}}</td>
               <td>{{product.precioCompra}}</td>
-              <td><img  [src]="returnImg(product.id) | async" width="50px" height="50px" alt="" /></td>
+              <td><img [src]="envairomentGloblal+product.imagen"  width="50px" height="50px" alt="" /></td>
             </tr>
           </tbody>
         </table>

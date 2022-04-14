@@ -24,7 +24,7 @@ export class VentaService {
   }
 
   saveVenta(Venta:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(Venta));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(Venta), this.PaginacionService.httpOptions);
   }
 
   deleteVenta(ventaId: number): Observable<Venta>{
@@ -35,7 +35,7 @@ export class VentaService {
   }
 
   updateVenta(Venta : any): Observable<Response>{
-    return this.http.put<Response>(this.baseUrl, JSON.stringify(Venta));
+    return this.http.put<Response>(this.baseUrl, JSON.stringify(Venta), this.PaginacionService.httpOptions);
   }
 
   getReportes(genero: string , inicio : Date , fin : Date): Observable<Response>{

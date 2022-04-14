@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
-
+import { environment } from 'src/environments/environment.prod';
 @Component({
   selector: 'app-ventaadd',
   templateUrl: './ventaadd.component.html',
@@ -28,9 +28,9 @@ export class VentaaddComponent implements OnInit {
   totalVenta=0;
   listaProductosAux:Producto[]=[];
   //img
-  listaImg :Producto[]=[];
-  myimage: any;
 
+
+  envairomentGloblal= environment.appUrl;
   numeroLista=1;
 
   constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
@@ -59,8 +59,6 @@ export class VentaaddComponent implements OnInit {
     this.ProductoService.gets().subscribe( r =>
       {
         this.listaProductos=r.data;
-        this.listaImg=this.listaProductos;
-        this.listaImgs(this.listaImg);
         this.listaProductosAux=r.data;
       }
     )
@@ -78,7 +76,7 @@ export class VentaaddComponent implements OnInit {
     let unicoProducto = this.listadetalleVenta.filter(prodcuto=>prodcuto.idProducto==this.productoSeleccionado.id);
     if(this.productoSeleccionado.precioVenta && unicoProducto.length<1 && this.productoSeleccionado.stock)
     {
-      if(this.productoSeleccionado.stock>this.form.value.cantidad){
+      if(this.productoSeleccionado.stock>=this.form.value.cantidad){
         this.detalleventa={
           cantidad: this.form.value.cantidad,
           idProducto:this.productoSeleccionado.id,
@@ -144,41 +142,5 @@ export class VentaaddComponent implements OnInit {
   }
 
 
-  //metodo para retornar la img de cada producto
-  returnImg(id:any){
-    for (let index = 0; index < this.listaImg.length; index++) {
-      if (this.listaImg[index].id===id) {
-        this.myimage=this.listaImg[index].imagen;
-      }
-    }
-  return this.myimage;
-}
 
-   //base 64 to image
-   async toImage(url: any){
-    if(url===""){
-      return '/assets/img/productoSinImagen.jpg'
-    }
-    var res =  await fetch(url);
-    var blob =  (await res).blob();
-
-    const result =  new Promise(async (resolve, reject) => {
-      var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        resolve(reader.result);
-      }, false);
-
-      reader.onerror = () => {
-        return reject(this);
-      };
-      reader.readAsDataURL(await blob);
-    })
-    return result
-  };
-  //almacena los productos en una lista local para convertir las img
-  listaImgs(lista:any){
-    for (let index = 0; index < lista.length; index++) {
-            lista[index].imagen= this.toImage(lista[index].imagen)
-    }
-  }
 }

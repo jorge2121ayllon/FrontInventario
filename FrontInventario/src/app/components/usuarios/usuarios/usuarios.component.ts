@@ -20,7 +20,7 @@ export class UsuariosComponent implements OnInit {
 
 
 
-
+  load: boolean= false;
   displayedColumns: string[] = ['usuario', 'role','gmail','acciones'];
   usuarios :any;
   metadata :any;
@@ -50,6 +50,7 @@ export class UsuariosComponent implements OnInit {
 
   Usuarios()
   {
+    this.load= false;
 
 
     this.UsuarioService.getUsers().subscribe( r =>
@@ -60,7 +61,8 @@ export class UsuariosComponent implements OnInit {
         this.length=this.metadata.totalCount;
       }
     )
-    console.log(this.usuarios)
+
+    this.load=true;
   }
 
   borrar(id : any)

@@ -6,6 +6,7 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { EMPTY, Observable } from 'rxjs';
 import { Producto } from 'src/app/models/producto';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-stockalerta',
@@ -13,6 +14,7 @@ import { Producto } from 'src/app/models/producto';
   styleUrls: ['./stockalerta.component.css']
 })
 export class StockalertaComponent implements OnInit {
+  envairomentGloblal= environment.appUrl;
   productos :any;
   group:any;
   metadata :any;
@@ -21,7 +23,7 @@ export class StockalertaComponent implements OnInit {
   listaStock:Producto[]=[];
   listaStockDoble:Producto[]=[];
   cantidad=0;
-  
+
   // MatPaginator Inputs
   length = 100;
   pageSize = 5;
@@ -60,7 +62,6 @@ export class StockalertaComponent implements OnInit {
             this.listaImg.push(elementt);
           });
         });
-        this.listaImgs(this.listaImg);
         //
         this.metadata = r.meta;
         this.length=this.metadata.totalCount;
@@ -78,27 +79,7 @@ export class StockalertaComponent implements OnInit {
    this.Productos();
   }
 
-async toImage(url: any){
-  if(url===""){
-    return '/assets/img/productoSinImagen.jpg'
-  }
-  var res =  await fetch(url);
-  var blob =  (await res).blob();
 
-  const result =  new Promise(async (resolve, reject) => {
-    var reader = new FileReader();
-    reader.addEventListener("load", function () {
-      resolve(reader.result);
-    }, false);
-
-    reader.onerror = () => {
-      return reject(this);
-    };
-    reader.readAsDataURL(await blob);
-  })
-  this.myimage=result;
-  return result
-};
 groupBy(list: any, keyGetter: any) {
   const map = new Map();
   list.forEach((item:any) => {
@@ -114,22 +95,6 @@ groupBy(list: any, keyGetter: any) {
 }
 
 
-//metodo para retornar la img de cada producto
-returnImg(id:any){
-  for (let index = 0; index < this.listaImg.length; index++) {
-    if (this.listaImg[index].id===id) {
-      this.myimage=this.listaImg[index].imagen;
-    }
-  }
-  return this.myimage;
-}
-
-//almacena los productos en una lista local para convertir las img
-listaImgs(lista:any){
-  for (let index = 0; index < lista.length; index++) {
-          lista[index].imagen= this.toImage(lista[index].imagen)
-  }
-}
 
 mostrar(code:any){
 //

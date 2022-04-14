@@ -23,7 +23,8 @@ export class DetalleCompraService {
   }
 
   saveDetalleCompra(DetalleCompra:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(DetalleCompra));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(DetalleCompra),
+    this.PaginacionService.httpOptions);
   }
 
   deleteDetalleCompra(Id: number): Observable<DetalleCompra>{

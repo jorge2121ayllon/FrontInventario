@@ -40,3 +40,65 @@ th{
   display: block;
   }
 
+
+
+
+  .overlay{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .loader-container{
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+  }
+
+  .loader-container .loader{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: solid 4px transparent;
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-radius: 50%;
+    animation: loader 1.4s linear infinite;
+  }
+
+  .loader-container .loader2{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    border: solid 4px transparent;
+    border-top-color: #fffb00;
+    border-left-color: #fffb00;
+    border-radius: 50%;
+    animation: loader2 1.2s linear infinite;
+  }
+
+  @keyframes loader{
+    0%{
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100%{
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes loader2{
+    0%{
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100%{
+      transform: translate(-50%, -50%) rotate(-360deg);
+    }
+  }
+

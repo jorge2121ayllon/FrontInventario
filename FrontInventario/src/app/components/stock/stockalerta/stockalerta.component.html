@@ -23,7 +23,7 @@
         <mat-card-subtitle>Marca: <strong>{{item.marca}}</strong></mat-card-subtitle>
         <mat-card-subtitle>Modelo: <strong>{{item.codigo}}</strong></mat-card-subtitle>
         <mat-card-subtitle>Color: <strong>{{item.color}}</strong></mat-card-subtitle>
-        <img mat-card-xl-image [src]="returnImg(item.id) | async" >
+        <img mat-card-xl-image [src]="envairomentGloblal+item.imagen" >
       </mat-card-title-group>
       <mat-card-content>
        <h2>Stock:<strong></strong> {{item.stock}}</h2>
