@@ -19,6 +19,8 @@ import { Producto } from 'src/app/models/producto';
   styleUrls: ['./productosadd.component.css']
 })
 export class ProductosaddComponent implements OnInit {
+
+  load: boolean= true;
   myimage: any;
   myimage1: string;
   form: FormGroup;
@@ -83,6 +85,7 @@ export class ProductosaddComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    this.load= false;
     this.Categorias();
     if(this.Route.snapshot.params.id>0){
       this.ProductoService.get(this.Route.snapshot.params.id).subscribe(
@@ -102,9 +105,11 @@ export class ProductosaddComponent implements OnInit {
         }
       )
     }
+      this.load=true;
   }
 
   Guardar(tipo:any){
+    this.load= false;
     if((this.form.value).imagen===""){
       (this.form.value).imagen=this.imagenLocal;
     }else{
@@ -177,6 +182,7 @@ export class ProductosaddComponent implements OnInit {
         }
       )
     }
+      this.load=true;
   }
 
   Categorias()

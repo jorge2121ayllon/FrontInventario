@@ -12,6 +12,7 @@ import { LoginService } from 'src/app/services/login.service';
 export class LoginComponent implements OnInit {
 
   form: FormGroup
+  load: boolean= true;
 
   constructor(private fb : FormBuilder,private LoginService : LoginService ,private Router: Router,  private toastr: ToastrService
     )
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   ingresar()
   {
+    this.load=false;
     this.LoginService.LoginUser(this.form.value)
     .subscribe(
       response => {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
       error => {
         this.toastr.warning("Porfavor verifique los datos ingresados en password y gmail","Error de login.")
       });
+      this.load=true;
   }
 
 }

@@ -1,5 +1,10 @@
 
-
+<div class="overlay" *ngIf="!load" >
+  <div class="loader-container">
+     <div class="loader"></div>
+     <div class="loader2"></div>
+  </div>
+</div>
         <form class="example-container" [formGroup]="form" (ngSubmit)="Guardar(false)"  >
           <div class="form-row">
             <div class="form-group col-md-4">
