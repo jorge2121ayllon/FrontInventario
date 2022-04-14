@@ -24,11 +24,13 @@ export class CategoriaService {
    }
 
    saveCategoria(Categoria:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(Categoria));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(Categoria),
+    this.PaginacionService.httpOptions);
   }
 
   updateCategoria(Categoria : Categoria): Observable<Categoria>{
-    return this.http.put<Categoria>(this.baseUrl +"/"+ Categoria.id, JSON.stringify(Categoria));
+    return this.http.put<Categoria>(this.baseUrl +"/"+ Categoria.id, JSON.stringify(Categoria),
+    this.PaginacionService.httpOptions);
   }
 
   deleteCategoria(categoriaId: number): Observable<any>{

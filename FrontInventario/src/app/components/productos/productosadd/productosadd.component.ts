@@ -28,6 +28,7 @@ export class ProductosaddComponent implements OnInit {
   myimage11: any;
   //mostrar codigo
   creado:any
+  ImagenCreada!:File;
 
   //FOTO
   imagenLocal:any;
@@ -58,6 +59,7 @@ export class ProductosaddComponent implements OnInit {
           descripcion: new FormControl('',Validators.required),
           codigo: new FormControl(''),
           imagen: new FormControl(''),
+          imagenguardar : new FormControl(''),
           idCategoria: new FormControl('',Validators.required),
         })
       }
@@ -74,6 +76,7 @@ export class ProductosaddComponent implements OnInit {
           stock: new FormControl(0),
           codigo: new FormControl(''),
           imagen: new FormControl(''),
+          imagenguardar : new FormControl(''),
           idCategoria: new FormControl('',Validators.required),
         })
       }
@@ -93,7 +96,6 @@ export class ProductosaddComponent implements OnInit {
           this.form.controls['stock'].setValue(r.data.stock)
           this.form.controls['descripcion'].setValue(r.data.descripcion)
           this.codigo=(r.data.codigo)
-          this.myimage= this.toImage(r.data.imagen)
           this.imagenLocal=r.data.imagen
           this.visible=false;
           this.form.controls['idCategoria'].setValue(r.data.idCategoria)
@@ -111,7 +113,7 @@ export class ProductosaddComponent implements OnInit {
     (this.form.value).codigo=this.codigo;
 
     if(this.Route.snapshot.params.id>0){
-      console.log(this.form.value)
+
       this.ProductoService.update(this.form.value).subscribe
       (
         r=> {
@@ -124,45 +126,51 @@ export class ProductosaddComponent implements OnInit {
       )
     }
     else{
-      this.ProductoService.save(this.form.value).subscribe
+      this.ProductoService.saveImagen(this.ImagenCreada).subscribe
       (
-        r=> {
+        res=> {
+            console.log(res.data)
+            this.form.value.imagen=res.data;
 
-          if(tipo===true){
-              this.form.controls['precioCompra'].setValue(r.data.precioCompra)
-              this.form.controls['precioVenta'].setValue(r.data.precioVenta)
-              this.form.controls['genero'].setValue(r.data.genero)
-              this.form.controls['color'].setValue("")
-              this.form.controls['talla'].setValue("")
-              this.form.controls['stock'].setValue("")
-              this.form.controls['marca'].setValue(r.data.marca)
-              this.form.controls['descripcion'].setValue(r.data.descripcion)
-              this.form.controls['stock'].setValue("")
-              this.form.controls['imagen'].setValue("")
-              this.codigo=(r.data.codigo)
-              this.myimage=""
-              this.form.controls['idCategoria'].setValue(r.data.idCategoria)
-              //mostrar codigo
-              this.openDialog(r.data);
-          }else if(tipo===false){
+            this.ProductoService.save(this.form.value).subscribe(
+              r=>{
+               if(tipo===true){
+                 this.form.controls['precioCompra'].setValue(r.data.precioCompra)
+                 this.form.controls['precioVenta'].setValue(r.data.precioVenta)
+                 this.form.controls['genero'].setValue(r.data.genero)
+                 this.form.controls['color'].setValue("")
+                 this.form.controls['talla'].setValue("")
+                 this.form.controls['stock'].setValue("")
+                 this.form.controls['marca'].setValue(r.data.marca)
+                 this.form.controls['descripcion'].setValue(r.data.descripcion)
+                 this.form.controls['stock'].setValue(0)
+                 this.form.controls['imagen'].setValue("")
+                 this.codigo=(r.data.codigo)
+                 this.myimage=""
+                 this.form.controls['idCategoria'].setValue(r.data.idCategoria)
+                 //mostrar codigo
+                 this.openDialog(r.data);
+             }else if(tipo===false){
 
-            this.form.controls['precioCompra'].setValue('')
-            this.form.controls['precioVenta'].setValue('')
-            this.form.controls['genero'].setValue('')
-            this.form.controls['color'].setValue('')
-            this.form.controls['talla'].setValue('')
-            this.form.controls['marca'].setValue('')
-            this.form.controls['descripcion'].setValue('')
-            this.form.controls['stock'].setValue(0)
-            this.form.controls['codigo'].setValue('')
-            this.codigo=('')
-            this.myimage=""
-            this.form.controls['idCategoria'].setValue('')
+               this.form.controls['precioCompra'].setValue('')
+               this.form.controls['precioVenta'].setValue('')
+               this.form.controls['genero'].setValue('')
+               this.form.controls['color'].setValue('')
+               this.form.controls['talla'].setValue('')
+               this.form.controls['marca'].setValue('')
+               this.form.controls['descripcion'].setValue('')
+               this.form.controls['stock'].setValue(0)
+               this.form.controls['codigo'].setValue('')
+               this.codigo=('')
+               this.myimage=""
+               this.form.controls['idCategoria'].setValue('')
+               this.openDialog(r.data);
+             }
 
-            this.openDialog(r.data);
-          }
+             this.toastr.success("se guardo exitosamente","Guardado.")
 
-          this.toastr.success("se guardo exitosamente","Guardado.")
+              })
+
         },
         error => {
           this.toastr.warning("no se guardo","Error.")
@@ -182,21 +190,25 @@ export class ProductosaddComponent implements OnInit {
       }
     )
   }
+
   //evento que captura el archivo
   onChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files![0];
+    this.ImagenCreada=file;
     this.convertToBase64(file);
   }
-  //metodo para convertir la img a base 64
   convertToBase64(file: File) {
     this.myimage = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
     this.myimage.subscribe((d: any)=>{
+      this.myimage.array.forEach((element: any) => {
+
+      });
       this.imagenCon=d;
     })
   }
-  //metodo para lecturar el archivo
+
   readFile(file: File, subscriber: Subscriber<any>) {
     const filereader = new FileReader();
     filereader.readAsDataURL(file);
@@ -210,28 +222,6 @@ export class ProductosaddComponent implements OnInit {
       subscriber.complete();
     };
   }
-  //base 64 to image
-  async toImage(url: any){
-    if(url===""){
-      return '/assets/img/productoSinImagen.jpg'
-    }
-    var res =  await fetch(url);
-    var blob =  (await res).blob();
-
-    const result =  new Promise(async (resolve, reject) => {
-      var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        resolve(reader.result);
-      }, false);
-
-      reader.onerror = () => {
-        return reject(this);
-      };
-      reader.readAsDataURL(await blob);
-    })
-    return result
-  };
-
 
   //mostrarCodigoGenerado
   openDialog(creado:any) {

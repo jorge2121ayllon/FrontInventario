@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
+
 
 @Component({
   selector: 'app-ventaedit',
@@ -30,8 +32,8 @@ export class VentaeditComponent implements OnInit {
   listadetalleVenta:DetalleVenta[]=[];
   listadetalleVentaAux:DetalleVenta[]=[];
 
- //img
- listaImg :Producto[]=[];
+  envairomentGloblal= environment.appUrl;
+
  myimage: any;
 
 
@@ -108,8 +110,7 @@ export class VentaeditComponent implements OnInit {
       {
         this.listaProductos=r.data;
         //img
-        this.listaImg=this.listaProductos;
-        this.listaImgs(this.listaImg);
+
         //
         this.listaProductosAux=r.data;
       }
@@ -186,41 +187,4 @@ export class VentaeditComponent implements OnInit {
 
 
 
-//metodo para retornar la img de cada producto
-returnImg(id:any){
-  for (let index = 0; index < this.listaImg.length; index++) {
-    if (this.listaImg[index].id===id) {
-      this.myimage=this.listaImg[index].imagen;
-    }
-  }
-return this.myimage;
-}
-
- //base 64 to image
- async toImage(url: any){
-  if(url===""){
-    return '/assets/img/productoSinImagen.jpg'
-  }
-  var res =  await fetch(url);
-  var blob =  (await res).blob();
-
-  const result =  new Promise(async (resolve, reject) => {
-    var reader = new FileReader();
-    reader.addEventListener("load", function () {
-      resolve(reader.result);
-    }, false);
-
-    reader.onerror = () => {
-      return reject(this);
-    };
-    reader.readAsDataURL(await blob);
-  })
-  return result
-};
-//almacena los productos en una lista local para convertir las img
-listaImgs(lista:any){
-  for (let index = 0; index < lista.length; index++) {
-          lista[index].imagen= this.toImage(lista[index].imagen)
-  }
-}
 }

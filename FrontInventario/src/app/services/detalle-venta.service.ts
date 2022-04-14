@@ -24,7 +24,7 @@ export class DetalleVentaService {
   }
 
   saveDetalleVenta(DetalleVenta:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(DetalleVenta));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(DetalleVenta), this.PaginacionService.httpOptions);
   }
 
   deleteDetalleVenta(Id: number): Observable<DetalleVenta>{

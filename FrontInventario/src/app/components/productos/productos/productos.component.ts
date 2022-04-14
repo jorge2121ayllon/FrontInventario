@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { Observable, observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 
 @Component({
@@ -21,11 +22,10 @@ export class ProductosComponent implements OnInit {
   displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','imagen','acciones'];
   categorias :any;
   productos :any;
-  listaImg :Producto[]=[];
   myimage: any;
   metadata :any;
- 
-  
+  envairomentGloblal= environment.appUrl;
+
 
   // MatPaginator Inputs
   length = 100;
@@ -34,7 +34,7 @@ export class ProductosComponent implements OnInit {
   pageIndex=0;
 
   constructor(private fb : FormBuilder, private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
-    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) { 
+    private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
       this.myimage= new Observable<any>();
       this.form = this.fb.group({
@@ -58,13 +58,14 @@ export class ProductosComponent implements OnInit {
       }
     )
   }
+
+
   Productos()
   {
     this.ProductoService.gets().subscribe( r =>
       {
         this.productos = r.data;
-        this.listaImg=this.productos;
-        this.listaImgs(this.listaImg);
+
         this.metadata = r.meta;
         this.length=this.metadata.totalCount;
         if(this.metadata.totalCount===0){
@@ -74,22 +75,8 @@ export class ProductosComponent implements OnInit {
     )
   }
 
-  //almacena los productos en una lista local para convertir las img
-  listaImgs(lista:any){
-    for (let index = 0; index < lista.length; index++) {
-            lista[index].imagen= this.toImage(lista[index].imagen)
-    }
-  }
 
-  //metodo para retornar la img de cada producto
-  returnImg(id:any){
-      for (let index = 0; index < this.listaImg.length; index++) {
-        if (this.listaImg[index].id===id) {
-          this.myimage=this.listaImg[index].imagen;
-        }
-      }
-      return this.myimage;
-  }
+
 
   borrar(id : any)
   {
@@ -120,33 +107,7 @@ export class ProductosComponent implements OnInit {
   }
 
 
-  //sgte funcionalidad: 1.-vista  de stock con descripcion y cantidad de stock, 2.- vista de notificaciones
-  //inicio 17-03-22 fin 20-03-22 
 
-
-   //base 64 to image
-   async toImage(url: any){
-
-    
-    if(url===""){
-      return '/assets/img/productoSinImagen.jpg'
-    }
-    var res =  await fetch(url);
-    var blob =  (await res).blob();
-
-    const result =  new Promise(async (resolve, reject) => {
-      var reader = new FileReader();
-      reader.addEventListener("load", function () {
-        resolve(reader.result);
-      }, false);
-
-      reader.onerror = () => {
-        return reject(this);
-      };
-      reader.readAsDataURL(await blob);
-    })
-    return result
-  };
 
   //obtiene los nombres de las categorias
   getCategoria(id:any){

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,13 @@ export class UsuarioService {
 
   baseUrl: string='';
 
+  httpOptions ={
+    headers: new HttpHeaders(
+      {
+          'Content-Type':'application/json; charset=utf-8',
+      })
+  };
+
   constructor(private http : HttpClient, private PaginacionService : PaginacionService) {
     this.baseUrl=environment.appUrl+'api/user'
   }
@@ -25,11 +32,11 @@ export class UsuarioService {
   }
 
   saveUser(User:any): Observable<Response>{
-    return this.http.post<Response>(this.baseUrl, JSON.stringify(User));
+    return this.http.post<Response>(this.baseUrl, JSON.stringify(User),this.httpOptions);
   }
 
   updateUser(User : User): Observable<User>{
-    return this.http.put<User>(this.baseUrl +"/"+ User.id, JSON.stringify(User));
+    return this.http.put<User>(this.baseUrl +"/"+ User.id, JSON.stringify(User),this.httpOptions);
   }
 
   deleteUser(userId: number): Observable<User>{

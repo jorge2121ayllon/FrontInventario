@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Filtro } from './../models/filtro';
 import { FiltroDate } from './../models/filtroDate';
 import { Injectable } from '@angular/core';
@@ -11,6 +12,13 @@ export class  PaginacionService {
   Filtro : Filtro = new Filtro;
   Filtros : Filtros = new Filtros;
   FiltroDate: FiltroDate = new FiltroDate;
+
+  httpOptions ={
+    headers: new HttpHeaders(
+      {
+          'Content-Type':'application/json; charset=utf-8',
+      })
+  };
 
   constructor() {
     this.Filtro.filter="";
