@@ -14,6 +14,8 @@ import { environment } from 'src/environments/environment.prod';
   styleUrls: ['./stockalerta.component.css']
 })
 export class StockalertaComponent implements OnInit {
+
+  load: boolean= true;
   envairomentGloblal= environment.appUrl;
   productos :any;
   group:any;
@@ -50,6 +52,7 @@ export class StockalertaComponent implements OnInit {
 
   Productos()
   {
+    this.load= false;
     this.StockService.getStock().subscribe( r =>
       {
         this.productos = r.data;
@@ -70,6 +73,7 @@ export class StockalertaComponent implements OnInit {
         }
       }
     )
+      this.load=true;
   }
 
   handlePage(e: PageEvent)

@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class ProductosComponent implements OnInit {
 
+  load: boolean= true;
   form: FormGroup;
   displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','imagen','acciones'];
   categorias :any;
@@ -52,16 +53,20 @@ export class ProductosComponent implements OnInit {
 
   Categorias()
   {
+    
+    
     this.CategoriaService.getCategorias().subscribe( r =>
       {
         this.categorias = r.data;
       }
     )
+   
   }
 
 
   Productos()
   {
+    this.load= false;
     this.ProductoService.gets().subscribe( r =>
       {
         this.productos = r.data;
@@ -73,6 +78,7 @@ export class ProductosComponent implements OnInit {
         }
       }
     )
+      this.load=true;
   }
 
 

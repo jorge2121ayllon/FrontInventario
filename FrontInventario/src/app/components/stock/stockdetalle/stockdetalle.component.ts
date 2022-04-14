@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoriaService } from './../../../services/categoria.service';
 import { disableDebugTools } from '@angular/platform-browser';
-import { values } from 'lodash';
+import { delay, values } from 'lodash';
 import { Observable } from 'rxjs';
 import { Producto } from 'src/app/models/producto';
 import { environment } from 'src/environments/environment.prod';
@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class StockdetalleComponent implements OnInit {
 
+  load: boolean= true;
   public form: FormGroup;
   displayedColumns: string[] = ['descripcion','marca','color','talla', 'stock','codigo','genero','imagen','acciones'];
   categorias :any;
@@ -76,7 +77,7 @@ export class StockdetalleComponent implements OnInit {
 
   Productos()
   {
-
+   
     this.StockService.getDetalleStock().subscribe( r =>
       {
         this.productos = r.data;
@@ -87,6 +88,7 @@ export class StockdetalleComponent implements OnInit {
         }
       }
     )
+    
   }
   Categorias()
   {
@@ -111,6 +113,7 @@ export class StockdetalleComponent implements OnInit {
   }
 
   applyFilter() {
+    this.load=false;
     this.Limpiador()
     this.PaginacionService.Filtros.filter='si';
     this.PaginacionService.Filtros.categoria=Number(this.form.value.categoria);
@@ -121,6 +124,7 @@ export class StockdetalleComponent implements OnInit {
     this.PaginacionService.Filtros.codigo=this.form.value.codigo;
     this.PaginacionService.Filtros.genero=this.form.value.genero;
     this.Productos();
+      this.load=true;
   }
 
 
