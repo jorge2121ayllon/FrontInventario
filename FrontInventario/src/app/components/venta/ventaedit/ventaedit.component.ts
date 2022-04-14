@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class VentaeditComponent implements OnInit {
 
+  load: boolean= true;
   form: FormGroup;
 
   listaProductos:Producto[]=[];
@@ -59,6 +60,7 @@ export class VentaeditComponent implements OnInit {
 
 
   ObtenerVenta(){
+    this.load= false;
     this.VentaService.getVenta(this.Route.snapshot.params.id).subscribe(
       r=>{
         this.form.controls['total'].setValue(r.data.total)
@@ -98,10 +100,12 @@ export class VentaeditComponent implements OnInit {
         });
       }
     )
+    this.load= true;
   }
 
   obtenerProductos()
   {
+    this.load= false;
     this.PaginacionService.Filtro.filter=this.form.value.buscadorProducto;
     this.PaginacionService.Filtro.PageSize=100000;
     this.PaginacionService.Filtro.PageNumber=1;
@@ -115,6 +119,7 @@ export class VentaeditComponent implements OnInit {
         this.listaProductosAux=r.data;
       }
     )
+    this.load= true;
   }
 
   seleccionProducto(producto : any){

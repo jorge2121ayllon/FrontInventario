@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./reporteclientes.component.css']
 })
 export class ReporteclientesComponent implements OnInit {
-
+  load: boolean= true;
   reportes: reporteClientes[]=[];
   form : FormGroup;
 
@@ -29,14 +29,12 @@ export class ReporteclientesComponent implements OnInit {
 
   Buscar()
   {
+    this.load=false;
     this.VentaService.getReportesClientes( this.form.value.genero,this.form.value.inicio , this.form.value.fin).subscribe(
       v=> {
         this.reportes= v as any;
-
-
-      }
-      )
-
+      })
+      this.load=true;
   }
 
 }

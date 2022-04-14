@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class VentaaddComponent implements OnInit {
 
-
+  load: boolean= true;
   form: FormGroup;
   listaProductos:Producto[]=[];
   productoSeleccionado: Producto = new Producto;
@@ -52,6 +52,7 @@ export class VentaaddComponent implements OnInit {
 
   obtenerProductos()
   {
+    this.load= false;
     this.PaginacionService.Filtro.filter=this.form.value.buscadorProducto;
     this.PaginacionService.Filtro.PageSize=100000;
     this.PaginacionService.Filtro.PageNumber=1;
@@ -62,6 +63,7 @@ export class VentaaddComponent implements OnInit {
         this.listaProductosAux=r.data;
       }
     )
+    this.load= true;
   }
 
   seleccionProducto(producto : any){

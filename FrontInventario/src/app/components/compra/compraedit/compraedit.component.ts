@@ -21,7 +21,7 @@ import { Producto } from 'src/app/models/producto';
 export class CompraeditComponent implements OnInit {
 
   form: FormGroup;
-
+  load: boolean= false;
   listaProductos:Producto[]=[];
   listaProductosAux:Producto[]=[];
 
@@ -55,6 +55,7 @@ export class CompraeditComponent implements OnInit {
   }
 
   ObtenerCompra(){
+    this.load= false;
     this.CompraService.getCompra(this.Route.snapshot.params.id).subscribe(
       r=>{
         this.form.controls['total'].setValue(r.data.total)
@@ -87,14 +88,15 @@ export class CompraeditComponent implements OnInit {
                 )
 
               }
+              this.load= true;
         });
       }
     )
-    console.log('error')
   }
 
   obtenerProductos()
   {
+    this.load=false;
     this.PaginacionService.Filtro.filter=this.form.value.buscadorProducto;
     this.PaginacionService.Filtro.PageSize=100000;
     this.PaginacionService.Filtro.PageNumber=1;
@@ -105,6 +107,7 @@ export class CompraeditComponent implements OnInit {
         this.listaProductosAux=r.data;
       }
     )
+    this.load=true;
   }
 
   seleccionProducto(producto : any){
@@ -150,6 +153,7 @@ export class CompraeditComponent implements OnInit {
 
   guardar()
   {
+    this.load= false;
     this.form.value.total=this.totalCompra;
     this.compra.detalleCompra=this.listadetalleCompra;
     this.compra.Compra=this.form.value;
@@ -157,6 +161,7 @@ export class CompraeditComponent implements OnInit {
     this.CompraService.updateCompra(this.compra).subscribe
     (
       r=> {
+        this.load= true;
         this.Router.navigate(['/compras']);
         this.toastr.success("se guardo exitosamente","Guardado.")
       },
