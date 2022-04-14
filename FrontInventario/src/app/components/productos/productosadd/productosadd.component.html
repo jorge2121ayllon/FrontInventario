@@ -91,7 +91,7 @@
           <div class="form-row">
             <div class="form-group col-md-6" style="text-align: center;">
               <label>Ingrese la Imagen</label>
-              <input accept="image/png,image/jpeg,image/jpg,image/gif" style="margin: auto; display: block;" #img type="file" class="form-control-file border" (change)="onChange($event)" formControlName="imagen">
+              <input accept="image/jpg" style="margin: auto; display: block;" #img type="file" class="form-control-file border" (change)="onChange($event)" formControlName="imagen">
               <br>
               <div *ngIf="myimage">
                   <img [src]="myimage | async" width="200px" height="200px" alt="" />
