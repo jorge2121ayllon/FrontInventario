@@ -23,6 +23,7 @@ export class CategoriasComponent implements OnInit {
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10,25, 100];
   pageIndex=0;
+  load: boolean= true;
 
   constructor(private fb : FormBuilder,private CategoriaService : CategoriaService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl, private toastr: ToastrService) { 
@@ -42,8 +43,10 @@ export class CategoriasComponent implements OnInit {
 
   Categorias()
   {
+    this.load= false;
     this.CategoriaService.getCategorias().subscribe( r =>
       {
+        this.load=true;
         this.categorias = r.data;
         this.metadata = r.meta;
 
@@ -51,21 +54,29 @@ export class CategoriasComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No cuenta con Categorias")
         }
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
   }
 
   borrar(id : any)
   {
+    this.load= false;
     const res = confirm('Seguro que desea eliminar la categoria');
     if (res){
         this.CategoriaService.deleteCategoria(id).subscribe((res) => {
+          this.load=true;
           this.Categorias();
           if(res.data){
             this.toastr.warning("Categoria Eliminada Con Éxito")
           }else if(!res.data){
             this.toastr.warning("No se puede Eliminar la Categoria porque se encuentra vinculada a un Producto")
           }
+        }, error => {
+          this.load=true;
+          this.toastr.warning("no se Elimino, Por favor verifique su conexión a Internet","Error.")
         });
     }
   }

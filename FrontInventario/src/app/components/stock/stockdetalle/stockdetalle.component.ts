@@ -77,15 +77,19 @@ export class StockdetalleComponent implements OnInit {
 
   Productos()
   {
-   
+    this.load= false;
     this.StockService.getDetalleStock().subscribe( r =>
       {
+        this.load=true;
         this.productos = r.data;
         this.metadata = r.meta;
         this.length=this.metadata.totalCount;
         if(this.metadata.totalCount===0){
           this.toastr.info("No existe productos con los filtros enviados")
         }
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Revise la conexción a Internet","Error.")
       }
     )
     
@@ -95,6 +99,9 @@ export class StockdetalleComponent implements OnInit {
     this.CategoriaService.getCategorias().subscribe( r =>
       {
         this.categorias = r.data;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
   }
@@ -113,7 +120,6 @@ export class StockdetalleComponent implements OnInit {
   }
 
   applyFilter() {
-    this.load=false;
     this.Limpiador()
     this.PaginacionService.Filtros.filter='si';
     this.PaginacionService.Filtros.categoria=Number(this.form.value.categoria);
@@ -124,7 +130,6 @@ export class StockdetalleComponent implements OnInit {
     this.PaginacionService.Filtros.codigo=this.form.value.codigo;
     this.PaginacionService.Filtros.genero=this.form.value.genero;
     this.Productos();
-      this.load=true;
   }
 
 

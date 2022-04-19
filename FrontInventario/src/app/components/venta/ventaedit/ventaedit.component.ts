@@ -63,22 +63,29 @@ export class VentaeditComponent implements OnInit {
     this.load= false;
     this.VentaService.getVenta(this.Route.snapshot.params.id).subscribe(
       r=>{
+        this.load= true;
         this.form.controls['total'].setValue(r.data.total)
         this.form.controls['nombreCliente'].setValue(r.data.nombreCliente)
         this.form.controls['celular'].setValue(r.data.celular)
         this.totalVenta = this.form.value.total;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("No se pudo Obtener la Venta, Por favor verifique su conexión a Internet","Error.")
       }
     )
+    this.load= false;
     this.DetalleVentaService.getDetallesVenta(this.Route.snapshot.params.id).subscribe(
       r=>{
+        this.load= true;
         this.listadetalleVentaAux=r.data;
         this.listadetalleVentaAux.forEach(element => {
 
               if(element.idProducto)
               {
+                this.load= false;
                 this.ProductoService.get(element.idProducto).subscribe( r =>
                   {
-
+                    this.load= true;
                     this.productoSeleccionado = r.data;
                     this.detalleventa={
                     id: element.id,
@@ -92,12 +99,18 @@ export class VentaeditComponent implements OnInit {
                    this.listaProductosAux.push(this.productoSeleccionado);
                    this.listadetalleVenta.push(this.detalleventa);
                    this.productoSeleccionado=new Producto;
+                  }, error => {
+                    this.load=true;
+                    this.toastr.warning("No se pudo obtener el Producto, Por favor verifique su conexión a Internet","Error.")
                   }
 
                 )
 
               }
         });
+      }, error => {
+        this.load=true;
+        this.toastr.warning("No se pudo obtener el detalle de venta, Por favor verifique su conexión a Internet","Error.")
       }
     )
     this.load= true;
@@ -112,14 +125,17 @@ export class VentaeditComponent implements OnInit {
 
     this.ProductoService.gets().subscribe( r =>
       {
+        this.load= true;
         this.listaProductos=r.data;
         //img
 
         //
         this.listaProductosAux=r.data;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
-    this.load= true;
   }
 
   seleccionProducto(producto : any){
@@ -161,16 +177,22 @@ export class VentaeditComponent implements OnInit {
   {
     if(detalle.subTotal! && detalle.id!)
     {
+      this.load= false;
       this.totalVenta=this.totalVenta-detalle.subTotal;
 
       this.DetalleVentaService.deleteDetalleVenta(detalle.id).subscribe((data) => {
+        this.load= true;
         this.listadetalleVenta=this.listadetalleVenta.filter((item) => item.id != detalle.id);
+      }, error => {
+        this.load=true;
+        this.toastr.warning("no sep udo eliminar, Por favor verifique su conexión a Internet","Error.")
       });
     }
   }
 
   guardar()
   {
+    this.load= false;
     if (this.form.valid)
     {
     this.form.value.total=this.totalVenta;
@@ -180,11 +202,12 @@ export class VentaeditComponent implements OnInit {
     this.VentaService.updateVenta(this.venta).subscribe
     (
       r=> {
+        this.load= true;
         this.Router.navigate(['/ventas']);
         this.toastr.success("se guardo exitosamente","Guardado.")
-      },
-      error => {
-        this.toastr.warning("no se guardo","Error.")
+      }, error => {
+        this.load=true;
+        this.toastr.warning("no se guardo, Por favor verifique su conexión a Internet","Error.")
       }
     )
   }

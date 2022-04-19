@@ -55,14 +55,16 @@ export class UsuariosComponent implements OnInit {
 
     this.UsuarioService.getUsers().subscribe( r =>
       {
+        this.load=true;
         this.usuarios = r.data;
         this.metadata = r.meta;
 
         this.length=this.metadata.totalCount;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
-
-    this.load=true;
   }
 
   borrar(id : any)
@@ -70,8 +72,12 @@ export class UsuariosComponent implements OnInit {
     const res = confirm('Seguro que desea eliminar el usuario');
     if (res){
         this.UsuarioService.deleteUser(id).subscribe((data) => {
+          this.load=true;
           this.Usuarios();
           this.toastr.success("Usuario Eliminado.")
+        }, error => {
+          this.load=true;
+          this.toastr.warning("no se Elimino, Por favor verifique su conexión a Internet","Error.")
         });
     }
   }

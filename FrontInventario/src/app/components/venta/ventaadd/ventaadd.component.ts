@@ -59,11 +59,14 @@ export class VentaaddComponent implements OnInit {
 
     this.ProductoService.gets().subscribe( r =>
       {
+        this.load= true;
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
-    this.load= true;
   }
 
   seleccionProducto(producto : any){
@@ -106,6 +109,7 @@ export class VentaaddComponent implements OnInit {
 
   guardar()
   {
+    this.load= false;
     if (this.form.valid)
     {
       this.form.value.total=this.totalVenta;
@@ -116,11 +120,13 @@ export class VentaaddComponent implements OnInit {
       this.VentaService.saveVenta(this.venta).subscribe
       (
         r=> {
+          this.load=true;
           this.Router.navigate(['/ventas']);
           this.toastr.success("se guardo exitosamente","Guardado.")
         },
         error => {
-          this.toastr.warning("no se guardo","Error.")
+          this.load=true;
+          this.toastr.warning("no se guardo, revise su conexión","Error.")
         }
       )
     }

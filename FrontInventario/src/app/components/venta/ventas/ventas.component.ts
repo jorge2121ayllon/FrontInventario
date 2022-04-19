@@ -49,6 +49,7 @@ export class VentasComponent implements OnInit {
     this.load= false;
     this.VentaService.getVentas().subscribe( r =>
       {
+        this.load=true;
         this.ventas = r.data;
         this.metadata = r.meta;
 
@@ -56,9 +57,11 @@ export class VentasComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No existe Ventas asociadas al Cliente")
         }
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
-    this.load= true;
   }
 
   handlePage(e: PageEvent)
@@ -71,11 +74,16 @@ export class VentasComponent implements OnInit {
 
   borrar(id : any)
   {
+    this.load= false;
     const res = confirm('Seguro que desea eliminar el usuario');
     if (res){
         this.VentaService.deleteVenta(id).subscribe((data) => {
+          this.load=true;
           this.toastr.success("Usuario Eliminado.")
           this.Ventas();
+        }, error => {
+          this.load=true;
+          this.toastr.warning("no se Elimino, Por favor verifique su conexión a Internet","Error.")
         });
     }
   }

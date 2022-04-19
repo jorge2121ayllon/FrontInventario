@@ -55,6 +55,7 @@ export class StockalertaComponent implements OnInit {
     this.load= false;
     this.StockService.getStock().subscribe( r =>
       {
+        this.load=true;
         this.productos = r.data;
         this.group=this.groupBy(r.data, (producto: { codigo: any; }) => producto.codigo);
         //
@@ -71,9 +72,12 @@ export class StockalertaComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No cuenta con Productos con bajo Stock")
         }
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
       }
     )
-      this.load=true;
+      
   }
 
   handlePage(e: PageEvent)

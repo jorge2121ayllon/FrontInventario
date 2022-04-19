@@ -1,3 +1,9 @@
+<div class="overlay" *ngIf="!load" >
+    <div class="loader-container">
+       <div class="loader"></div>
+       <div class="loader2"></div>
+    </div>
+  </div>
 <form [formGroup]="form" (ngSubmit)="Guardar()">
 
   <mat-form-field class="example-full-width" appearance="fill">
