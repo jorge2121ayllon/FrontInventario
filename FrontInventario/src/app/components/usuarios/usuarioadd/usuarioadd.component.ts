@@ -13,6 +13,7 @@ export class UsuarioaddComponent implements OnInit {
 
   form: FormGroup;
   idUsuario: number=0;
+  load: boolean= true;
   constructor(private fb : FormBuilder,private Router: Router, private UsuarioService:
     UsuarioService,private Route : ActivatedRoute,  private toastr: ToastrService)
   {
@@ -41,11 +42,16 @@ export class UsuarioaddComponent implements OnInit {
   ngOnInit(): void {
     if(this.Route.snapshot.params.id>0)
     {
+      this.load= false;
       this.UsuarioService.getUser(this.Route.snapshot.params.id).subscribe(
         r=>{
+          this.load=true;
           this.form.controls['usuario'].setValue(r.data.usuario)
           this.form.controls['role'].setValue(r.data.role)
           this.form.controls['gmail'].setValue(r.data.gmail)
+        }, error => {
+          this.load=true;
+          this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
         }
       )
     }
@@ -55,26 +61,33 @@ export class UsuarioaddComponent implements OnInit {
 
     if(this.Route.snapshot.params.id>0)
     {
+      this.load= false;
       this.UsuarioService.updateUser(this.form.value).subscribe
       (
         r=> {
+          
+          this.load=true;
           this.Router.navigate(['usuarios']);
           this.toastr.success("se edito exitosamente","Editado.")
         },
         error => {
-          this.toastr.warning("no se edito","Error.")
+          this.load=true;
+          this.toastr.warning("no se edito, revise su conexión","Error.")
         }
       )
     }
     else{
+      this.load= false;
       this.UsuarioService.saveUser(this.form.value).subscribe
       (
         r=> {
+          this.load=true;
           this.Router.navigate(['usuarios']);
           this.toastr.success("se guardo exitosamente","Guardado.")
         },
         error => {
-          this.toastr.warning("no se guardo","Error.")
+          this.load=true;
+          this.toastr.warning("no se guardo, revise su conexión","Error.")
         }
       )
     }
