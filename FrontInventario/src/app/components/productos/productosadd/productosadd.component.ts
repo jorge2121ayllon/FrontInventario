@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { ToastrService } from 'ngx-toastr';
 import { ProductoService } from 'src/app/services/producto.service';
@@ -20,7 +21,7 @@ import { Producto } from 'src/app/models/producto';
 })
 export class ProductosaddComponent implements OnInit {
 
-  load: boolean= true;
+  load: boolean= false;
   myimage: any;
   myimage1: string;
   form: FormGroup;
@@ -31,11 +32,13 @@ export class ProductosaddComponent implements OnInit {
   //mostrar codigo
   creado:any
   ImagenCreada!:File;
-
+  envairomentGloblal= environment.appUrl;
   //FOTO
-  imagenLocal:any;
-  imagenCon:any;
   visible:any;
+  imagenContador= 0;
+
+  //
+  checkCodigo = new FormControl(false);
 
   constructor(public dialog: MatDialog, private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
@@ -45,9 +48,10 @@ export class ProductosaddComponent implements OnInit {
       this.myimage= new Observable<any>();
       this.myimage1= String();
       this.codigo=String();
-      this.imagenLocal="";
+
       this.visible=true;
       if(this.Route.snapshot.params.id>0){
+        this.imagenContador=1;
         this.idProducto = this.Route.snapshot.params.id;
         this.form = this.fb.group({
           id: this.Route.snapshot.params.id,
@@ -97,100 +101,79 @@ export class ProductosaddComponent implements OnInit {
           this.form.controls['talla'].setValue(r.data.talla)
           this.form.controls['marca'].setValue(r.data.marca)
           this.form.controls['stock'].setValue(r.data.stock)
+          this.form.controls['codigo'].setValue(r.data.codigo)
+          this.myimage=r.data.imagen;
           this.form.controls['descripcion'].setValue(r.data.descripcion)
-          this.codigo=(r.data.codigo)
-          this.imagenLocal=r.data.imagen
+
+
           this.visible=false;
           this.form.controls['idCategoria'].setValue(r.data.idCategoria)
-        }
-      )
-    }
-      this.load=true;
-  }
 
-  Guardar(tipo:any){
-    this.load= false;
-    if((this.form.value).imagen===""){
-      (this.form.value).imagen=this.imagenLocal;
-    }else{
-        (this.form.value).imagen=this.imagenCon;
-    }
-    (this.form.value).codigo=this.codigo;
-
-    if(this.Route.snapshot.params.id>0){
-
-      this.ProductoService.update(this.form.value).subscribe
-      (
-        r=> {
-          this.Router.navigate(['productos']);
-          this.toastr.success("se edito exitosamente","Editado.")
+          this.load=true;
         },
         error => {
-          this.toastr.warning("no se edito","Error.")
+          this.toastr.warning("Porfavor verifique su conexion a internet.")
+          this.load=true;
         }
       )
     }
     else{
-      this.ProductoService.saveImagen(this.ImagenCreada).subscribe
-      (
-        res=> {
-            console.log(res.data)
-            this.form.value.imagen=res.data;
-
-            this.ProductoService.save(this.form.value).subscribe(
-              r=>{
-               if(tipo===true){
-                 this.form.controls['precioCompra'].setValue(r.data.precioCompra)
-                 this.form.controls['precioVenta'].setValue(r.data.precioVenta)
-                 this.form.controls['genero'].setValue(r.data.genero)
-                 this.form.controls['color'].setValue("")
-                 this.form.controls['talla'].setValue("")
-                 this.form.controls['stock'].setValue("")
-                 this.form.controls['marca'].setValue(r.data.marca)
-                 this.form.controls['descripcion'].setValue(r.data.descripcion)
-                 this.form.controls['stock'].setValue(0)
-                 this.form.controls['imagen'].setValue("")
-                 this.codigo=(r.data.codigo)
-                 this.myimage=""
-                 this.form.controls['idCategoria'].setValue(r.data.idCategoria)
-                 //mostrar codigo
-                 this.openDialog(r.data);
-             }else if(tipo===false){
-
-               this.form.controls['precioCompra'].setValue('')
-               this.form.controls['precioVenta'].setValue('')
-               this.form.controls['genero'].setValue('')
-               this.form.controls['color'].setValue('')
-               this.form.controls['talla'].setValue('')
-               this.form.controls['marca'].setValue('')
-               this.form.controls['descripcion'].setValue('')
-               this.form.controls['stock'].setValue(0)
-               this.form.controls['codigo'].setValue('')
-               this.codigo=('')
-               this.myimage=""
-               this.form.controls['idCategoria'].setValue('')
-               this.openDialog(r.data);
-             }
-
-             this.toastr.success("se guardo exitosamente","Guardado.")
-
-              })
-
-        },
-        error => {
-          this.toastr.warning("no se guardo","Error.")
-        }
-      )
-    }
       this.load=true;
+    }
+
+  }
+
+  Guardar(tipo:any){
+    this.load= false;
+    if(this.form.valid){
+            if(this.Route.snapshot.params.id>0){
+              if(this.form.value.imagen==="")
+              {
+                    this.form.value.imagen=this.myimage;
+                    this.Update()
+              }
+              else
+              {
+                this.ProductoService.saveImagen(this.ImagenCreada).subscribe
+                    (
+                      res=> {
+                          this.form.value.imagen=res.data;
+                          this.Update()
+                        }
+                    )
+              }
+            }
+            else{
+              if(this.form.value.imagen==="")
+              {
+                    this.form.value.imagen="StaticFiles/images/productoSinImagen.jpg";
+                    this.Save(tipo)
+              }
+              else
+              {
+                this.ProductoService.saveImagen(this.ImagenCreada).subscribe
+                    (
+                      res=> {
+                          this.form.value.imagen=res.data;
+                          this.Save(tipo)
+                        },
+                        error => {
+                          this.load=true;
+                          this.toastr.warning("revise la conexion a internet","No se pudo guardar.")
+                      }
+                    )
+              }
+            }
+    }
+    else
+    {
+      this.load= true;
+    }
   }
 
   Categorias()
   {
-    this.PaginacionService.Filtro.PageNumber=1;
-    this.PaginacionService.Filtro.filter='';
-    this.PaginacionService.Filtro.PageSize=100000;
-    this.CategoriaService.getCategorias().subscribe( r =>
+    this.CategoriaService.getCategoriasProducto().subscribe( r =>
       {
         this.categorias = r.data;
       }
@@ -199,20 +182,17 @@ export class ProductosaddComponent implements OnInit {
 
   //evento que captura el archivo
   onChange($event: Event) {
+    this.imagenContador=0;
     const file = ($event.target as HTMLInputElement).files![0];
     this.ImagenCreada=file;
     this.convertToBase64(file);
   }
+
   convertToBase64(file: File) {
     this.myimage = new Observable((subscriber: Subscriber<any>) => {
       this.readFile(file, subscriber);
     });
-    this.myimage.subscribe((d: any)=>{
-      this.myimage.array.forEach((element: any) => {
 
-      });
-      this.imagenCon=d;
-    })
   }
 
   readFile(file: File, subscriber: Subscriber<any>) {
@@ -236,5 +216,82 @@ export class ProductosaddComponent implements OnInit {
         creado:creado,
       },
     });
+  }
+
+  Update()
+  {
+    this.ProductoService.update(this.form.value).subscribe
+    (
+      r=> {
+        this.load=true;
+        this.openDialog(this.form.value);
+        this.Router.navigate(['productos']);
+        this.toastr.success("se edito exitosamente","Editado.")
+
+      },
+      error => {
+        this.load=true;
+        this.toastr.warning("no se edito","Error.")
+      }
+    )
+  }
+
+  Save(tipo:any)
+  {
+      this.ProductoService.save(this.form.value).subscribe(
+              r=>{
+                            this.form.value.imagen=""
+                            if(tipo===true){
+                              console.log("entro tue")
+                              this.form.controls['imagen'].setValue('')
+                              this.form.controls['precioCompra'].setValue(r.data.precioCompra)
+                              this.form.controls['precioVenta'].setValue(r.data.precioVenta)
+                              this.form.controls['genero'].setValue(r.data.genero)
+                              this.form.controls['color'].setValue("")
+                              this.form.controls['talla'].setValue("")
+                              this.form.controls['stock'].setValue("")
+                              this.form.controls['marca'].setValue(r.data.marca)
+                              this.form.controls['descripcion'].setValue(r.data.descripcion)
+                              this.form.controls['stock'].setValue(0)
+                              this.form.controls['imagen'].setValue("")
+                              this.form.controls['codigo'].setValue(r.data.codigo)
+                              this.codigo=(r.data.codigo)
+                              this.myimage=""
+                              this.form.controls['idCategoria'].setValue(r.data.idCategoria)
+                              this.load= true;
+                              //mostrar codigo
+                              this.openDialog(r.data);
+                            }else if(tipo===false){
+
+                            this.form.controls['precioCompra'].setValue('')
+                            this.form.controls['imagen'].setValue('')
+                            this.form.controls['precioVenta'].setValue('')
+                            this.form.controls['genero'].setValue('')
+                            this.form.controls['color'].setValue('')
+                            this.form.controls['talla'].setValue('')
+                            this.form.controls['marca'].setValue('')
+                            this.form.controls['descripcion'].setValue('')
+                            this.form.controls['stock'].setValue(0)
+                            this.form.controls['codigo'].setValue('')
+                            this.codigo=this.form.value.codigo;
+                            this.myimage=""
+                            this.form.controls['idCategoria'].setValue('')
+                            this.load= true;
+                            this.openDialog(r.data);
+                          }
+                          this.toastr.success("se guardo exitosamente","Guardado.")
+              },
+              error => {
+                          this.load=true;
+                          this.toastr.warning("revise la conexion a internet","Error.")
+              }
+            )
+  }
+  Limpiador()
+  {
+    if(this.checkCodigo.value==false)
+    {
+      this.form.value.codigo='';
+    }
   }
 }

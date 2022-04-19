@@ -93,8 +93,11 @@
               <label>Ingrese la Imagen</label>
               <input accept="image/jpg" style="margin: auto; display: block;" #img type="file" class="form-control-file border" (change)="onChange($event)" formControlName="imagen">
               <br>
-              <div *ngIf="myimage">
+              <div *ngIf="myimage && imagenContador===0" >
                   <img [src]="myimage | async" width="200px" height="200px" alt="" />
+              </div>
+              <div *ngIf="myimage && imagenContador>0" >
+                <img [src]="envairomentGloblal+myimage" width="200px" height="200px" alt="" />
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -105,6 +108,14 @@
                     Stock<strong> requerido</strong>
                 </mat-error>
               </mat-form-field>
+
+              <mat-checkbox class="example-full-width" [formControl]="checkCodigo">Código</mat-checkbox>
+              <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkCodigo.value">
+                <mat-label>Código</mat-label>
+                <input matInput placeholder="Ej. DFGH-3456-DF45" formControlName="codigo">
+              </mat-form-field>
+
+
               <br>
               <br>
               <mat-form-field class="example-full-width" appearance="fill" >
@@ -119,9 +130,9 @@
           <br>
           <div class="form-row">
             <div class="form-group col-md-12">
-              <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar Único Producto</button>
+              <button type="submit" mat-raised-button color="primary" color="primary"  >Guardar Único Producto</button>
               &nbsp;
-              <button type="button" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" (click)="Guardar(true)" *ngIf="visible">Guardar Más Productos</button>
+              <button type="button" mat-raised-button color="primary" color="primary" (click)="Guardar(true)" *ngIf="visible">Guardar Más Productos</button>
             </div>
           </div>
 

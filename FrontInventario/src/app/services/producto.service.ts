@@ -27,7 +27,6 @@ export class ProductoService {
 
 
   saveImagen(file:Blob ): Observable<Response>{
-
     const formData = new FormData();
     formData.append('file', file );
     return this.http.post<Response>(this.baseUrl,
