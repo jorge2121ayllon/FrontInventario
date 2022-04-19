@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { reporteClientes } from './../../../models/reporteClientes';
 import { DetalleVenta } from './../../../models/detalleVenta';
 import { VentaService } from './../../../services/venta.service';
@@ -14,7 +15,8 @@ export class ReporteclientesComponent implements OnInit {
   reportes: reporteClientes[]=[];
   form : FormGroup;
 
-  constructor(private VentaService: VentaService,  private fb : FormBuilder) {
+  constructor(private VentaService: VentaService,  private fb : FormBuilder,
+    private toastr: ToastrService) {
     this.form = this.fb.group({
       inicio: new FormControl('',Validators.required),
       fin: new FormControl('',Validators.required),
@@ -33,8 +35,12 @@ export class ReporteclientesComponent implements OnInit {
     this.VentaService.getReportesClientes( this.form.value.genero,this.form.value.inicio , this.form.value.fin).subscribe(
       v=> {
         this.reportes= v as any;
+        this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error al cargar");
+        this.load=true;
       })
-      this.load=true;
   }
 
 }

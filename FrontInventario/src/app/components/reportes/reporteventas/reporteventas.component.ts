@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Form, FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { VentaService } from './../../../services/venta.service';
 import { Component, OnInit } from '@angular/core';
@@ -20,7 +21,8 @@ export class ReporteventasComponent implements OnInit {
 
   displayedColumns: string[] = ['Descripcion', 'Stock','Precio Venta','Precio Compra','Cantidad Vendida','Inversion', 'Venta', 'Ganancia' ];
 
-  constructor(private VentaService: VentaService,  private fb : FormBuilder) {
+  constructor(private VentaService: VentaService,  private fb : FormBuilder,
+    private toastr: ToastrService) {
       this.form = this.fb.group({
         inicio: new FormControl('',Validators.required),
         fin: new FormControl('',Validators.required),
@@ -56,8 +58,13 @@ export class ReporteventasComponent implements OnInit {
           {
             this.alertar=1;
           }
-      }
-    )
-      this.load=true;
+          this.load=true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error al cargar");
+        this.load=true;
+      })
+
+
   }
 }

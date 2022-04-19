@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComprasComponent implements OnInit {
 
-  load: boolean= true;
+  load: boolean= false;
   form: FormGroup;
   displayedColumns: string[] = [ 'fecha','total','acciones'];
   metadata :any;
@@ -56,10 +56,14 @@ export class ComprasComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No cuenta con Compras")
         }
-
+        this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error al cargar");
+        this.load=true;
       }
     )
-    this.load= true;
+
 
   }
 
@@ -74,9 +78,14 @@ export class ComprasComponent implements OnInit {
   {
     const res = confirm('Seguro que desea eliminar el usuario');
     if (res){
+        this.load=false;
         this.CompraService.deleteCompra(id).subscribe((data) => {
           this.toastr.success("Usuario Eliminado.")
           this.Compras();
+        },
+        error => {
+          this.toastr.warning("Porfavor verifique su conexion a internet.","Error al borrar");
+          this.load=true;
         });
     }
   }
