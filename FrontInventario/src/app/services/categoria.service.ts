@@ -23,6 +23,12 @@ export class CategoriaService {
     '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
    }
 
+   getCategoriasProducto(): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl+'?filter='+""+
+    '&PageSize='+1000000+
+    '&PageNumber='+1)
+   }
+
    saveCategoria(Categoria:any): Observable<Response>{
     return this.http.post<Response>(this.baseUrl, JSON.stringify(Categoria),
     this.PaginacionService.httpOptions);

@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class ProductosComponent implements OnInit {
 
-  load: boolean= true;
+  load: boolean= false;
   form: FormGroup;
   displayedColumns: string[] = ['precioCompra', 'precioVenta','genero', 'color','talla', 'marca','descripcion', 'stock','codigo', 'idCategoria','imagen','acciones'];
   categorias :any;
@@ -47,20 +47,18 @@ export class ProductosComponent implements OnInit {
     this.PaginacionService.Filtro.filter='';
     this.PaginacionService.Filtro.PageSize=5;
     this.PaginacionService.Filtro.PageNumber=1;
-    this.Categorias();
     this.Productos();
+    this.Categorias();
   }
 
   Categorias()
   {
-    
-    
-    this.CategoriaService.getCategorias().subscribe( r =>
+    this.CategoriaService.getCategoriasProducto().subscribe( r =>
       {
         this.categorias = r.data;
       }
     )
-   
+
   }
 
 
@@ -76,9 +74,13 @@ export class ProductosComponent implements OnInit {
         if(this.metadata.totalCount===0){
           this.toastr.info("No cuenta con Prodcutos")
         }
+        this.load=true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.")
+        this.load=true;
       }
     )
-      this.load=true;
   }
 
 
