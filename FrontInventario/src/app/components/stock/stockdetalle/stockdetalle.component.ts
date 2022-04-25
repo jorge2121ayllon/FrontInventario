@@ -96,7 +96,7 @@ export class StockdetalleComponent implements OnInit {
   }
   Categorias()
   {
-    this.CategoriaService.getCategorias().subscribe( r =>
+    this.CategoriaService.getCategoriasProducto().subscribe( r =>
       {
         this.categorias = r.data;
       }, error => {
