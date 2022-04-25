@@ -60,6 +60,11 @@ export class CompraeditComponent implements OnInit {
       r=>{
         this.form.controls['total'].setValue(r.data.total)
         this.totalCompra = this.form.value.total;
+        this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error");
+        this.load=true;
       }
     )
     this.DetalleCompraService.getDetallesCompra(this.Route.snapshot.params.id).subscribe(
@@ -84,12 +89,22 @@ export class CompraeditComponent implements OnInit {
                    this.listaProductosAux.push(this.productoSeleccionado);
                    this.listadetalleCompra.push(this.detalleCompra);
                    this.productoSeleccionado=new Producto;
+                   this.load= true;
+                  },
+                  error => {
+                    this.toastr.warning("Porfavor verifique su conexion a internet.","Error");
+                    this.load=true;
                   }
                 )
 
               }
-              this.load= true;
+
         });
+      this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error");
+        this.load=true;
       }
     )
   }
@@ -105,9 +120,14 @@ export class CompraeditComponent implements OnInit {
       {
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
+        this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error al cargar");
+        this.load=true;
       }
     )
-    this.load=true;
+
   }
 
   seleccionProducto(producto : any){
@@ -133,7 +153,7 @@ export class CompraeditComponent implements OnInit {
           this.productoSeleccionado=new Producto;
      }
      else{
-       this.toastr.warning("Este producto ya fue agregado anteriormente al detalle de la venta")
+       this.toastr.warning("Este producto ya se encuentra en el detalle o el stock del producto es menor al requerido")
        this.productoSeleccionado=new Producto;
      }
    }
@@ -164,9 +184,11 @@ export class CompraeditComponent implements OnInit {
         this.load= true;
         this.Router.navigate(['/compras']);
         this.toastr.success("se guardo exitosamente","Guardado.")
+        this.load= true;
       },
       error => {
-        this.toastr.warning("no se guardo","Error.")
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error al guardar");
+        this.load=true;
       }
     )
   }

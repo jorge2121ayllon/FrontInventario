@@ -59,10 +59,15 @@ export class CompraaddComponent implements OnInit {
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
 
+        this.load= true;
+      },
+      error => {
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error");
+        this.load=true;
       }
 
     )
-    this.load= true;
+
 
   }
 
@@ -113,12 +118,13 @@ export class CompraaddComponent implements OnInit {
         this.load= true;
         this.Router.navigate(['/compras']);
         this.toastr.success("se guardo exitosamente","Guardado.")
+        this.load= true;
       },
       error => {
-        this.toastr.warning("no se guardo","Error.")
+        this.toastr.warning("Porfavor verifique su conexion a internet.","Error");
+        this.load=true;
       }
     )
-    this.load= true;
 
   }
 
