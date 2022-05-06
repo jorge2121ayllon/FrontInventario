@@ -12,6 +12,8 @@ import { VentaVentaDetalle } from './../../../models/VentaVentaDetalle';
 import { DetalleVenta } from './../../../models/detalleVenta';
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/models/producto';
+import { DetalleVentaImg } from 'src/app/models/detalleVentaImg';
+import { DetalleCompraImg } from 'src/app/models/detalleCompraImg';
 
 @Component({
   selector: 'app-compraedit',
@@ -32,6 +34,11 @@ export class CompraeditComponent implements OnInit {
 
   listadetalleCompra:DetalleCompra[]=[];
   listadetalleCompraAux:DetalleCompra[]=[];
+  //modificacion
+  listadetalleCompraImg: DetalleCompraImg[]=[];
+  //modificacion
+  detalleCompraImg!: DetalleCompraImg;
+  //
   envairomentGloblal= environment.appUrl;
    //img
  listaImg :Producto[]=[];
@@ -86,8 +93,22 @@ export class CompraeditComponent implements OnInit {
                     producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+  this.productoSeleccionado.color,
                     precioCompra: this.productoSeleccionado.precioCompra
                    }
+                    //modificacion img en detalle
+                    this.detalleCompraImg={
+                      id: element.id,
+                      idCompra: this.Route.snapshot.params.id,
+                      cantidad: element.cantidad,
+                      idProducto:this.productoSeleccionado.id,
+                      subTotal: element.subTotal,
+                      producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+  this.productoSeleccionado.color,
+                      precioCompra: this.productoSeleccionado.precioCompra,
+                      imagen:this.productoSeleccionado.imagen
+                     }
                    this.listaProductosAux.push(this.productoSeleccionado);
                    this.listadetalleCompra.push(this.detalleCompra);
+                    //modificacion img en detalle
+                    this.listadetalleCompraImg.push(this.detalleCompraImg);
+                    //
                    this.productoSeleccionado=new Producto;
                    this.load= true;
                   },
@@ -148,8 +169,20 @@ export class CompraeditComponent implements OnInit {
            producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
            precioCompra: this.productoSeleccionado.precioCompra
           }
+          //modificacion img en detalle
+          this.detalleCompraImg={
+            cantidad: this.form.value.cantidad,
+            idProducto:this.productoSeleccionado.id,
+            subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+            producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+            precioCompra: this.productoSeleccionado.precioCompra,
+            imagen:this.productoSeleccionado.imagen
+           }
+           //
           this.totalCompra= this.totalCompra +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
           this.listadetalleCompra.push(this.detalleCompra);
+          //modificacion img en detalle
+          this.listadetalleCompraImg.push(this.detalleCompraImg);
           this.productoSeleccionado=new Producto;
      }
      else{
@@ -167,6 +200,9 @@ export class CompraeditComponent implements OnInit {
 
       this.DetalleCompraService.deleteDetalleCompra(detalle.id).subscribe((data) => {
         this.listadetalleCompra=this.listadetalleCompra.filter((item) => item.id != detalle.id);
+         //modificacion img en detalle
+         this.listadetalleCompraImg=this.listadetalleCompraImg.filter((item) => item.id != detalle.id);
+         //
       });
     }
   }

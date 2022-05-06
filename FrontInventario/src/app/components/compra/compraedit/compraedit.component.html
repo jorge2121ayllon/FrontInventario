@@ -99,15 +99,17 @@
           <th>Precio Unitario</th>
           <th>Cantidad</th>
           <th>Subtotal</th>
+          <th>Imagen</th>
           <th>Acciones</th>
         </tr>
       </thead>
         <tbody>
-          <tr *ngFor="let product of listadetalleCompra">
+          <tr *ngFor="let product of listadetalleCompraImg">
             <td>{{product.producto}}</td>
             <td >{{product.precioCompra}}</td>
             <td >{{product.cantidad}}</td>
             <td >{{product.subTotal}}</td>
+            <td><img [src]="envairomentGloblal+product.imagen"  width="50px" height="50px" alt="" /></td>
             <td>
 
               <button mat-icon-button color="warn" (click)="eliminarDetalle(product)">
