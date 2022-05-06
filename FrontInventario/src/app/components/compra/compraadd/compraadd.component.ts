@@ -10,6 +10,7 @@ import { Producto } from './../../../models/producto';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { DetalleCompraImg } from 'src/app/models/detalleCompraImg';
 
 @Component({
   selector: 'app-compraadd',
@@ -31,6 +32,11 @@ export class CompraaddComponent implements OnInit {
   totalCompra=0;
   productoalert=0;
   envairomentGloblal= environment.appUrl;
+   //modificacion
+   listadetalleCompraImg: DetalleCompraImg[]=[];
+   //modificacion
+   detalleCompraImg!: DetalleCompraImg;
+   //
 
   constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
     private toastr: ToastrService,private CompraService: CompraService, private ProductoService: ProductoService,
@@ -87,9 +93,22 @@ export class CompraaddComponent implements OnInit {
           producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
           precioCompra: this.productoSeleccionado.precioCompra
          }
+         //modificacion img en detalle
+         this.detalleCompraImg={
+          cantidad: this.form.value.cantidad,
+          idProducto:this.productoSeleccionado.id,
+          subTotal: this.productoSeleccionado.precioCompra*this.form.value.cantidad,
+          producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+          precioCompra: this.productoSeleccionado.precioCompra,
+          imagen:this.productoSeleccionado.imagen
+         }
+         //
          this.totalCompra= this.totalCompra +this.productoSeleccionado.precioCompra*this.form.value.cantidad;
 
          this.listadetalleCompra.push(this.detalleCompra);
+         //modificacion img en detalle
+         this.listadetalleCompraImg.push(this.detalleCompraImg);
+         //
 
          this.productoSeleccionado=new Producto;
     }
@@ -129,6 +148,8 @@ export class CompraaddComponent implements OnInit {
     {
     this.totalCompra=this.totalCompra-detalle.subTotal;
     this.listadetalleCompra=this.listadetalleCompra.filter((item) => item.idProducto != detalle.idProducto);
+    //modificacion img en detalle
+    this.listadetalleCompraImg=this.listadetalleCompraImg.filter((item) => item.idProducto != detalle.idProducto);
     }
   }
 
