@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
+import { DetalleVentaImg } from 'src/app/models/detalleVentaImg';
 
 
 @Component({
@@ -27,6 +28,12 @@ export class VentaeditComponent implements OnInit {
 
   productoSeleccionado: Producto = new Producto;
   detalleventa!: DetalleVenta;
+  //modificacion
+  listadetalleVentaImg: DetalleVentaImg[]=[];
+  //
+  //modificacion
+  detalleventaImg!: DetalleVentaImg;
+  //
   venta: VentaVentaDetalle = new VentaVentaDetalle;
   totalVenta=0;
 
@@ -96,8 +103,23 @@ export class VentaeditComponent implements OnInit {
                     producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+  this.productoSeleccionado.color,
                     precioVenta: this.productoSeleccionado.precioVenta
                    }
+                   //modificacion img en detalle
+                   this.detalleventaImg={
+                    id: element.id,
+                    idVenta: this.Route.snapshot.params.id,
+                    cantidad: element.cantidad,
+                    idProducto:this.productoSeleccionado.id,
+                    subTotal: element.subTotal,
+                    producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+  this.productoSeleccionado.color,
+                    precioVenta: this.productoSeleccionado.precioVenta,
+                    imagen:this.productoSeleccionado.imagen
+                   }
+                   //
                    this.listaProductosAux.push(this.productoSeleccionado);
                    this.listadetalleVenta.push(this.detalleventa);
+                   //modificacion img en detalle
+                   this.listadetalleVentaImg.push(this.detalleventaImg);
+                   //
                    this.productoSeleccionado=new Producto;
                   }, error => {
                     this.load=true;
@@ -157,8 +179,21 @@ export class VentaeditComponent implements OnInit {
            producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
            precioVenta: this.productoSeleccionado.precioVenta
           }
+          //modificacion img en detalle
+          this.detalleventaImg={
+            cantidad: this.form.value.cantidad,
+            idProducto:this.productoSeleccionado.id,
+            subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+            producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+            precioVenta: this.productoSeleccionado.precioVenta,
+            imagen:this.productoSeleccionado.imagen
+           }
+           //
           this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
           this.listadetalleVenta.push(this.detalleventa);
+          //modificacion img en detalle
+          this.listadetalleVentaImg.push(this.detalleventaImg);
+          //
           this.productoSeleccionado=new Producto;
        }
        else{
@@ -183,6 +218,9 @@ export class VentaeditComponent implements OnInit {
       this.DetalleVentaService.deleteDetalleVenta(detalle.id).subscribe((data) => {
         this.load= true;
         this.listadetalleVenta=this.listadetalleVenta.filter((item) => item.id != detalle.id);
+        //modificacion img en detalle
+        this.listadetalleVentaImg=this.listadetalleVentaImg.filter((item) => item.id != detalle.id);
+        //
       }, error => {
         this.load=true;
         this.toastr.warning("no sep udo eliminar, Por favor verifique su conexión a Internet","Error.")
@@ -192,9 +230,9 @@ export class VentaeditComponent implements OnInit {
 
   guardar()
   {
-    this.load= false;
     if (this.form.valid)
     {
+      this.load= false;
     this.form.value.total=this.totalVenta;
     this.venta.detalleVenta=this.listadetalleVenta;
     this.venta.venta=this.form.value;

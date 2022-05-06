@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit } from '@angular/core';
 import { map, startWith } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
+import { DetalleVentaImg } from 'src/app/models/detalleVentaImg';
 @Component({
   selector: 'app-ventaadd',
   templateUrl: './ventaadd.component.html',
@@ -23,13 +24,17 @@ export class VentaaddComponent implements OnInit {
   listaProductos:Producto[]=[];
   productoSeleccionado: Producto = new Producto;
   listadetalleVenta:DetalleVenta[]=[];
+  //modificacion img en detalle
+  listadetalleVentaImg: DetalleVentaImg[]=[];
+  //
   detalleventa!: DetalleVenta;
+  //modificacion img en detalle
+  detalleventaImg!: DetalleVentaImg;
+  //
   venta: VentaVentaDetalle = new VentaVentaDetalle;
   totalVenta=0;
   listaProductosAux:Producto[]=[];
   //img
-
-
   envairomentGloblal= environment.appUrl;
   numeroLista=1;
 
@@ -89,10 +94,22 @@ export class VentaaddComponent implements OnInit {
           producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
           precioVenta: this.productoSeleccionado.precioVenta
          }
+         //modificacion img en detalle
+         this.detalleventaImg={
+          cantidad: this.form.value.cantidad,
+          idProducto:this.productoSeleccionado.id,
+          subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+          producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
+          precioVenta: this.productoSeleccionado.precioVenta,
+          imagen: this.productoSeleccionado.imagen
+         }
+         //
          this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
 
          this.listadetalleVenta.push(this.detalleventa);
-
+         //modificacion img en detalle
+         this.listadetalleVentaImg.push(this.detalleventaImg);
+         //
          this.productoSeleccionado=new Producto;
       }
       else{
@@ -109,9 +126,10 @@ export class VentaaddComponent implements OnInit {
 
   guardar()
   {
-    this.load= false;
+    
     if (this.form.valid)
     {
+      this.load= false;
       this.form.value.total=this.totalVenta;
 
       this.venta.detalleVenta=this.listadetalleVenta;
@@ -139,6 +157,9 @@ export class VentaaddComponent implements OnInit {
     {
     this.totalVenta=this.totalVenta-detalle.subTotal;
     this.listadetalleVenta=this.listadetalleVenta.filter((item) => item.idProducto != detalle.idProducto);
+    //modificacion img en detalle
+    this.listadetalleVentaImg=this.listadetalleVentaImg.filter((item) => item.idProducto != detalle.idProducto);
+    //
     }
   }
 
