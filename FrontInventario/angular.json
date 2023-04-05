@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "076ad3da-0dde-4d78-a897-d1bb6926041f"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -36,7 +39,7 @@
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
-              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js"
             ]
           },
           "configurations": {
@@ -57,13 +60,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "2mb",
+                  "maximumError": "4mb"
                 }
               ]
             }

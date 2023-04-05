@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  appUrl:'https://fashsporttarija.online/'
+  appUrl:'https://obispadotarija-001-site2.etempurl.com/'
 };
