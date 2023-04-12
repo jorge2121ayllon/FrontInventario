@@ -22,7 +22,7 @@
 
       <form [formGroup]="form">
         <table class="example-full-widthh" cellspacing="0"><tr>
-            <td><mat-form-field appearance="fill" *ngIf="checkCategoria.value">
+            <td><mat-form-field appearance="outline" *ngIf="checkCategoria.value">
                 <mat-label>Categoria</mat-label>
                 <mat-select formControlName="categoria">
                   <mat-option *ngFor="let categoria of categorias" [value]="categoria.id">
@@ -31,37 +31,37 @@
                 </mat-select>
               </mat-form-field></td>
             <td>
-              <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkDescripcion.value">
+              <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkDescripcion.value">
                 <mat-label>Descripcion</mat-label>
                 <input matInput placeholder="Ej. Top Cortos" formControlName="descripcion">
               </mat-form-field>
             </td>
               <td>
-                <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkColor.value">
+                <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkColor.value">
                 <mat-label>Color</mat-label>
                 <input matInput placeholder="Ej. Fuxia" formControlName="color">
               </mat-form-field>
             </td>
               <td>
-                <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkMarca.value">
+                <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkMarca.value">
                 <mat-label>Marca</mat-label>
                 <input matInput placeholder="Ej. Adidas" formControlName="marca">
               </mat-form-field>
             </td>
               <td>
-                <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkTalla.value">
+                <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkTalla.value">
                   <mat-label>Talla</mat-label>
                   <input matInput placeholder="Ej. M" formControlName="talla">
                 </mat-form-field>
               </td>
                 <td>
-                  <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkCodigo.value">
+                  <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkCodigo.value">
                   <mat-label>Código</mat-label>
                   <input matInput placeholder="Ej. DFGH-3456-DF45" formControlName="codigo">
                 </mat-form-field>
               </td>
               <td>
-                <mat-form-field class="example-full-width" appearance="fill" *ngIf="checkGenero.value">
+                <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkGenero.value">
                 <mat-label>Genero</mat-label>
                 <mat-select formControlName="genero">
                   <mat-option value="">Seleccione un Género</mat-option>

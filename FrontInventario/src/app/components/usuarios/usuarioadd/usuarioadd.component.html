@@ -6,7 +6,7 @@
   </div>
 <form [formGroup]="form" (ngSubmit)="Guardar()">
 
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Usuario</mat-label>
       <input matInput placeholder="Usuario" formControlName="usuario">
       <mat-error *ngIf="form.controls.usuario.hasError('required')">
@@ -17,7 +17,7 @@
       </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Seleccione Rol</mat-label>
       <mat-select formControlName="role">
         <mat-option value="Administrador">Administrador</mat-option>
@@ -28,7 +28,7 @@
       </mat-error>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Password</mat-label>
       <input type="password" matInput placeholder="password" formControlName="password">
       <mat-error *ngIf="form.controls.usuario.hasError('required')">
@@ -40,7 +40,7 @@
       <mat-hint *ngIf="idUsuario"> Si no escribe un nuevo password se mantendra la anterior. </mat-hint>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width" appearance="fill">
+  <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Gmail</mat-label>
       <input matInput placeholder="gmail" formControlName="gmail">
   </mat-form-field>
