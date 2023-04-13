@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-
+import {MatDialog} from '@angular/material/dialog';
+import { UsuarioaddComponent } from '../usuarioadd/usuarioadd.component'; 
 
 @Component({
   selector: 'app-usuarios',
@@ -32,7 +33,7 @@ export class UsuariosComponent implements OnInit {
    pageSizeOptions: number[] = [5, 10,25, 100];
    pageIndex=0;
 
-  constructor(private fb : FormBuilder,private UsuarioService : UsuarioService,private Router: Router,
+  constructor(public dialog: MatDialog,private fb : FormBuilder,private UsuarioService : UsuarioService,private Router: Router,
     private PaginacionService: PaginacionService, private paginators: MatPaginatorIntl,  private toastr: ToastrService) {
       this.paginators.itemsPerPageLabel = "Registros por página";
 
@@ -101,5 +102,15 @@ export class UsuariosComponent implements OnInit {
     this.length = 0;
     this.pageIndex=0;
     this.Usuarios();
+  }
+
+  //modificaciones del sistema Version #2
+  openDialog(id:number) {
+    const dialogRef=this.dialog.open(UsuarioaddComponent, {
+      data: {id: id},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+     this.Usuarios();
+    });
   }
 }

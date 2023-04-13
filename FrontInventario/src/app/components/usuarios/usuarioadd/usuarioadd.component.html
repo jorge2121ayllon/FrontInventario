@@ -4,46 +4,50 @@
        <div class="loader2"></div>
     </div>
   </div>
-<form [formGroup]="form" (ngSubmit)="Guardar()">
+  <h1 mat-dialog-title>Usuario</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form" (ngSubmit)="Guardar()">
 
-  <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Usuario</mat-label>
-      <input matInput placeholder="Usuario" formControlName="usuario">
-      <mat-error *ngIf="form.controls.usuario.hasError('required')">
-          Nombre de usuario <strong>requerido</strong>
-      </mat-error>
-      <mat-error *ngIf="form.controls.usuario.hasError('minlength') && !form.controls.usuario.hasError('required')">
-         Ingrese un nombre de usuario con mas de 5 caracteres
-      </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Seleccione Rol</mat-label>
-      <mat-select formControlName="role">
-        <mat-option value="Administrador">Administrador</mat-option>
-        <mat-option value="Vendedor">Vendedor</mat-option>
-      </mat-select>
-      <mat-error *ngIf="form.controls.role.hasError('required')">
-          Rol de usuario <strong>requerido</strong>
-      </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Password</mat-label>
-      <input type="password" matInput placeholder="password" formControlName="password">
-      <mat-error *ngIf="form.controls.usuario.hasError('required')">
-          Password <strong>requerido</strong>
-      </mat-error>
-      <mat-error *ngIf="form.controls.usuario.hasError('minlength') && !form.controls.usuario.hasError('required')">
-         Ingrese una password con mas de 6 caracteres
-      </mat-error>
-      <mat-hint *ngIf="idUsuario"> Si no escribe un nuevo password se mantendra la anterior. </mat-hint>
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Gmail</mat-label>
-      <input matInput placeholder="gmail" formControlName="gmail">
-  </mat-form-field>
-
-  <br>
-  <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="Usuario" formControlName="usuario">
+            <mat-error *ngIf="form.controls.usuario.hasError('required')">
+                Nombre de usuario <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls.usuario.hasError('minlength') && !form.controls.usuario.hasError('required')">
+               Ingrese un nombre de usuario con mas de 5 caracteres
+            </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Seleccione Rol</mat-label>
+            <mat-select formControlName="role">
+              <mat-option value="Administrador">Administrador</mat-option>
+              <mat-option value="Vendedor">Vendedor</mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.controls.role.hasError('required')">
+                Rol de usuario <strong>requerido</strong>
+            </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="password" formControlName="password">
+            <mat-error *ngIf="form.controls.usuario.hasError('required')">
+                Password <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls.usuario.hasError('minlength') && !form.controls.usuario.hasError('required')">
+               Ingrese una password con mas de 6 caracteres
+            </mat-error>
+            <mat-hint *ngIf="idUsuario"> Si no escribe un nuevo password se mantendra la anterior. </mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Gmail</mat-label>
+            <input matInput placeholder="gmail" formControlName="gmail">
+        </mat-form-field>
+      
+        <br>
+        <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" mat-dialog-close>Guardar</button>
+      </form>
+</div>   

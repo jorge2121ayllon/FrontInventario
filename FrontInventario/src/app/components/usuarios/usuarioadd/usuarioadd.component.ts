@@ -2,7 +2,9 @@ import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from './../../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { UsuariosComponent } from '../usuarios/usuarios.component';
 
 @Component({
   selector: 'app-usuarioadd',
@@ -15,13 +17,14 @@ export class UsuarioaddComponent implements OnInit {
   idUsuario: number=0;
   load: boolean= true;
   constructor(private fb : FormBuilder,private Router: Router, private UsuarioService:
-    UsuarioService,private Route : ActivatedRoute,  private toastr: ToastrService)
+    UsuarioService,private Route : ActivatedRoute,  private toastr: ToastrService, public dialogRef: MatDialogRef<UsuariosComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any)
   {
-    if(this.Route.snapshot.params.id>0)
+    if(this.data.id>0)
     {
-      this.idUsuario=this.Route.snapshot.params.id;
+      this.idUsuario=this.data.id;
       this.form = this.fb.group({
-        id: this.Route.snapshot.params.id,
+        id: this.data.id,
         usuario: new FormControl('',[Validators.required,Validators.minLength(5)]),
         role: new FormControl('',Validators.required),
         password:  new FormControl(''),
@@ -30,7 +33,7 @@ export class UsuarioaddComponent implements OnInit {
     }
     else{
       this.form = this.fb.group({
-        id: this.Route.snapshot.params.id,
+        id: this.data.id,
         usuario: new FormControl('',[Validators.required,Validators.minLength(5)]),
         role: new FormControl('',Validators.required),
         password:  new FormControl('',[Validators.required,Validators.minLength(6)]),
@@ -40,10 +43,10 @@ export class UsuarioaddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.Route.snapshot.params.id>0)
+    if(this.data.id>0)
     {
       this.load= false;
-      this.UsuarioService.getUser(this.Route.snapshot.params.id).subscribe(
+      this.UsuarioService.getUser(this.data.id).subscribe(
         r=>{
           this.load=true;
           this.form.controls['usuario'].setValue(r.data.usuario)
@@ -59,7 +62,7 @@ export class UsuarioaddComponent implements OnInit {
   Guardar()
   {
 
-    if(this.Route.snapshot.params.id>0)
+    if(this.data.id>0)
     {
       this.load= false;
       this.UsuarioService.updateUser(this.form.value).subscribe
