@@ -4,7 +4,8 @@
 
 export const environment = {
   production: true,
-  appUrl:'https://obispadotarija-001-site2.etempurl.com/'
+  //appUrl:'https://obispadotarija-001-site2.etempurl.com/'
+  appUrl:'https://localhost:44388/'
 };
 
 /*

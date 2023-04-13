@@ -2,7 +2,9 @@ import { ToastrService } from 'ngx-toastr';
 import { CategoriaService } from './../../../services/categoria.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import { CategoriasComponent } from '../categorias/categorias.component';
 
 @Component({
   selector: 'app-categoriaadd',
@@ -15,19 +17,20 @@ export class CategoriaaddComponent implements OnInit {
   idCategoria: number=0;
   load: boolean= true;
   constructor(private fb : FormBuilder,private Router: Router, private CategoriaService:
-    CategoriaService,private Route : ActivatedRoute,  private toastr: ToastrService)
+    CategoriaService,private Route : ActivatedRoute,  private toastr: ToastrService, public dialogRef: MatDialogRef<CategoriasComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any)
     {
-      if(this.Route.snapshot.params.id>0){
-        this.idCategoria = this.Route.snapshot.params.id;
+      if(this.data.id>0){
+        this.idCategoria = this.data.id;
         this.form = this.fb.group({
-          id: this.Route.snapshot.params.id,
+          id: this.data.id,
           nombre: new FormControl('',Validators.required),
           descripcion: new FormControl(''),
         })
       }
       else{
         this.form = this.fb.group({
-          id: this.Route.snapshot.params.id,
+          id: this.data.id,
           nombre: new FormControl('',Validators.required),
           descripcion: new FormControl(''),
         })
@@ -35,9 +38,9 @@ export class CategoriaaddComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    if(this.Route.snapshot.params.id>0){
+    if(this.data.id>0){
       this.load= false;
-      this.CategoriaService.getCategoria(this.Route.snapshot.params.id).subscribe(
+      this.CategoriaService.getCategoria(this.data.id).subscribe(
         r=>{
           this.load=true;
           this.form.controls['nombre'].setValue(r.data.nombre)
@@ -52,7 +55,7 @@ export class CategoriaaddComponent implements OnInit {
 
   Guardar(){
     
-    if(this.Route.snapshot.params.id>0){
+    if(this.data.id>0){
       this.load= false;
       this.CategoriaService.updateCategoria(this.form.value).subscribe
       (
