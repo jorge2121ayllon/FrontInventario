@@ -2,14 +2,14 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CategoriaService } from './../../../services/categoria.service';
 import { ProductoService } from 'src/app/services/producto.service';
-import { Producto } from 'src/app/models/producto';
+import {MatDialog} from '@angular/material/dialog';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
-
+import { ProductosaddComponent } from '../productosadd/productosadd.component';
 
 @Component({
   selector: 'app-productos',
@@ -34,7 +34,7 @@ export class ProductosComponent implements OnInit {
   pageSizeOptions: number[] = [5, 10,25, 100];
   pageIndex=0;
 
-  constructor(private fb : FormBuilder, private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
+  constructor(public dialog: MatDialog,private fb : FormBuilder, private CategoriaService : CategoriaService,private ProductoService : ProductoService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
       this.myimage= new Observable<any>();
@@ -113,7 +113,15 @@ export class ProductosComponent implements OnInit {
     this.PaginacionService.Filtro.filter=this.form.value.filtro;
     this.Productos();
   }
-
+//modificaciones del sistema Version #2
+openDialog(id:number) {
+  const dialogRef=this.dialog.open(ProductosaddComponent, {
+    data: {id: id},
+  });
+  dialogRef.afterClosed().subscribe(result => {
+   this.Productos();
+  });
+}
 
 
 
