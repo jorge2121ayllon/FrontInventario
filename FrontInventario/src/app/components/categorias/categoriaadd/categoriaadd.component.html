@@ -4,10 +4,10 @@
      <div class="loader2"></div>
   </div>
 </div>
-<form [formGroup]="form" (ngSubmit)="Guardar()">
-
-  <div class="form-row">
-    <div class="form-group col-md-6">
+<h1 mat-dialog-title>Categoria</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="Guardar()">
+  
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Nombre</mat-label>
         <input matInput placeholder="Nombre" formControlName="nombre">
@@ -15,8 +15,7 @@
             Nombre de descripción <strong>requerido</strong>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="form-group col-md-6">
+    
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Descripción</mat-label>
         <input matInput placeholder="Descripción" formControlName="descripcion">
@@ -24,9 +23,9 @@
             Descripcion<strong>requerido</strong>
         </mat-error>
     </mat-form-field>
-    </div>
- </div>
+   
 
  <br>
- &nbsp;&nbsp;&nbsp; <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" >Guardar</button>
-
+ <button type="submit" mat-raised-button color="primary" color="primary"  [disabled]="!form.valid" mat-dialog-close>Guardar</button>
+</form>
+</div>

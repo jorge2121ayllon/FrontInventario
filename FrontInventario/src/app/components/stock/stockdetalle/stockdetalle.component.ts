@@ -6,12 +6,10 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CategoriaService } from './../../../services/categoria.service';
-import { disableDebugTools } from '@angular/platform-browser';
-import { delay, values } from 'lodash';
 import { Observable } from 'rxjs';
-import { Producto } from 'src/app/models/producto';
+import {MatDialog} from '@angular/material/dialog';
 import { environment } from 'src/environments/environment.prod';
-
+import { ProductosaddComponent } from '../../productos/productosadd/productosadd.component';
 
 @Component({
   selector: 'app-stockdetalle',
@@ -44,7 +42,7 @@ export class StockdetalleComponent implements OnInit {
   checkCodigo = new FormControl(false);
   checkGenero = new FormControl(false);
 
-  constructor(public fb : FormBuilder,private StockService : StockService,private Router: Router,
+  constructor(public dialog: MatDialog,public fb : FormBuilder,private StockService : StockService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl,  private toastr: ToastrService, private CategoriaService : CategoriaService) {
       this.paginator.itemsPerPageLabel = "Registros por página";
       this.myimage= new Observable<any>();
@@ -167,6 +165,15 @@ Limpiador()
   }
 }
 
+ //modificaciones del sistema Version #2
+ openDialog(id:number) {
+  const dialogRef=this.dialog.open(ProductosaddComponent, {
+    data: {id: id},
+  });
+  dialogRef.afterClosed().subscribe(result => {
+   this.Productos();
+  });
+}
 }
 
 

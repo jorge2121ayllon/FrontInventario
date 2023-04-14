@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { PaginacionService } from 'src/app/services/paginacion.service';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {MatDialog} from '@angular/material/dialog';
+import { CategoriaaddComponent } from '../categoriaadd/categoriaadd.component';
 
 @Component({
   selector: 'app-categorias',
@@ -25,7 +27,7 @@ export class CategoriasComponent implements OnInit {
   pageIndex=0;
   load: boolean= true;
 
-  constructor(private fb : FormBuilder,private CategoriaService : CategoriaService,private Router: Router,
+  constructor(public dialog: MatDialog, private fb : FormBuilder,private CategoriaService : CategoriaService,private Router: Router,
     private PaginacionService: PaginacionService, private paginator: MatPaginatorIntl, private toastr: ToastrService) { 
       this.paginator.itemsPerPageLabel = "Registros por página";
       this.form = this.fb.group({
@@ -98,4 +100,13 @@ export class CategoriasComponent implements OnInit {
     this.Categorias();
   }
 
+  //modificaciones del sistema Version #2
+  openDialog(id:number) {
+    const dialogRef=this.dialog.open(CategoriaaddComponent, {
+      data: {id: id},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+     this.Categorias();
+    });
+  }
 }

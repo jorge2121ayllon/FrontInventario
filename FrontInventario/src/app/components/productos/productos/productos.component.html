@@ -12,7 +12,7 @@
     matTooltip="Agregar un nuevo producto"
     matTooltipClass="example-tooltip-red"
     aria-label="Button that shows a red tooltip"
-    class="example-button" color="primary" [routerLink]="['/productoadd/0']">
+    class="example-button" color="primary" (click)="openDialog(0)">
       <mat-icon>local_offer</mat-icon>
     </button>
     <form [formGroup]="form" autocomplete="off">
@@ -94,7 +94,7 @@
             <mat-icon>delete</mat-icon>
           </button>
           &nbsp;
-          <button mat-icon-button color="basic" (click)="Editar(element.id)">
+          <button mat-icon-button color="basic" (click)="openDialog(element.id)">
             <mat-icon>create</mat-icon>
           </button>
         </td>

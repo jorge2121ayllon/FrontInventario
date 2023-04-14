@@ -10,9 +10,9 @@ import { observable, Observable, Observer, Subscriber } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as _ from 'lodash';
 import { Location } from '@angular/common';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.component';
-import { Producto } from 'src/app/models/producto';
+import { ProductosComponent } from '../productos/productos.component';
 
 @Component({
   selector: 'app-productosadd',
@@ -43,18 +43,19 @@ export class ProductosaddComponent implements OnInit {
   constructor(public dialog: MatDialog, private fb : FormBuilder,private Router: Router, private ProductoService:
     ProductoService, private CategoriaService:
     CategoriaService, private Route : ActivatedRoute, private toastr: ToastrService, public _location: Location,
-    private PaginacionService: PaginacionService)
+    private PaginacionService: PaginacionService , public dialogRef: MatDialogRef<ProductosComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any)
     {
       this.myimage= new Observable<any>();
       this.myimage1= String();
       this.codigo=String();
 
       this.visible=true;
-      if(this.Route.snapshot.params.id>0){
+      if(this.data.id>0){
         this.imagenContador=1;
-        this.idProducto = this.Route.snapshot.params.id;
+        this.idProducto = this.data.id;
         this.form = this.fb.group({
-          id: this.Route.snapshot.params.id,
+          id: this.data.id,
           precioCompra: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           precioVenta: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           stock: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
@@ -71,7 +72,7 @@ export class ProductosaddComponent implements OnInit {
       }
       else{
         this.form = this.fb.group({
-          id: this.Route.snapshot.params.id,
+          id: this.data.id,
           precioCompra: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           precioVenta: new FormControl('',[Validators.required, Validators.pattern("^[0-9]+([.][0-9]+)?$")]),
           genero: new FormControl('',Validators.required),
@@ -91,8 +92,8 @@ export class ProductosaddComponent implements OnInit {
   ngOnInit(): void {
     this.load= false;
     this.Categorias();
-    if(this.Route.snapshot.params.id>0){
-      this.ProductoService.get(this.Route.snapshot.params.id).subscribe(
+    if(this.data.id>0){
+      this.ProductoService.get(this.data.id).subscribe(
         r=>{
           this.form.controls['precioCompra'].setValue(r.data.precioCompra)
           this.form.controls['precioVenta'].setValue(r.data.precioVenta)
@@ -126,7 +127,7 @@ export class ProductosaddComponent implements OnInit {
   Guardar(tipo:any){
     this.load= false;
     if(this.form.valid){
-            if(this.Route.snapshot.params.id>0){
+            if(this.data.id>0){
               if(this.form.value.imagen==="")
               {
                     this.form.value.imagen=this.myimage;
