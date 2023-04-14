@@ -49,4 +49,8 @@ export class StockService {
     '&PageSize='+this.PaginacionService.Filtros.PageSize+
     '&PageNumber='+this.PaginacionService.Filtros.PageNumber)
    }
+
+   total(): Observable<Response>{
+    return this.http.get<Response>(this.baseUrl +"/"+ "total");
+  }
 }

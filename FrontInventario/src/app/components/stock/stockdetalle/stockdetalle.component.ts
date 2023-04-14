@@ -19,6 +19,7 @@ import { ProductosaddComponent } from '../../productos/productosadd/productosadd
 export class StockdetalleComponent implements OnInit {
 
   load: boolean= true;
+  Total=0;
   public form: FormGroup;
   displayedColumns: string[] = ['descripcion','marca','color','talla', 'stock','codigo','genero','imagen','acciones'];
   categorias :any;
@@ -78,6 +79,7 @@ export class StockdetalleComponent implements OnInit {
     this.load= false;
     this.StockService.getDetalleStock().subscribe( r =>
       {
+        this.total();
         this.load=true;
         this.productos = r.data;
         this.metadata = r.meta;
@@ -97,6 +99,18 @@ export class StockdetalleComponent implements OnInit {
     this.CategoriaService.getCategoriasProducto().subscribe( r =>
       {
         this.categorias = r.data;
+      }, error => {
+        this.load=true;
+        this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
+      }
+    )
+  }
+  //version 2
+  total()
+  {
+    this.StockService.total().subscribe( r =>
+      {
+        this.Total=(r as any);
       }, error => {
         this.load=true;
         this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
