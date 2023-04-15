@@ -17,7 +17,7 @@ import { ProductosaddComponent } from '../../productos/productosadd/productosadd
   styleUrls: ['./stockdetalle.component.css']
 })
 export class StockdetalleComponent implements OnInit {
-
+  barCode="232423423"
   load: boolean= true;
   Total=0;
   public form: FormGroup;
