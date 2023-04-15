@@ -10,6 +10,7 @@ import { PaginacionService } from 'src/app/services/paginacion.service';
 import { Observable, observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { ProductosaddComponent } from '../productosadd/productosadd.component';
+import { ProductosDialogComponent } from '../productos-dialog/productos-dialog.component';
 
 @Component({
   selector: 'app-productos',
@@ -120,6 +121,14 @@ openDialog(id:number) {
   });
   dialogRef.afterClosed().subscribe(result => {
    this.Productos();
+  });
+}
+//modificaciones del sistema Version #2
+openDialogCode(creado: any) {
+  this.dialog.open(ProductosDialogComponent, {
+    data: {
+      creado:creado,
+    },
   });
 }
 

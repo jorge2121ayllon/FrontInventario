@@ -281,6 +281,7 @@ export class ProductosaddComponent implements OnInit {
                             this.openDialog(r.data);
                           }
                           this.toastr.success("se guardo exitosamente","Guardado.")
+                          this.dialogRef.close();
               },
               error => {
                           this.load=true;

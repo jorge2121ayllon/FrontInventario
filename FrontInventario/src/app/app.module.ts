@@ -25,7 +25,8 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-
+// Import ngx-barcode module
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 //Componentes de material
 import {MatProgressBarModule} from '@angular/material/progress-bar';
@@ -119,11 +120,12 @@ import { PanelayudasComponent } from './components/ayuda/panelayudas/panelayudas
     MatListModule,
     MatBadgeModule,
     MatCheckboxModule,
+    NgxBarcodeModule,
     MatTooltipModule,
     LayoutModule,
     MatSidenavModule,
     MatExpansionModule
-  ],
+    ],
   providers: [
     LoginService,
     AuthGuard, {
