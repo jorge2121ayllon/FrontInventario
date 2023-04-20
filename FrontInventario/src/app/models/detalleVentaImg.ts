@@ -7,5 +7,5 @@ export class DetalleVentaImg{
     producto? : string;
     precioVenta?: number;
     imagen?: string;
+    descuento?: number;
   }
-  

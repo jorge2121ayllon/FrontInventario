@@ -16,10 +16,11 @@ export class ReporteventasComponent implements OnInit {
   cantidadTotal = 0;
   inversionTotal = 0;
   vendidoTotal = 0;
+  descuento = 0;
   alertar=0;
 
 
-  displayedColumns: string[] = ['Descripcion', 'Stock','Precio Venta','Precio Compra','Cantidad Vendida','Inversion', 'Venta', 'Ganancia' ];
+  displayedColumns: string[] = ['Descripcion', 'Stock','Precio Venta','Precio Compra','Cantidad Vendida','Inversion', 'Descuento' , 'Venta', 'Ganancia' ];
 
   constructor(private VentaService: VentaService,  private fb : FormBuilder,
     private toastr: ToastrService) {
@@ -42,17 +43,19 @@ export class ReporteventasComponent implements OnInit {
     this.cantidadTotal = 0;
     this.inversionTotal = 0;
     this.vendidoTotal = 0;
+    this.descuento = 0;
 
 
     this.VentaService.getReportes( this.form.value.genero, this.form.value.inicio , this.form.value.fin).subscribe(
       v=> {
         this.reportes = v as any;
-
+        console.log(this.reportes)
         for (let index = 0; index < this.reportes.length; index++) {
          this.ganaciaTotal=this.ganaciaTotal+this.reportes[index].totalGanancia;
          this.cantidadTotal=this.cantidadTotal+this.reportes[index].cantidadVendida;
          this.inversionTotal=this.inversionTotal+this.reportes[index].totalInversion;
-         this.vendidoTotal=this.vendidoTotal+this.reportes[index].totalVendido;
+         this.vendidoTotal= this.vendidoTotal+this.reportes[index].totalVendido;
+         this.descuento =this.descuento+ this.reportes[index].descuento;
         }
         if( this.reportes.length==0)
           {

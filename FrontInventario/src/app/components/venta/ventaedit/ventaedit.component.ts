@@ -52,6 +52,7 @@ export class VentaeditComponent implements OnInit {
     private PaginacionService: PaginacionService,private DetalleVentaService: DetalleVentaService)
     {
       this.form = this.fb.group({
+        descuento : new FormControl(0),
         buscadorProducto: new FormControl(''),
         cantidad : new FormControl(1),
         nombreCliente: new FormControl(''),
@@ -84,6 +85,8 @@ export class VentaeditComponent implements OnInit {
     this.DetalleVentaService.getDetallesVenta(this.Route.snapshot.params.id).subscribe(
       r=>{
         this.load= true;
+        console.log(r.data)
+
         this.listadetalleVentaAux=r.data;
         this.listadetalleVentaAux.forEach(element => {
 
@@ -95,6 +98,7 @@ export class VentaeditComponent implements OnInit {
                     this.load= true;
                     this.productoSeleccionado = r.data;
                     this.detalleventa={
+                    descuento : element.descuento,
                     id: element.id,
                     idVenta: this.Route.snapshot.params.id,
                     cantidad: element.cantidad,
@@ -105,6 +109,7 @@ export class VentaeditComponent implements OnInit {
                    }
                    //modificacion img en detalle
                    this.detalleventaImg={
+                    descuento : element.descuento,
                     id: element.id,
                     idVenta: this.Route.snapshot.params.id,
                     cantidad: element.cantidad,
@@ -173,28 +178,33 @@ export class VentaeditComponent implements OnInit {
      {
        if(this.productoSeleccionado.stock>= this.form.value.cantidad){
          this.detalleventa={
+          descuento: this.form.value.descuento,
            cantidad: this.form.value.cantidad,
            idProducto:this.productoSeleccionado.id,
-           subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+           subTotal: (this.productoSeleccionado.precioVenta*this.form.value.cantidad)- this.form.value.descuento,
            producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
            precioVenta: this.productoSeleccionado.precioVenta
           }
           //modificacion img en detalle
           this.detalleventaImg={
+            descuento: this.form.value.descuento,
             cantidad: this.form.value.cantidad,
             idProducto:this.productoSeleccionado.id,
-            subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+            subTotal: (this.productoSeleccionado.precioVenta*this.form.value.cantidad)- this.form.value.descuento,
             producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
             precioVenta: this.productoSeleccionado.precioVenta,
             imagen:this.productoSeleccionado.imagen
            }
            //
-          this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
+           this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad -this.form.value.descuento;
+
           this.listadetalleVenta.push(this.detalleventa);
           //modificacion img en detalle
           this.listadetalleVentaImg.push(this.detalleventaImg);
           //
           this.productoSeleccionado=new Producto;
+          this.form.controls.descuento.setValue(0);
+
        }
        else{
          this.toastr.warning("El producto no cuenta con el suficiente stock para la venta")
