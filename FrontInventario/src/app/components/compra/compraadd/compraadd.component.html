@@ -9,13 +9,16 @@
  <mat-expansion-panel hideToggle>
   <mat-expansion-panel-header>
     <mat-panel-title>
-      NUEVO PRODUCTO
+      <button mat-raised-button
+      matTooltip="Agregar un nuevo producto"
+      matTooltipClass="example-tooltip-red"
+      aria-label="Button that shows a red tooltip"
+      class="example-button" color="primary" (click)="openDialog(0)">
+        <mat-icon>local_offer</mat-icon>
+      </button>
     </mat-panel-title>
-    <mat-panel-description>
-      datos para registrar un nuevo producto
-    </mat-panel-description>
   </mat-expansion-panel-header>
-  <app-productosadd></app-productosadd>
+
 </mat-expansion-panel>
 
 <form [formGroup]="form" autocomplete="off" >
