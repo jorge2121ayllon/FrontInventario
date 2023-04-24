@@ -83,6 +83,7 @@
             <th>Precio </th>
             <th>Stock </th>
             <th>Cantidad </th>
+            <th>Descuento </th>
             <th>Acciones</th>
           </tr>
       </thead>
@@ -97,9 +98,13 @@
             <td>
               {{productoSeleccionado.stock}}
             </td>
+
             <td>
-                <input type="number" class="form-control" placeholder="cantidad" formControlName="cantidad">
+                <input type="number"style="width: 80%;" class="form-control" placeholder="cantidad" formControlName="cantidad">
             </td>
+            <td>
+              <input type="number"style="width: 80%;"  class="form-control" placeholder="descuento" formControlName="descuento">
+          </td>
             <td>
               <button mat-button color="primary" (click)="agregarDetalle()">Aregar al carrito</button>
             </td>
@@ -124,6 +129,7 @@
           <th>Precio</th>
           <th>Cantidad</th>
           <th>Subtotal</th>
+          <th>Descuento</th>
           <th>Imagen</th>
           <th>Acciones</th>
         </tr>
@@ -133,6 +139,7 @@
             <td> {{product.producto}}</td>
             <td >{{product.precioVenta}}</td>
             <td >{{product.cantidad}}</td>
+            <td >{{product.descuento}}</td>
             <td >{{product.subTotal}}</td>
             <td><img [src]="envairomentGloblal+product.imagen"  width="50px" height="50px" alt="" /></td>
             <td>

@@ -43,6 +43,7 @@ export class VentaaddComponent implements OnInit {
               private PaginacionService: PaginacionService,)
               {
                 this.form = this.fb.group({
+                  descuento : new FormControl(0),
                   buscadorProducto: new FormControl(''),
                   cantidad : new FormControl(1),
                   nombreCliente: new FormControl(''),
@@ -89,28 +90,33 @@ export class VentaaddComponent implements OnInit {
       if(this.productoSeleccionado.stock>=this.form.value.cantidad){
         this.detalleventa={
           cantidad: this.form.value.cantidad,
+          descuento: this.form.value.descuento,
           idProducto:this.productoSeleccionado.id,
-          subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+          subTotal: (this.productoSeleccionado.precioVenta*this.form.value.cantidad)- this.form.value.descuento,
           producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
           precioVenta: this.productoSeleccionado.precioVenta
          }
+
          //modificacion img en detalle
          this.detalleventaImg={
           cantidad: this.form.value.cantidad,
+          descuento: this.form.value.descuento,
           idProducto:this.productoSeleccionado.id,
-          subTotal: this.productoSeleccionado.precioVenta*this.form.value.cantidad,
+          subTotal: (this.productoSeleccionado.precioVenta*this.form.value.cantidad)- this.form.value.descuento,
           producto: this.productoSeleccionado.codigo+" "+ this.productoSeleccionado.descripcion+" "+ this.productoSeleccionado.color,
           precioVenta: this.productoSeleccionado.precioVenta,
           imagen: this.productoSeleccionado.imagen
          }
          //
-         this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad;
+         this.totalVenta= this.totalVenta +this.productoSeleccionado.precioVenta*this.form.value.cantidad -this.form.value.descuento;
 
          this.listadetalleVenta.push(this.detalleventa);
          //modificacion img en detalle
          this.listadetalleVentaImg.push(this.detalleventaImg);
          //
          this.productoSeleccionado=new Producto;
+
+         this.form.controls.descuento.setValue(0);
       }
       else{
 
@@ -126,7 +132,7 @@ export class VentaaddComponent implements OnInit {
 
   guardar()
   {
-    
+
     if (this.form.valid)
     {
       this.load= false;

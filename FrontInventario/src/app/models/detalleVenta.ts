@@ -6,4 +6,5 @@ export class DetalleVenta{
   idVenta? : number;
   producto? : string;
   precioVenta?: number;
+  descuento?: number;
 }

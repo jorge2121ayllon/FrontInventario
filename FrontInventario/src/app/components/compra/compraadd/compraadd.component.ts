@@ -1,3 +1,4 @@
+import { ProductosComponent } from './../../productos/productos/productos.component';
 
 import { CompraService } from './../../../services/compra.service';
 import { PaginacionService } from 'src/app/services/paginacion.service';
@@ -11,6 +12,9 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { DetalleCompraImg } from 'src/app/models/detalleCompraImg';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductosaddComponent } from '../../productos/productosadd/productosadd.component';
+
 
 @Component({
   selector: 'app-compraadd',
@@ -38,7 +42,7 @@ export class CompraaddComponent implements OnInit {
    detalleCompraImg!: DetalleCompraImg;
    //
 
-  constructor(private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
+  constructor(public dialog: MatDialog,private fb : FormBuilder,private Router: Router,private Route : ActivatedRoute,
     private toastr: ToastrService,private CompraService: CompraService, private ProductoService: ProductoService,
     private PaginacionService: PaginacionService) {
       this.form = this.fb.group({
@@ -51,6 +55,15 @@ export class CompraaddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+
+  openDialog(id:number) {
+    const dialogRef=this.dialog.open(ProductosaddComponent, {
+      data: {id: id},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
 
 
   obtenerProductos()
