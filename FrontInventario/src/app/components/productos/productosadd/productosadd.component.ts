@@ -227,6 +227,7 @@ export class ProductosaddComponent implements OnInit {
         this.load=true;
         this.openDialog(this.form.value);
         //this.Router.navigate(['productos']);
+        this.dialogRef.close();
         this.toastr.success("se edito exitosamente","Editado.")
 
       },
