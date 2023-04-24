@@ -8,86 +8,114 @@
 <h1 mat-dialog-title>Producto</h1>
 <div mat-dialog-content>
   <form class="example-container" [formGroup]="form">
-         
-    <mat-form-field appearance="outline">
-      <mat-label>Genero</mat-label>
-      <mat-select  formControlName="genero">
-          <mat-option value="Masculino">Masculino</mat-option>
-          <mat-option value="Femenino">Femenino</mat-option>
-          <mat-option value="Unisex">Unisex</mat-option>
-      </mat-select>
-      <mat-hint align="end">Seleccione un genero </mat-hint>
-      <mat-error *ngIf="form.controls.genero.hasError('required')">
-          Genero<strong> requerido</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Color</mat-label>
-      <input matInput placeholder="Color" formControlName="color">
-      <mat-error *ngIf="form.controls.color.hasError('required')">
-          Color<strong> requerido</strong>
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Talla</mat-label>
-      <input matInput placeholder="Talla" formControlName="talla">
-      <mat-hint align="end">Caracteres Máximos  {{form.controls.talla.value?.length || 0}}/5</mat-hint>
-      <mat-error *ngIf="form.controls.talla.invalid">
-          Ingrese la talla<strong> correcta</strong>
-      </mat-error>
-    </mat-form-field>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="outline">
+          <mat-label>Genero</mat-label>
+          <mat-select  formControlName="genero">
+              <mat-option value="Masculino">Masculino</mat-option>
+              <mat-option value="Femenino">Femenino</mat-option>
+              <mat-option value="Unisex">Unisex</mat-option>
+          </mat-select>
+          <mat-hint align="end">Seleccione un genero </mat-hint>
+          <mat-error *ngIf="form.controls.genero.hasError('required')">
+              Genero<strong> requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Categoria</mat-label>
+          <mat-select placeholder="Categorias de Producto" formControlName="idCategoria">
+            <mat-option *ngFor="let obj of categorias" [value]="obj.id">
+              {{obj.nombre}}
+            </mat-option>
+          </mat-select>
+          <mat-hint align="end">Seleccione una Categoria </mat-hint>
+          <mat-error *ngIf="form.controls.idCategoria.hasError('required')">
+              Categoria<strong> requerida</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Categoria</mat-label>
-      <mat-select placeholder="Categorias de Producto" formControlName="idCategoria">
-        <mat-option *ngFor="let obj of categorias" [value]="obj.id">
-          {{obj.nombre}}
-        </mat-option>
-      </mat-select>
-      <mat-hint align="end">Seleccione una Categoria </mat-hint>
-      <mat-error *ngIf="form.controls.idCategoria.hasError('required')">
-          Categoria<strong> requerida</strong>
-      </mat-error>
-  </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Marca</mat-label>
-      <input matInput placeholder="Marca" formControlName="marca">
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Precio Compra</mat-label>
-      <input matInput placeholder="Precio de Compra del Producto" formControlName="precioCompra" >
-      <span matPrefix>Bs .</span>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Color</mat-label>
+          <input matInput placeholder="Color" formControlName="color">
+          <mat-error *ngIf="form.controls.color.hasError('required')">
+              Color<strong> requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Talla</mat-label>
+          <input matInput placeholder="Talla" formControlName="talla">
+          <mat-hint align="end">Caracteres Máximos  {{form.controls.talla.value?.length || 0}}/5</mat-hint>
+          <mat-error *ngIf="form.controls.talla.invalid">
+              Ingrese la talla<strong> correcta</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-      <mat-error *ngIf="form.controls.precioCompra.invalid">
-          Precio de Compra del Producto<strong> incorrecto</strong>
-      </mat-error>
-    </mat-form-field>
- 
-    <mat-form-field class="example-full-width" appearance="outline">
-      <mat-label>Precio Venta</mat-label>
-      <input matInput placeholder="Precio de Venta del Producto" formControlName="precioVenta">
-      <span matPrefix>Bs .</span>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Marca</mat-label>
+          <input matInput placeholder="Marca" formControlName="marca">
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline" >
+          <mat-label>stock</mat-label>
+          <input type="number" matInput placeholder="stock" formControlName="stock">
+          <mat-error *ngIf="form.controls.stock.hasError('required')">
+              Stock<strong> requerido</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
 
-      <mat-error *ngIf="form.controls.precioVenta.invalid">
-          Precio de Venta del Producto <strong> incorrecto</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="outline" >
-      <mat-label>stock</mat-label>
-      <input type="number" matInput placeholder="stock" formControlName="stock">
-      <mat-error *ngIf="form.controls.stock.hasError('required')">
-          Stock<strong> requerido</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-checkbox class="example-full-width" [formControl]="checkCodigo">Código</mat-checkbox>
-    <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkCodigo.value">
-      <mat-label>Código</mat-label>
-      <input matInput placeholder="Ej. DFGH-3456-DF45" formControlName="codigo">
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width" appearance="outline" >
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Precio Compra</mat-label>
+          <input matInput placeholder="Precio de Compra del Producto" formControlName="precioCompra" >
+          <span matPrefix>Bs .</span>
+    
+          <mat-error *ngIf="form.controls.precioCompra.invalid">
+              Precio de Compra del Producto<strong> incorrecto</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Precio Venta</mat-label>
+          <input matInput placeholder="Precio de Venta del Producto" formControlName="precioVenta">
+          <span matPrefix>Bs .</span>
+    
+          <mat-error *ngIf="form.controls.precioVenta.invalid">
+              Precio de Venta del Producto <strong> incorrecto</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-checkbox class="example-full-width" [formControl]="checkCodigo">Código</mat-checkbox>
+      </div>
+      <div class="col">
+        <mat-form-field class="example-full-width" appearance="outline" *ngIf="checkCodigo.value">
+          <mat-label>Código</mat-label>
+          <input matInput placeholder="Ej. DFGH-3456-DF45" formControlName="codigo">
+        </mat-form-field>
+      </div>
+    </div>
+          
+    <mat-form-field class="example-full-width" appearance="outline" style="width: 100%;" >
       <mat-label>Descripcion</mat-label>
       <textarea matInput rows="12" placeholder="Descripción" formControlName="descripcion"></textarea>
       <mat-error *ngIf="form.controls.descripcion.hasError('required')">
@@ -107,11 +135,12 @@
     <br>
 </form>
 </div>
-<mat-dialog-actions align="end">
-  <div class="form-row">
-    <div class="form-group col-md-12">
+<mat-dialog-actions>
+  <div class="row">
+    <div class="col">
       <button type="button" mat-raised-button color="primary" color="primary"  (click)="Guardar(false)">Guardar Único Producto</button>
-      &nbsp; &nbsp;
+    </div>
+    <div class="col">
       <button type="button" mat-raised-button color="primary" color="primary" (click)="Guardar(true)" *ngIf="visible">Guardar Más Productos</button>
     </div>
   </div>
