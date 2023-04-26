@@ -155,7 +155,7 @@ export class VentaeditComponent implements OnInit {
         this.load= true;
         this.listaProductos=r.data;
         //img
-
+        this.form.controls['buscadorProducto'].setValue("");
         //
         this.listaProductosAux=r.data;
       }, error => {

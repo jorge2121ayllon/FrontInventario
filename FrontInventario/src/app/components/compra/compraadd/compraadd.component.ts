@@ -77,7 +77,7 @@ export class CompraaddComponent implements OnInit {
       {
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
-
+        this.form.controls['buscadorProducto'].setValue("");
         this.load= true;
       },
       error => {
