@@ -68,6 +68,7 @@ export class VentaaddComponent implements OnInit {
         this.load= true;
         this.listaProductos=r.data;
         this.listaProductosAux=r.data;
+        this.form.controls['buscadorProducto'].setValue("");
       }, error => {
         this.load=true;
         this.toastr.warning("Por favor verifique su conexión a Internet","Error.")
