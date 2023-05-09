@@ -8,12 +8,18 @@
       Codigo de Producto:
         <hr>
         <div id="print" class="print">
-          <ngx-barcode [bc-value]="data.creado.codigo" [bc-display-value]="true"></ngx-barcode>
+          <div align="center">
+            <div style="font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; font-size:150%;">
+              <strong>FASH SPORT</strong>
+            </div>
+            
+            <ngx-barcode [bc-value]="data.creado.codigo" [bc-display-value]="true"></ngx-barcode>
+           PRECIO: <strong>{{precio}}</strong>
+          </div>
         </div>
         <hr>
       <img [src]="myimage" class="img-rounded" alt="Producto sin Imagen" width="auto" height="90px">
       <br>
-     
     </div>
   </mat-card-content>
   <mat-card-actions align="end">

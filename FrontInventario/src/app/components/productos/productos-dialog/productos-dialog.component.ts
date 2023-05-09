@@ -10,12 +10,14 @@ import { ProductosaddComponent } from '../productosadd/productosadd.component';
 })
 export class ProductosDialogComponent implements OnInit {
   myimage: any;
+  precio:any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ProductosaddComponent) {
     this.myimage= new Observable<any>();
    }
 
   ngOnInit(): void {
+    this.precio=this.data.creado.precioVenta;
     this.myimage=environment.appUrl+this.data.creado.imagen;
   }
 
