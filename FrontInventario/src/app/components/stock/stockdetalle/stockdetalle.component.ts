@@ -79,10 +79,12 @@ export class StockdetalleComponent implements OnInit {
     this.load= false;
     this.StockService.getDetalleStock().subscribe( r =>
       {
-        this.total();
+        
+        //this.total();//camvio de variables para el total de items
         this.load=true;
-        this.productos = r.data;
-        this.metadata = r.meta;
+        this.Total=r.totalItems;
+        this.productos = r.response.data;//camvio de variables para el total de items
+        this.metadata = r.response.meta;//camvio de variables para el total de items
         this.length=this.metadata.totalCount;
         if(this.metadata.totalCount===0){
           this.toastr.info("No existe productos con los filtros enviados")

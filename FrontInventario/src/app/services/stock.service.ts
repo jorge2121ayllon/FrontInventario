@@ -26,7 +26,7 @@ export class StockService {
     '&PageNumber='+this.PaginacionService.Filtro.PageNumber)
    }
    
-   getDetalleStock(): Observable<Response>{
+   getDetalleStock(): Observable<any>{
 
     var filtro=this.PaginacionService.Filtros.filter;
     var categoria=this.PaginacionService.Filtros.categoria;
